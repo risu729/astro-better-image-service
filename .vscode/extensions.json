@@ -1,0 +1,14 @@
+{
+	"recommendations": [
+		"oven.bun-vscode",
+		"biomejs.biome",
+		"ms-playwright.playwright",
+		// cspell:ignore tamasfe
+		"tamasfe.even-better-toml", // for bunfig.toml
+		"github.vscode-github-actions",
+		// cspell:ignore esbenp
+		"esbenp.prettier-vscode", // for yaml and markdown
+		"astro-build.astro-vscode", // for formatting astro files
+		"streetsidesoftware.code-spell-checker"
+	]
+}

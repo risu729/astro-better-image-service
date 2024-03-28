@@ -1,0 +1,43 @@
+{
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"ignoreUnknown": true
+	},
+	"formatter": {
+		"formatWithErrors": true
+	},
+	"linter": {
+		"rules": {
+			"all": true,
+			"style": {
+				// Astro dynamic routes include special characters
+				// cspell:ignore filenaming
+				"useFilenamingConvention": "off"
+			},
+			"complexity": {
+				// collides with the noPropertyAccessFromIndexSignature tsconfig option
+				// ref: https://github.com/biomejs/biome/issues/463
+				"useLiteralKeys": "off"
+			},
+			"nursery": {
+				"all": true,
+				// this package runs on Node.js
+				"noNodejsModules": "off",
+				// collides with the lint/nursery/useImportRestrictions rule
+				"noBarrelFile": "off",
+				// handled by Knip
+				"noUndeclaredDependencies": "off"
+			}
+		}
+	},
+	"json": {
+		"parser": {
+			"allowComments": true
+		}
+	}
+}

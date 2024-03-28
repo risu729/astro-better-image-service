@@ -1,0 +1,15 @@
+[oven-sh/bun]
+src/cli/gitignore-for-init
+
+[inline]
+.cspellcache
+playwright-report/
+test-results/
+# ignore snapshots generated in CI
+tests/e2e/conversion.test.ts-snapshots/
+
+[github/gitignore]
+Global/Windows.gitignore
+Global/macOS.gitignore
+Global/Linux.gitignore
+Global/VisualStudioCode.gitignore

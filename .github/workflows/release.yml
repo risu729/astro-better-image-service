@@ -1,0 +1,85 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  check:
+    permissions:
+      # we must pass all the required permissions of the callee workflow
+      contents: read
+      actions: read
+    uses: ./.github/workflows/check.yml
+
+  test:
+    permissions:
+      # we must pass all the required permissions of the callee workflow
+      contents: read
+      actions: read
+    uses: ./.github/workflows/test.yml
+
+  release:
+    needs:
+      - check
+      - test
+
+    runs-on: ubuntu-22.04
+
+    permissions:
+      contents: write # for GitHub Release
+      issues: write # for commenting on issues
+      pull-requests: write # for commenting on pull requests
+      id-token: write # for npm provenance
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          fetch-depth: 0 # fetch all history for semantic-release
+
+      - name: Setup bun
+        uses: oven-sh/setup-bun@d3603274aca5625baad52ec06108517a089cdd00 # v1.2.0
+
+      - name: Setup Node.js
+        # Install to use the new version of npm in semantic-release
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
+        with:
+          node-version-file: package.json
+
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+        env:
+          HUSKY: 0
+
+      - name: Build
+        run: bun run tsc --project tsconfig.src.json --incremental false
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: bun run semantic-release
+
+  actions-timeline:
+    needs:
+      - release
+
+    if: ${{ !cancelled() }}
+
+    runs-on: ubuntu-22.04
+
+    permissions:
+      actions: read # for actions-timeline
+
+    steps:
+      - name: actions-timeline
+        # cspell:ignore kesin
+        uses: Kesin11/actions-timeline@b03a6aa289adef5534c84ccb6fbef7c975973574 # v2.1.0

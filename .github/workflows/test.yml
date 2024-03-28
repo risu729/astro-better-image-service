@@ -1,0 +1,228 @@
+name: Test
+
+on:
+  pull_request:
+  workflow_call:
+  workflow_dispatch:
+
+permissions: {}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  general:
+    runs-on: ubuntu-22.04
+
+    permissions:
+      contents: read # for checkout
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Setup bun
+        uses: oven-sh/setup-bun@d3603274aca5625baad52ec06108517a089cdd00 # v1.2.0
+
+      - name: Setup Node.js
+        # Install to use the latest version of Node.js when shebang is specified
+        # ref: https://bun.sh/docs/cli/run#bun
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
+        with:
+          node-version-file: package.json
+
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+        env:
+          HUSKY: 0
+
+      - name: Store Dependency Versions
+        id: dependency-versions
+        run: |
+          playwright_version=$(bun pm ls | sed -nE 's/.*@playwright\/test@(.+)/\1/p')
+          echo "playwright=$playwright_version" >> "$GITHUB_OUTPUT"
+
+      - name: Restore Playwright Browsers Cache
+        id: restore-browsers-cache
+        uses: actions/cache/restore@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-browsers-${{ runner.os }}-${{ steps.dependency-versions.outputs.playwright }}
+
+      - name: Install Playwright Browsers and Dependencies
+        id: playwright-install
+        if: steps.restore-browsers-cache.outputs.cache-hit != 'true'
+        run: bun run playwright install chromium --with-deps
+
+      - name: Save Playwright Browsers Cache
+        uses: actions/cache/save@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ steps.restore-browsers-cache.outputs.cache-primary-key }}
+
+      - name: Install Playwright Dependencies
+        if: steps.playwright-install.outcome == 'skipped'
+        run: bun run playwright install-deps chromium
+
+      - name: Build Package
+        run: bun run build
+
+      - name: Register Package
+        run: bun link
+
+      - name: Install E2E Test Fixtures Dependencies
+        run: bun install --frozen-lockfile
+        working-directory: tests/e2e/fixtures
+
+      - name: Build E2E Test Fixtures with astro-better-image-service
+        run: bun run build
+        working-directory: tests/e2e/fixtures
+
+      - name: Playwright Test
+        id: playwright-test
+        run: bun run playwright test vrt format
+
+      - name: Upload the Playwright Report
+        # use failure() because success() is used implicitly
+        # ref: https://docs.github.com/en/actions/learn-github-actions/expressions#status-check-functions
+        if: failure() && steps.playwright-test.outcome == 'failure'
+        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
+        with:
+          name: playwright-report-${{ github.sha }}
+          path: playwright-report/
+
+  conversion:
+    runs-on: ubuntu-22.04
+
+    permissions:
+      contents: read # for checkout
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Setup bun
+        uses: oven-sh/setup-bun@d3603274aca5625baad52ec06108517a089cdd00 # v1.2.0
+
+      - name: Setup Node.js
+        # Install to use the latest version of Node.js when shebang is specified
+        # ref: https://bun.sh/docs/cli/run#bun
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
+        with:
+          node-version-file: package.json
+
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+        env:
+          HUSKY: 0
+
+      - name: Store Dependency Versions
+        id: dependency-versions
+        run: |
+          playwright_version=$(bun pm ls | sed -nE 's/.*@playwright\/test@(.+)/\1/p')
+          astro_version=$(bun pm ls | sed -nE 's/.*astro@(.+)/\1/p')
+          echo "playwright=$playwright_version" >> "$GITHUB_OUTPUT"
+          echo "astro=$astro_version" >> "$GITHUB_OUTPUT"
+
+      - name: Restore Playwright Browsers Cache
+        id: restore-browsers-cache
+        uses: actions/cache/restore@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-browsers-${{ runner.os }}-${{ steps.dependency-versions.outputs.playwright }}
+
+      - name: Install Playwright Browsers and Dependencies
+        id: playwright-install
+        if: steps.restore-browsers-cache.outputs.cache-hit != 'true'
+        run: bun run playwright install chromium --with-deps
+
+      - name: Save Playwright Browsers Cache
+        uses: actions/cache/save@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ steps.restore-browsers-cache.outputs.cache-primary-key }}
+
+      - name: Install Playwright Dependencies
+        if: steps.playwright-install.outcome == 'skipped'
+        run: bun run playwright install-deps chromium
+
+      - name: Build Package
+        run: bun run build
+
+      - name: Register Package
+        run: bun link
+
+      - name: Store Hash of E2E Test Fixtures and Image Service Consistency Test
+        id: fixtures-hash
+        # calculate the hash before installing dependencies and building to exclude gitignored files easily
+        run: echo "hash=${{ hashFiles('tests/e2e/fixtures/**/*', 'tests/e2e/conversion.test.ts') }}" >> "$GITHUB_OUTPUT"
+
+      - name: Install E2E Test Fixtures Dependencies
+        run: bun install --frozen-lockfile
+        working-directory: tests/e2e/fixtures
+
+      - name: Restore Snapshots Cache
+        id: restore-snapshots-cache
+        uses: actions/cache/restore@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        with:
+          path: tests/e2e/conversion.test.ts-snapshots
+          key: "\
+            default-service-snapshots-${{ runner.os }}-\
+            ${{ steps.dependency-versions.outputs.astro }}-${{ steps.dependency-versions.outputs.playwright }}-\
+            ${{ steps.fixtures-hash.outputs.hash }}
+            "
+
+      - name: Build E2E Test Fixtures with the Default Image Service
+        if: steps.restore-snapshots-cache.outputs.cache-hit != 'true'
+        run: bun run build
+        working-directory: tests/e2e/fixtures
+        env:
+          USE_DEFAULT_IMAGE_SERVICE: true
+
+      - name: Take Snapshots with the Default Image Service
+        if: steps.restore-snapshots-cache.outputs.cache-hit != 'true'
+        run: bun run playwright test conversion --update-snapshots
+        env:
+          USE_DEFAULT_IMAGE_SERVICE: true
+
+      - name: Save Snapshots Cache
+        uses: actions/cache/save@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
+        with:
+          path: tests/e2e/conversion.test.ts-snapshots
+          key: ${{ steps.restore-snapshots-cache.outputs.cache-primary-key }}
+
+      - name: Build E2E Test Fixtures with astro-better-image-service
+        run: bun run build
+        working-directory: tests/e2e/fixtures
+
+      - name: Playwright Image Services Consistency Test
+        id: playwright-test-conversion
+        run: bun run playwright test conversion
+
+      - name: Upload the Playwright Report of Image Services Consistency Test
+        # use failure() because success() is used implicitly
+        # ref: https://docs.github.com/en/actions/learn-github-actions/expressions#status-check-functions
+        if: failure() && steps.playwright-test-conversion.outcome == 'failure'
+        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
+        with:
+          name: playwright-report-conversion-${{ github.sha }}
+          path: playwright-report/
+
+  actions-timeline:
+    needs:
+      - general
+      - conversion
+
+    # skip if the workflow is called from another workflow
+    if: ${{ !cancelled() && contains(github.workflow_ref, '/test.yml') }}
+
+    runs-on: ubuntu-22.04
+
+    permissions:
+      actions: read # for actions-timeline
+
+    steps:
+      - name: actions-timeline
+        # cspell:ignore kesin
+        uses: Kesin11/actions-timeline@b03a6aa289adef5534c84ccb6fbef7c975973574 # v2.1.0

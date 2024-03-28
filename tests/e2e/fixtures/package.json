@@ -1,0 +1,12 @@
+{
+	"name": "@astro-better-image-service/test",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "astro build",
+		"preview": "astro preview"
+	},
+	"dependencies": {
+		"astro-better-image-service": "link:astro-better-image-service"
+	}
+}

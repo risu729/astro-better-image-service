@@ -1,0 +1,67 @@
+---
+// biome-ignore lint/correctness/noUnusedImports: used in the template
+import { Image } from "astro:assets";
+import type { GetStaticPaths, ImageMetadata } from "astro";
+import {
+	AVAILABLE_FORMAT_CONVERSIONS,
+	type VALID_INPUT_FORMATS,
+} from "../formats";
+
+import svgImage from "../images/astro.svg";
+import tiffImage from "../images/capybara.tiff";
+import jpegImage from "../images/chipmunk.jpeg";
+// cspell:ignore webp
+import webpImage from "../images/manatee.webp";
+// cspell:ignore prairiedog
+import jpgImage from "../images/prairiedog.jpg";
+// cspell:ignore redpanda
+import avifImage from "../images/redpanda.avif";
+import gifImage from "../images/seal.gif";
+import pngImage from "../images/sloth.png";
+
+export const getStaticPaths = (() => {
+	const images = {
+		jpeg: jpegImage,
+		jpg: jpgImage,
+		png: pngImage,
+		tiff: tiffImage,
+		webp: webpImage,
+		gif: gifImage,
+		svg: svgImage,
+		avif: avifImage,
+	} as const satisfies {
+		[K in (typeof VALID_INPUT_FORMATS)[number]]: ImageMetadata;
+	};
+	const qualities = [undefined, "low", "mid", "high", "max"] as const;
+	return AVAILABLE_FORMAT_CONVERSIONS.flatMap(
+		({ inputFormat, outputFormat, path, name }, i) => ({
+			params: {
+				path,
+			},
+			props: {
+				outputFormat,
+				name,
+				image: images[inputFormat],
+				quality: qualities[i % qualities.length],
+			},
+		}),
+	);
+}) satisfies GetStaticPaths;
+
+// biome-ignore lint/correctness/noUndeclaredVariables: Astro is globally defined in .astro files
+// biome-ignore lint/correctness/noUnusedVariables: used in the template
+const { outputFormat, name, image, quality } = Astro.props;
+---
+
+<html>
+  <body>
+    <h1>{name}</h1>
+    <Image
+      src={image}
+      alt=""
+      width={500}
+      {...outputFormat ? { format: outputFormat } : {}}
+      {...quality ? { quality } : {}}
+    />
+  </body>
+</html>

@@ -1,0 +1,5 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	// cspell:ignore tsconfigs
+	"extends": "astro/tsconfigs/strictest"
+}

@@ -1,0 +1,26 @@
+---
+// biome-ignore lint/correctness/noUnusedImports: used in the template
+import { AVAILABLE_FORMAT_CONVERSIONS } from "../formats";
+
+// biome-ignore lint/correctness/noUnusedVariables: used in the template
+const imageService = process.env["USE_DEFAULT_IMAGE_SERVICE"]
+	? "sharpImageService"
+	: "astro-better-image-service";
+---
+
+<html>
+  <body>
+    <h1>{imageService}</h1>
+    <ul>
+      {
+        AVAILABLE_FORMAT_CONVERSIONS.map(({ path, name }) => {
+          return (
+            <li>
+              <a href={path}>{name}</a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </body>
+</html>

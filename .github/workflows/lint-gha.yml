@@ -1,0 +1,77 @@
+name: Lint GitHub Actions workflows
+
+on:
+  push:
+    branches: main
+    paths:
+      - .github/workflows/**
+  pull_request:
+    paths:
+      - .github/workflows/**
+  workflow_dispatch:
+
+permissions: {}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  lint:
+    runs-on: ubuntu-22.04
+
+    permissions:
+      contents: read # for checkout
+      actions: read # for actions-timeline
+
+    steps:
+      - name: actions-timeline
+        # cspell:ignore kesin
+        uses: Kesin11/actions-timeline@b03a6aa289adef5534c84ccb6fbef7c975973574 # v2.1.0
+
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          sparse-checkout: |
+            .github/workflows/*
+          sparse-checkout-cone-mode: false
+
+      - name: Install actionlint
+        # cspell:ignore jaxxstorm
+        uses: jaxxstorm/action-install-gh-release@71d17cb091aa850acb2a1a4cf87258d183eb941b # v1.11.0
+        with:
+          # cspell:ignore rhysd
+          repo: rhysd/actionlint
+          cache: enable
+
+      - name: Install pinact
+        uses: jaxxstorm/action-install-gh-release@71d17cb091aa850acb2a1a4cf87258d183eb941b # v1.11.0
+        with:
+          # cspell:ignore pinact
+          repo: suzuki-shunsuke/pinact
+          cache: enable
+
+      - name: Install ghalint
+        id: install-ghalint
+        uses: jaxxstorm/action-install-gh-release@71d17cb091aa850acb2a1a4cf87258d183eb941b # v1.11.0
+        with:
+          # cspell:ignore shunsuke ghalint
+          repo: suzuki-shunsuke/ghalint
+          cache: enable
+
+      - name: Run actionlint
+        run: actionlint -color
+
+      - name: Run ghalint
+        # continue on error even if the previous step fails
+        # do not use continue-on-error because it will result in a successful job
+        if: ${{ !cancelled() && steps.install-ghalint.outcome == 'success' }}
+        run: ghalint run
+        env:
+          GHALINT_LOG_COLOR: always
+
+      - name: Run pinact
+        if: ${{ !cancelled() && steps.install-ghalint.outcome == 'success' }}
+        uses: suzuki-shunsuke/pinact-action@a60b07ee63e41654915780a3297ff9f5f6b6db63 # v0.1.0
+        with:
+          skip_push: true # cannot push to the repository in the workflow unless using a PAT
