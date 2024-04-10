@@ -46,7 +46,7 @@
 		"@commitlint/config-conventional": "19.1.0",
 		"@commitlint/cz-commitlint": "19.2.0",
 		"@commitlint/types": "19.0.3",
-		"@cspell/cspell-types": "8.6.1",
+		"@cspell/cspell-types": "8.7.0",
 		"@playwright/test": "1.43.0",
 		"@tsconfig/bun": "1.0.5",
 		"@tsconfig/node-lts": "20.1.3",
