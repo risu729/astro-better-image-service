@@ -60,7 +60,7 @@
 		"ignore-sync": "7.0.1",
 		"knip": "5.9.3",
 		"semantic-release": "23.0.8",
-		"typescript": "5.4.4"
+		"typescript": "5.4.5"
 	},
 	"overrides": {
 		"sharp": "0.33.3"
