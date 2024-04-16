@@ -24,12 +24,14 @@
 				// ref: https://github.com/biomejs/biome/issues/463
 				"useLiteralKeys": "off"
 			},
+			"performance": {
+				// collides with the lint/nursery/useImportRestrictions rule
+				"noBarrelFile": "off"
+			},
 			"nursery": {
 				"all": true,
 				// this package runs on Node.js
 				"noNodejsModules": "off",
-				// collides with the lint/nursery/useImportRestrictions rule
-				"noBarrelFile": "off",
 				// handled by Knip
 				"noUndeclaredDependencies": "off"
 			}
