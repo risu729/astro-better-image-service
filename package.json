@@ -37,7 +37,7 @@
 		"prepare": "husky"
 	},
 	"dependencies": {
-		"astro": "4.6.2",
+		"astro": "4.6.3",
 		"svgo": "3.2.0"
 	},
 	"devDependencies": {
