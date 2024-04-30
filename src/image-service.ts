@@ -90,7 +90,7 @@ const betterImageService: LocalImageService = {
 			result.resize({ width: Math.round(width) });
 		}
 
-		let sharpQuality: number | string | undefined = undefined;
+		let sharpQuality: number | undefined;
 		if (quality) {
 			const parsedQuality = parseQuality(quality);
 			if (typeof parsedQuality === "number") {
