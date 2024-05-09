@@ -65,7 +65,7 @@
 	"overrides": {
 		"sharp": "0.33.3"
 	},
-	"trustedDependencies": ["@biomejs/biome"],
+	"trustedDependencies": ["@biomejs/biome", "esbuild", "sharp"],
 	"type": "module",
 	"engines": {
 		"node": "^18.17.0 || >= 20.3.0"
