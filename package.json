@@ -38,6 +38,7 @@
 	},
 	"dependencies": {
 		"astro": "4.8.1",
+		"sharp": "0.33.3",
 		"svgo": "3.3.2"
 	},
 	"devDependencies": {
@@ -62,14 +63,8 @@
 		"semantic-release": "23.0.8",
 		"typescript": "5.4.5"
 	},
-	"overrides": {
-		"sharp": "0.33.3"
-	},
 	"trustedDependencies": ["@biomejs/biome", "esbuild", "sharp"],
 	"type": "module",
-	"engines": {
-		"node": "^18.17.0 || >= 20.3.0"
-	},
 	"volta": {
 		"node": "21.7.3"
 	},
