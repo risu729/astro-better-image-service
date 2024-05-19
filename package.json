@@ -2,7 +2,7 @@
 	"$schema": "https://json.schemastore.org/package.json",
 	"name": "astro-better-image-service",
 	"version": "0.0.0-development",
-	"description": "An Astro image service to optimize images with the best compression and quality.",
+	"description": "Astro integration for image compression and conversion, superseding Astro's default image service.",
 	"keywords": [
 		"astro-integration",
 		"withastro",
