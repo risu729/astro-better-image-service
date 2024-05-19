@@ -66,8 +66,11 @@ You are discouraged using this integration in SSR environments, because it may s
 
 ## vs. Astro's default image service ([`sharpImageService`](https://docs.astro.build/en/guides/images/#default-image-service))
 
-- The default image service uses the default compression settings of [sharp](https://github.com/lovell/sharp), in which the compression ratio is medium.  
-  \* It is reasonable because the compression should be fast for SSR.
+- The default image service (a.k.a. `astro:assets`) uses the default compression settings of [sharp](https://github.com/lovell/sharp), in which the compression ratio is medium, as referred to in the [Astro Discord](https://astro.build/chat).
+
+> astro-compress sets the compression level to the maximum, whereas astro:assets uses the default settings  
+> We most likely could tune up the settings a bit, though we need to be careful about it taking too much time (notably because of SSR doing it at runtime)  
+> see: https://discord.com/channels/830184174198718474/830184175176122389/1168307099571331155
 
 - The default image service does not support SVG images.  
   It only passes them through without any optimization.  
