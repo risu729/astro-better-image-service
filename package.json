@@ -25,7 +25,7 @@
 		"build": "tsc --project tsconfig.src.json",
 		"commit": "git-cz",
 		"check": "concurrently \"bun:check:*(!type:)\"",
-		"check:biome": "biome check --apply --error-on-warnings .",
+		"check:biome": "biome check --fix --error-on-warnings",
 		"check:type": "concurrently \"bun:check:type:*\"",
 		"check:type:base": "tsc --project tsconfig.base.json",
 		"check:type:src": "tsc --noEmit --project tsconfig.src.json",
