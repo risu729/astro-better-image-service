@@ -79,7 +79,7 @@ jobs:
 
       - name: Biome
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
-        run: bun run biome ci --error-on-warnings .
+        run: bun run biome ci --error-on-warnings
 
       - name: tsc (source)
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}

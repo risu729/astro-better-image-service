@@ -28,10 +28,12 @@
 				// collides with the lint/nursery/useImportRestrictions rule
 				"noBarrelFile": "off"
 			},
+			"correctness": {
+				// this package runs on Node.js
+				"noNodejsModules": "off"
+			},
 			"nursery": {
 				"all": true,
-				// this package runs on Node.js
-				"noNodejsModules": "off",
 				// handled by Knip
 				"noUndeclaredDependencies": "off"
 			}
