@@ -59,7 +59,7 @@
 		"cspell": "8.8.4",
 		"husky": "9.0.11",
 		"ignore-sync": "7.0.1",
-		"knip": "5.18.0",
+		"knip": "5.18.1",
 		"semantic-release": "24.0.0",
 		"typescript": "5.4.5"
 	},
