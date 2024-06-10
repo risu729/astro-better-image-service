@@ -31,8 +31,9 @@
 		"check:type:src": "tsc --noEmit --project tsconfig.src.json",
 		"check:spell": "cspell --cache \"**/*\"",
 		"check:knip": "knip",
-		"test": "playwright test vrt format",
-		"test:snapshots": "playwright test vrt --update-snapshots",
+		"test:unit": "bun test tests/unit",
+		"test:e2e": "playwright test vrt format",
+		"test:e2e:snapshots": "playwright test vrt --update-snapshots",
 		"ignore-sync": "ignore-sync .",
 		"prepare": "husky"
 	},

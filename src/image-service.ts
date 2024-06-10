@@ -10,7 +10,7 @@ import {
 	parseQuality,
 	qualityTable,
 } from "./astro-internals.js";
-import { sharpOptions, svgoOptions } from "./options.js";
+import type { MergedConfig } from "./config.js";
 
 type OutputFormat = Extract<
 	keyof FormatEnum,
@@ -20,7 +20,7 @@ type OutputFormat = Extract<
 /**
  * Image service with better compression for Astro
  */
-const betterImageService: LocalImageService = {
+const betterImageService: LocalImageService<MergedConfig> = {
 	// biome-ignore lint/style/useNamingConvention: following the Astro API
 	getURL: baseService.getURL,
 
@@ -57,6 +57,8 @@ const betterImageService: LocalImageService = {
 	// based on sharp image service
 	// https://github.com/withastro/astro/blob/8d5ea2df5d52ad9a311c407533b9f4226480faa8/packages/astro/src/assets/services/sharp.ts#L44-L89
 	async transform(inputBuffer, transformOptions, config) {
+		const imageServiceConfig = config.service.config;
+
 		const { width, height, format, quality } =
 			transformOptions as BaseServiceTransform & {
 				format: OutputFormat;
@@ -65,7 +67,7 @@ const betterImageService: LocalImageService = {
 		// SVG to SVG optimization
 		if (format === "svg") {
 			const svgString = new TextDecoder().decode(inputBuffer);
-			const result = svgo(svgString, svgoOptions);
+			const result = svgo(svgString, imageServiceConfig.svgo);
 			return {
 				data: new TextEncoder().encode(result.data),
 				format: "svg",
@@ -73,11 +75,7 @@ const betterImageService: LocalImageService = {
 		}
 
 		// SVG or raster image to raster image optimization
-		const result = sharp(inputBuffer, {
-			failOnError: false,
-			pages: -1,
-			limitInputPixels: config.service.config["limitInputPixels"],
-		});
+		const result = sharp(inputBuffer, imageServiceConfig.sharp.sharp);
 
 		// cspell:ignore exif
 		// always call rotate to adjust for EXIF data orientation
@@ -103,7 +101,7 @@ const betterImageService: LocalImageService = {
 
 		result.toFormat(format, {
 			quality: sharpQuality,
-			...sharpOptions[format === "jpg" ? "jpeg" : format],
+			...imageServiceConfig.sharp[format === "jpg" ? "jpeg" : format],
 		});
 
 		const { data, info } = await result.toBuffer({ resolveWithObject: true });

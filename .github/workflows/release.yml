@@ -19,17 +19,25 @@ jobs:
       actions: read
     uses: ./.github/workflows/check.yml
 
-  test:
+  unit:
     permissions:
       # we must pass all the required permissions of the callee workflow
       contents: read
       actions: read
-    uses: ./.github/workflows/test.yml
+    uses: ./.github/workflows/unit.yml
+
+  e2e:
+    permissions:
+      # we must pass all the required permissions of the callee workflow
+      contents: read
+      actions: read
+    uses: ./.github/workflows/e2e.yml
 
   release:
     needs:
       - check
-      - test
+      - e2e
+      - unit
 
     runs-on: ubuntu-22.04
 
