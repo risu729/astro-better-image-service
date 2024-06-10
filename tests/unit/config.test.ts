@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 // biome-ignore lint/nursery/useImportRestrictions:
-import { betterImageService, defaultConfig } from "../../src/config";
+import { betterImageService, defaultConfig } from "../../src/config.ts";
 
 describe("default config", () => {
 	test("should load the default config", () => {
