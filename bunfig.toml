@@ -1,3 +1,6 @@
 [install]
 exact = true     # enable since we are using Renovate to update dependencies
 auto = "disable" # to specify the versions in package.json
+
+[test]
+coverage = true # enable coverage reports
