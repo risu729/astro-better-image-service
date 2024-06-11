@@ -67,7 +67,7 @@
 	"trustedDependencies": ["@biomejs/biome", "esbuild", "sharp"],
 	"type": "module",
 	"volta": {
-		"node": "22.2.0"
+		"node": "22.3.0"
 	},
 	"files": ["dist"],
 	"exports": {
