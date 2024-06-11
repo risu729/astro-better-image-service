@@ -4,7 +4,7 @@ import {
 	AVAILABLE_FORMAT_CONVERSIONS,
 	DEFAULT_OUTPUT_FORMAT,
 	// biome-ignore lint/nursery/useImportRestrictions: import required for test
-} from "./fixtures/src/formats";
+} from "./fixtures/src/formats.ts";
 
 test.describe("Image Format Conversion", () => {
 	for (const {
