@@ -9,7 +9,7 @@
 - Convert SVG images to raster images using [sharp](https://github.com/lovell/sharp).
 - And, of course, all features of Astro's default image service (`sharpImageService`) are supported.
 
-## ⚙️ Installation
+## 🛠️ Installation
 
 ### Using `astro add` (recommended)
 
@@ -39,8 +39,9 @@ npm install astro-better-image-service
 
 ```javascript
 import betterImageService from "astro-better-image-service";
+import { defineConfig } from "astro/config";
 
-export default {
+export default defineConfig({
   // ...
   integrations: [
     // ... other integrations
@@ -48,7 +49,7 @@ export default {
     // ... other integrations
   ],
   // ...
-};
+});
 ```
 
 You may put the `betterImageService` integration anywhere in the `integrations` array.  
@@ -93,8 +94,9 @@ For example, you may use the following configuration.
 ```javascript
 import betterImageService from "astro-better-image-service";
 import astroCompress from "astro-compress";
+import { defineConfig } from "astro/config";
 
-export default {
+export default defineConfig({
   integrations: [
     betterImageService(),
     astroCompress.default({
@@ -105,7 +107,81 @@ export default {
       SVG: false,
     }),
   ],
-};
+});
+```
+
+## ⚙️ Configuration
+
+If you want to configure the configuration of the image compression and conversion, you may pass a configuration object to the `betterImageService` function.  
+The configuration object is merged with the default configuration object, exported as `defaultConfig` from the package.
+
+`astro.config.{ts,js,mjs,cjs}`
+
+<!-- cspell:ignore webp -->
+
+```javascript
+import betterImageService from "astro-better-image-service";
+import { defineConfig } from "astro/config";
+
+export default defineConfig({
+  // ...
+  integrations: [
+    betterImageService({
+      sharp: {
+        sharp: {
+          // sharp constructor options
+        },
+        png: {
+          // sharp png options
+        },
+        jpeg: {
+          // sharp jpeg options
+        },
+        webp: {
+          // sharp webp options
+        },
+        avif: {
+          // sharp avif options
+        },
+      },
+      svgo: {
+        // svgo options
+      },
+    }),
+  ],
+  // ...
+});
+```
+
+### [`limitInputPixels`](https://docs.astro.build/en/reference/configuration-reference/#imageserviceconfiglimitinputpixels)
+
+You cannot configure `image.service.config.limitInputPixels` in the configuration object unless you set the `image.service.entrypoint` to `sharpImageService`.  
+We support to set `limitInputPixels` in the configuration object of `betterImageService` for compatibility with the default image service.  
+However, we recommend setting `sharp.sharp.limitInputPixels` in the configuration object of `betterImageService` for clarity.  
+For example, you may set `limitInputPixels` to `false` as follows.
+
+`astro.config.{ts,js,mjs,cjs}`
+
+```javascript
+import betterImageService from "astro-better-image-service";
+import { defineConfig } from "astro/config";
+
+export default defineConfig({
+  // ...
+  integrations: [
+    betterImageService({
+      // not recommended
+      limitInputPixels: false,
+      // recommended
+      sharp: {
+        sharp: {
+          limitInputPixels: false,
+        }
+      },
+    }),
+  ],
+  // ...
+});
 ```
 
 ## 💻 Development

@@ -1,4 +1,4 @@
-name: Test
+name: E2E Test
 
 on:
   pull_request:
@@ -220,7 +220,7 @@ jobs:
       - conversion
 
     # skip if the workflow is called from another workflow
-    if: ${{ !cancelled() && contains(github.workflow_ref, '/test.yml') }}
+    if: ${{ !cancelled() && contains(github.workflow_ref, '/e2e.yml') }}
 
     runs-on: ubuntu-22.04
 
