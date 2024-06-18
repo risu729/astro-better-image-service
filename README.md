@@ -1,6 +1,6 @@
 # 🚀 astro-better-image-service
 
-**astro-better-image-service** is an Astro integration for image compression and conversion, superseding Astro's default image service.
+**`astro-better-image-service`** is an Astro integration for image compression and conversion, superseding Astro's default image service.
 
 ## 🖼️ Features
 
@@ -77,29 +77,31 @@ You are discouraged using this integration in SSR environments, because it may s
   It only passes them through without any optimization.  
   Also, it does not support converting SVG images to raster images. (`format` option is ignored)
 
-## vs. [AstroCompress](https://github.com/Playform/AstroCompress)
+## vs. [`@playform/compress`](https://github.com/Playform/Compress) (f.k.a. `astro-compress`)
 
-- AstroCompress does not cache compressed images, so slows down your build time. https://github.com/Playform/AstroCompress/issues/49
+- `@playform/compress` does not cache compressed images, so slows down your build time. https://github.com/PlayForm/Compress/issues/49
 
-- AstroCompress does not support converting SVG images to raster images.  
+- `@playform/compress` does not support converting SVG images to raster images.  
   \* It only compresses built files in `outDir`, and does not intercept the build process.
 
-- Unless you set `image.service` in `astro.config.{ts,js,mjs,cjs}` to [`passthroughImageService`](https://docs.astro.build/en/guides/images/#configure-no-op-passthrough-service), Astro optimizes images and AstroCompress compresses them again.
+- Unless you set `image.service` in `astro.config.{ts,js,mjs,cjs}` to [`passthroughImageService`](https://docs.astro.build/en/guides/images/#configure-no-op-passthrough-service), Astro optimizes images and `@playform/compress` compresses them again.
 
-Since astro-better-image-service does not support optimizing HTML, CSS, and JavaScript files, you may use AstroCompress with it to compress them.  
+Since `astro-better-image-service` does not support optimizing HTML, CSS, and JavaScript files, you may use `@playform/compress` with it to compress them.  
 For example, you may use the following configuration.
 
 `astro.config.{ts,js,mjs,cjs}`
 
+<!-- cspell:ignore playform -->
+
 ```javascript
 import betterImageService from "astro-better-image-service";
-import astroCompress from "astro-compress";
+import compress from "@playform/compress";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
   integrations: [
     betterImageService(),
-    astroCompress.default({
+    compress({
       HTML: true,
       CSS: true,
       JavaScript: true,
