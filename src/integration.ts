@@ -1,4 +1,4 @@
-import type { AstroIntegration } from "astro";
+import type { AstroIntegration, AstroIntegrationLogger } from "astro";
 import { betterImageService } from "./config.js";
 
 /**
@@ -8,16 +8,26 @@ import { betterImageService } from "./config.js";
  */
 export const astroIntegration = (
 	config?: Parameters<typeof betterImageService>[0],
-): AstroIntegration => ({
-	name: "astro-better-image-service",
-	hooks: {
-		"astro:config:setup": ({ updateConfig, logger }) => {
-			updateConfig({
-				image: {
-					service: betterImageService(config),
-				},
-			});
-			logger.info("Image service entrypoint set.");
+) =>
+	// loose type for compatibility with other astro versions
+	({
+		name: "astro-better-image-service",
+		hooks: {
+			"astro:config:setup": ({
+				updateConfig,
+				logger,
+			}: {
+				updateConfig: (config: {
+					image: { service: ReturnType<typeof betterImageService> };
+				}) => unknown;
+				logger: AstroIntegrationLogger;
+			}) => {
+				updateConfig({
+					image: {
+						service: betterImageService(config),
+					},
+				});
+				logger.info("Image service entrypoint set.");
+			},
 		},
-	},
-});
+	}) as const satisfies AstroIntegration;
