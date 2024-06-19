@@ -1,8 +1,11 @@
+# ref: https://github.com/foray1010/ignore-sync?tab=readme-ov-file#how-to-use
+
 [oven-sh/bun]
 src/cli/gitignore-for-init
 
 [inline]
 .cspellcache
+.lycheecache # cspell:ignore lycheecache
 playwright-report/
 test-results/
 # ignore snapshots generated in CI

@@ -14,9 +14,9 @@ defaults:
     shell: bash
 
 jobs:
-  general:
+  test-e2e-general:
     runs-on: ubuntu-24.04
-
+    timeout-minutes: 10
     permissions:
       contents: read # for checkout
 
@@ -24,20 +24,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
-      - name: Setup bun
-        uses: oven-sh/setup-bun@f4d14e03ff726c06358e5557344e1da148b56cf7 # v1.2.2
-
-      - name: Setup Node.js
-        # Install to use the latest version of Node.js when shebang is specified
-        # ref: https://bun.sh/docs/cli/run#bun
-        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
+      - name: Install mise
+        uses: jdx/mise-action@d6e32c1796099e0f1f3ac741c220a8b7eae9e5dd # v2.0.6
         with:
-          node-version-file: package.json
-
-      - name: Install Dependencies
-        run: bun install --frozen-lockfile
-        env:
-          HUSKY: 0
+          experimental: true
 
       - name: Store Dependency Versions
         id: dependency-versions
@@ -51,6 +41,9 @@ jobs:
         with:
           path: ~/.cache/ms-playwright
           key: playwright-browsers-${{ runner.os }}-${{ steps.dependency-versions.outputs.playwright }}
+
+      - name: Install package.json dependencies
+        run: mise run buni
 
       - name: Install Playwright Browsers and Dependencies
         id: playwright-install
@@ -68,23 +61,9 @@ jobs:
         if: steps.playwright-install.outcome == 'skipped'
         run: bun run playwright install-deps chromium
 
-      - name: Build Package
-        run: bun run build
-
-      - name: Register Package
-        run: bun link
-
-      - name: Install E2E Test Fixtures Dependencies
-        run: bun install --frozen-lockfile
-        working-directory: tests/e2e/fixtures
-
-      - name: Build E2E Test Fixtures with astro-better-image-service
-        run: bun run build
-        working-directory: tests/e2e/fixtures
-
       - name: Playwright Test
         id: playwright-test
-        run: bun run playwright test vrt format
+        run: mise run test:e2e
 
       - name: Upload the Playwright Report
         # use failure() because success() is used implicitly
@@ -95,9 +74,9 @@ jobs:
           name: playwright-report-${{ github.sha }}
           path: playwright-report/
 
-  conversion:
+  test-e2e-conversion:
     runs-on: ubuntu-24.04
-
+    timeout-minutes: 10
     permissions:
       contents: read # for checkout
 
@@ -105,20 +84,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
-      - name: Setup bun
-        uses: oven-sh/setup-bun@f4d14e03ff726c06358e5557344e1da148b56cf7 # v1.2.2
-
-      - name: Setup Node.js
-        # Install to use the latest version of Node.js when shebang is specified
-        # ref: https://bun.sh/docs/cli/run#bun
-        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
+      - name: Install mise
+        uses: jdx/mise-action@d6e32c1796099e0f1f3ac741c220a8b7eae9e5dd # v2.0.6
         with:
-          node-version-file: package.json
-
-      - name: Install Dependencies
-        run: bun install --frozen-lockfile
-        env:
-          HUSKY: 0
+          experimental: true
 
       - name: Store Dependency Versions
         id: dependency-versions
@@ -135,6 +104,9 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-browsers-${{ runner.os }}-${{ steps.dependency-versions.outputs.playwright }}
 
+      - name: Install package.json dependencies
+        run: mise run buni
+
       - name: Install Playwright Browsers and Dependencies
         id: playwright-install
         if: steps.restore-browsers-cache.outputs.cache-hit != 'true'
@@ -151,36 +123,20 @@ jobs:
         if: steps.playwright-install.outcome == 'skipped'
         run: bun run playwright install-deps chromium
 
-      - name: Build Package
-        run: bun run build
-
-      - name: Register Package
-        run: bun link
-
       - name: Store Hash of E2E Test Fixtures and Image Service Consistency Test
         id: fixtures-hash
-        # calculate the hash before installing dependencies and building to exclude gitignored files easily
         run: echo "hash=${{ hashFiles('tests/e2e/fixtures/**/*', 'tests/e2e/conversion.test.ts') }}" >> "$GITHUB_OUTPUT"
-
-      - name: Install E2E Test Fixtures Dependencies
-        run: bun install --frozen-lockfile
-        working-directory: tests/e2e/fixtures
 
       - name: Restore Snapshots Cache
         id: restore-snapshots-cache
         uses: actions/cache/restore@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
         with:
           path: tests/e2e/conversion.test.ts-snapshots
-          key: "\
-            default-service-snapshots-${{ runner.os }}-\
-            ${{ steps.dependency-versions.outputs.astro }}-${{ steps.dependency-versions.outputs.playwright }}-\
-            ${{ steps.fixtures-hash.outputs.hash }}
-            "
+          key: "default-service-snapshots-${{ runner.os }}-${{ steps.dependency-versions.outputs.astro }}-${{ steps.dependency-versions.outputs.playwright }}-${{ steps.fixtures-hash.outputs.hash }} "
 
       - name: Build E2E Test Fixtures with the Default Image Service
         if: steps.restore-snapshots-cache.outputs.cache-hit != 'true'
-        run: bun run build
-        working-directory: tests/e2e/fixtures
+        run: mise run test:e2e:fixtures:build
         env:
           USE_DEFAULT_IMAGE_SERVICE: true
 
@@ -198,8 +154,7 @@ jobs:
           key: ${{ steps.restore-snapshots-cache.outputs.cache-primary-key }}
 
       - name: Build E2E Test Fixtures with astro-better-image-service
-        run: bun run build
-        working-directory: tests/e2e/fixtures
+        run: mise run test:e2e:fixtures:build
 
       - name: Playwright Image Services Consistency Test
         id: playwright-test-conversion
@@ -216,16 +171,16 @@ jobs:
 
   actions-timeline:
     needs:
-      - general
-      - conversion
+      - test-e2e-general
+      - test-e2e-conversion
 
     # skip if the workflow is called from another workflow
     if: ${{ !cancelled() && contains(github.workflow_ref, '/e2e.yml') }}
 
     runs-on: ubuntu-24.04
-
+    timeout-minutes: 5
     permissions:
-      actions: read # for actions-timeline
+      actions: read
 
     steps:
       - name: actions-timeline

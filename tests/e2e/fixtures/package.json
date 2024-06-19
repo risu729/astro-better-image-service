@@ -1,11 +1,7 @@
 {
-	"name": "@astro-better-image-service/test",
+	"name": "@astro-better-image-service/e2e-test-fixtures",
 	"private": true,
 	"type": "module",
-	"scripts": {
-		"build": "astro build",
-		"preview": "astro preview"
-	},
 	"dependencies": {
 		"astro-better-image-service": "link:astro-better-image-service"
 	}

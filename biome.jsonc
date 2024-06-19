@@ -1,4 +1,5 @@
 {
+	// ref: https://biomejs.dev/reference/configuration/
 	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
 	"vcs": {
 		"enabled": true,
@@ -43,11 +44,22 @@
 		},
 		{
 			// disable noNodejsModules rule for files running in bun or Node.js
-			"include": ["**/*.config.*", "tests/**"],
+			"include": ["**/*.config.*", "tests/**", "**/scripts/**"],
 			"linter": {
 				"rules": {
 					"correctness": {
 						"noNodejsModules": "off"
+					}
+				}
+			}
+		},
+		{
+			// disable noConsole rule for scripts
+			"include": ["**/scripts/**"],
+			"linter": {
+				"rules": {
+					"nursery": {
+						"noConsole": "off"
 					}
 				}
 			}

@@ -1,0 +1,13 @@
+# ignore files formatted by biome
+*.js
+*.mjs
+*.cjs
+*.ts
+*.mts
+*.cts
+*.json
+*.jsonc
+
+# ignore files formatted by yamlfmt
+*.yaml
+*.yml

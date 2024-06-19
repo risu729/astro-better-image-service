@@ -1,0 +1,139 @@
+name: Lint
+
+on:
+  pull_request:
+  workflow_call:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * SUN'
+
+permissions: {}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  list-tasks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read # for checkout
+
+    outputs:
+      tasks: ${{ steps.list.outputs.tasks }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+      - name: Install mise
+        uses: jdx/mise-action@d6e32c1796099e0f1f3ac741c220a8b7eae9e5dd # v2.0.6
+        with:
+          experimental: true
+
+      - name: Install package.json dependencies
+        run: mise run buni
+
+      - name: List mise tasks
+        id: list
+        run: |
+          tasks=$(bun run .github/workflows/scripts/list-mise-tasks.ts)
+          echo "tasks=$tasks" >> "$GITHUB_OUTPUT"
+
+  lint:
+    needs: list-tasks
+
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read # for checkout
+
+    name: lint-${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # use include not to be treated as multi-dimensional matrix
+        # ref: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs#expanding-or-adding-matrix-configurations
+        include: ${{ fromJson(needs.list-tasks.outputs.tasks) }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+      - name: Install mise
+        uses: jdx/mise-action@d6e32c1796099e0f1f3ac741c220a8b7eae9e5dd # v2.0.6
+        with:
+          experimental: true
+
+      - name: Run ${{ matrix.name }}
+        run: mise run ${{ matrix.task }}
+
+  lint-commitlint:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read # for checkout
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          fetch-depth: 0 # fetch all history for commitlint
+
+      - name: Install mise
+        uses: jdx/mise-action@d6e32c1796099e0f1f3ac741c220a8b7eae9e5dd # v2.0.6
+        with:
+          experimental: true
+
+      - name: Install package.json dependencies
+        run: mise run buni
+
+      - name: "commitlint (push: initial commit)"
+        id: commitlint-push-initial
+        # commit hash will be 000... if it doesn't exist
+        if: github.event_name == 'push' && github.event.before == '0000000000000000000000000000000000000000'
+        run: bun run commitlint --verbose --to ${{ github.event.after }}
+
+      - name: commitlint (push)
+        id: commitlint-push
+        if: github.event_name == 'push' && steps.commitlint-push-initial.outcome == 'skipped'
+        run: bun run commitlint --verbose --from ${{ github.event.before }} --to ${{ github.event.after }}
+
+      - name: commitlint (pull_request)
+        id: commitlint-pr
+        if: github.event_name == 'pull_request'
+        run: |
+          bun run commitlint --verbose --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }}
+
+      - name: commitlint (pull request title)
+        # continue even if the previous step fails
+        # do not use continue-on-error because it will result in a successful job
+        if: ${{ !cancelled() && (steps.commitlint-pr.outcome == 'success' || steps.commitlint-pr.outcome == 'failure') }}
+        # use intermediate environment variable to avoid injection attacks
+        # ref: https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: echo "$PR_TITLE" | bun run commitlint --verbose
+
+      - name: commitlint (last commit)
+        if: steps.commitlint-push-initial.outcome == 'skipped' && steps.commitlint-push.outcome == 'skipped' && steps.commitlint-pr.outcome == 'skipped'
+        run: bun run commitlint --verbose --from ${{ github.sha }}~1 --to ${{ github.sha }}
+
+  actions-timeline:
+    needs:
+      - lint
+      - lint-commitlint
+
+    # skip if the workflow is called from another workflow
+    if: ${{ !cancelled() && contains(github.workflow_ref, '/lint.yml') }}
+
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      actions: read
+
+    steps:
+      - name: actions-timeline
+        # cspell:ignore kesin
+        uses: Kesin11/actions-timeline@1c2ab3f28225878ae4dd1f76d31279f16ea29e29 # v2.1.1

@@ -18,6 +18,7 @@ Run the following command and it will automatically install the package and add 
 ```bash
 bun astro add astro-better-image-service
 ```
+
 ```bash
 npx astro add astro-better-image-service
 ```
@@ -29,11 +30,12 @@ npx astro add astro-better-image-service
 ```bash
 bun add astro-better-image-service
 ```
+
 ```bash
 npm install astro-better-image-service
 ```
 
-2. Edit your Astro configuration file to include the integration.
+2. Edit your Astro configuration file to include the integration. <!-- markdownlint-disable-line ol-prefix -->
 
 `astro.config.{ts,js,mjs,cjs}`
 
@@ -42,13 +44,13 @@ import betterImageService from "astro-better-image-service";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  // ...
-  integrations: [
-    // ... other integrations
-    betterImageService(),
-    // ... other integrations
-  ],
-  // ...
+	// ...
+	integrations: [
+		// ... other integrations
+		betterImageService(),
+		// ... other integrations
+	],
+	// ...
 });
 ```
 
@@ -71,7 +73,7 @@ You are discouraged using this integration in SSR environments, because it may s
 
 > astro-compress sets the compression level to the maximum, whereas astro:assets uses the default settings  
 > We most likely could tune up the settings a bit, though we need to be careful about it taking too much time (notably because of SSR doing it at runtime)  
-> see: https://discord.com/channels/830184174198718474/830184175176122389/1168307099571331155
+> see: <https://discord.com/channels/830184174198718474/830184175176122389/1168307099571331155>
 
 - The default image service does not support SVG images.  
   It only passes them through without any optimization.  
@@ -79,7 +81,7 @@ You are discouraged using this integration in SSR environments, because it may s
 
 ## vs. [`@playform/compress`](https://github.com/Playform/Compress) (f.k.a. `astro-compress`)
 
-- `@playform/compress` does not cache compressed images, so slows down your build time. https://github.com/PlayForm/Compress/issues/49
+- `@playform/compress` does not cache compressed images, so slows down your build time. <https://github.com/PlayForm/Compress/issues/49>
 
 - `@playform/compress` does not support converting SVG images to raster images.  
   \* It only compresses built files in `outDir`, and does not intercept the build process.
@@ -99,16 +101,16 @@ import compress from "@playform/compress";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  integrations: [
-    betterImageService(),
-    compress({
-      HTML: true,
-      CSS: true,
-      JavaScript: true,
-      Image: false,
-      SVG: false,
-    }),
-  ],
+	integrations: [
+		betterImageService(),
+		compress({
+			HTML: true,
+			CSS: true,
+			JavaScript: true,
+			Image: false,
+			SVG: false,
+		}),
+	],
 });
 ```
 
@@ -126,32 +128,32 @@ import betterImageService from "astro-better-image-service";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  // ...
-  integrations: [
-    betterImageService({
-      sharp: {
-        sharp: {
-          // sharp constructor options
-        },
-        png: {
-          // sharp png options
-        },
-        jpeg: {
-          // sharp jpeg options
-        },
-        webp: {
-          // sharp webp options
-        },
-        avif: {
-          // sharp avif options
-        },
-      },
-      svgo: {
-        // svgo options
-      },
-    }),
-  ],
-  // ...
+	// ...
+	integrations: [
+		betterImageService({
+			sharp: {
+				sharp: {
+					// sharp constructor options
+				},
+				png: {
+					// sharp png options
+				},
+				jpeg: {
+					// sharp jpeg options
+				},
+				webp: {
+					// sharp webp options
+				},
+				avif: {
+					// sharp avif options
+				},
+			},
+			svgo: {
+				// svgo options
+			},
+		}),
+	],
+	// ...
 });
 ```
 
@@ -169,20 +171,20 @@ import betterImageService from "astro-better-image-service";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  // ...
-  integrations: [
-    betterImageService({
-      // not recommended
-      limitInputPixels: false,
-      // recommended
-      sharp: {
-        sharp: {
-          limitInputPixels: false,
-        }
-      },
-    }),
-  ],
-  // ...
+	// ...
+	integrations: [
+		betterImageService({
+			// not recommended
+			limitInputPixels: false,
+			// recommended
+			sharp: {
+				sharp: {
+					limitInputPixels: false,
+				},
+			},
+		}),
+	],
+	// ...
 });
 ```
 
@@ -195,7 +197,8 @@ Run the following commands to start development.
 ```bash
 gh repo clone risu729/astro-better-image-service
 cd astro-better-image-service
-bun install --frozen-lockfile
+mise install
+mise run buni
 ```
 
 ### Testing
@@ -203,9 +206,7 @@ bun install --frozen-lockfile
 To test this package, you may link it to a project using it by running the following commands.
 
 ```bash
-bun run dev
-bun link
-
+mise run dev
 # in a project using astro-better-image-service
 bun link astro-better-image-service
 ```
@@ -218,7 +219,9 @@ To commit, run the following command.
 [commitizen](https://github.com/commitizen/cz-cli) will ask you to fill in the commit message.
 
 ```bash
-bun commit
+mise run commit
+# or to commit only staged files
+mise run commit:staged
 ```
 
 ### Release

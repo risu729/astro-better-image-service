@@ -1,0 +1,94 @@
+{
+	// ref: https://docs.renovatebot.com/configuration-options/
+	$schema: "https://docs.renovatebot.com/renovate-schema.json",
+	extends: [
+		"config:best-practices",
+		":pinVersions",
+		// cspell:ignore automerge
+		":automergeMinor",
+		":automergeDigest",
+		":prHourlyLimitNone",
+		":prConcurrentLimitNone",
+	],
+	labels: [
+		"dependencies",
+		"{{#unless (equals manager 'regex')}}{{manager}}{{/unless}}",
+	],
+	customManagers: [
+		// mise-en-place is not yet supported by Renovate
+		// ref: https://github.com/renovatebot/renovate/issues/28918
+		// ref: https://docs.renovatebot.com/modules/manager/regex/#advanced-capture
+		{
+			customType: "regex",
+			description: "Updates tool versions in mise.toml (asdf backend, github-releases datasource)",
+			// prettier-ignore
+			fileMatch: ["^mise\.toml$"],
+			// cspell:ignore datasource
+			datasourceTemplate: "github-releases",
+			matchStrings: [
+				// test: https://regex101.com/r/tNMUFo
+				// prettier-ignore
+				"# renovate: packageName=(?<packageName>.+?)(?: extractVersion=(?<extractVersion>.+?))?\\n\"?(?<depName>[^:]+?)\"? *= *\"(?<currentValue>.+?)\"",
+			],
+		},
+		{
+			customType: "regex",
+			description: "Updates tool versions in mise.toml (asdf backend, other datasource)",
+			// prettier-ignore
+			fileMatch: ["^mise\.toml$"],
+			matchStrings: [
+				// test: https://regex101.com/r/8grHta
+				// prettier-ignore
+				"# renovate: datasource=(?<datasource>[a-z-]+?)(?: packageName=(?<packageName>.+?))?(?: versioning=(?<versioning>[a-z-]+?))?(?: extractVersion=(?<extractVersion>.+?))?\\n\"?(?<depName>[^:]+?)\"? *= *\"?(?<currentValue>.+?)\"? *(?:#.*)?\\n",
+			],
+		},
+		{
+			customType: "regex",
+			description: "Updates tool versions in mise.toml (Cargo backend)",
+			// prettier-ignore
+			fileMatch: ["^mise\.toml$"],
+			datasourceTemplate: "crate",
+			matchStrings: [
+				// test: https://regex101.com/r/K6Imdx
+				// prettier-ignore
+				"\"cargo:(?<depName>[^:]+?)\" *= *\"(?<currentValue>.+?)\"",
+			],
+		},
+		{
+			customType: "regex",
+			description: "Updates tool versions in mise.toml (npm backend)",
+			// prettier-ignore
+			fileMatch: ["^mise\.toml$"],
+			datasourceTemplate: "npm",
+			matchStrings: [
+				// test: https://regex101.com/r/avOpdb
+				// prettier-ignore
+				"\"npm:(?<depName>[^:]+?)\" *= *\"(?<currentValue>.+?)\"",
+			],
+		},
+		{
+			customType: "regex",
+			description: "Updates tool versions in mise.toml (ubi backend)",
+			// prettier-ignore
+			fileMatch: ["^mise\.toml$"],
+			datasourceTemplate: "github-releases",
+			matchStrings: [
+				// test: https://regex101.com/r/RRA3NI
+				// prettier-ignore
+				"(?:# renovate: extractVersion=(?<extractVersion>.+?)\\n)?\"ubi:(?<depName>[^:]+?)\" *= *\".+?(?<currentValue>\\d+\\..+?)\"",
+			],
+		},
+	],
+	packageRules: [
+		// set semantic commit types
+		{
+			matchCategories: ["ci"],
+			semanticCommitType: "ci",
+		},
+		// add labels
+		{
+			matchFileNames: ["mise.toml"],
+			addLabels: ["mise"],
+		},
+	],
+}

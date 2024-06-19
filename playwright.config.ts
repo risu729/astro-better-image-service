@@ -1,3 +1,5 @@
+// ref: https://playwright.dev/docs/test-configuration
+
 import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
@@ -12,9 +14,7 @@ export default defineConfig({
 	},
 
 	webServer: {
-		// don't build automatically in CI to see logs
-		command: `${process.env["CI"] ? "" : "bun run build && "}bun run preview`,
-		cwd: "tests/e2e/fixtures",
+		command: "mise run test:e2e:fixtures:server",
 		url: "http://localhost:4321",
 		// set to 5 minutes because image optimization can take a while
 		timeout: 5 * 60 * 1000,

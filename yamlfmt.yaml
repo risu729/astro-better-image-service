@@ -1,0 +1,11 @@
+# ref: https://github.com/google/yamlfmt/blob/main/docs/config-file.md
+
+gitignore_excludes: true
+
+formatter:
+  type: basic
+  # line breaks for readability
+  retain_line_breaks_single: true
+  # GitHub Actions does not support anchors
+  # ref: https://github.com/actions/runner/issues/1182
+  disallow_anchors: true

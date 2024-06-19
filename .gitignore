@@ -180,6 +180,7 @@ dist
 .DS_Store
 
 .cspellcache
+.lycheecache
 playwright-report/
 test-results/
 tests/e2e/conversion.test.ts-snapshots/
