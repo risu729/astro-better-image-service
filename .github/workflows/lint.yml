@@ -66,6 +66,10 @@ jobs:
         with:
           experimental: true
 
+      - name: Install package.json dependencies
+        if: matrix.buni
+        run: mise run buni
+
       - name: Run ${{ matrix.name }}
         run: mise run ${{ matrix.task }}
 

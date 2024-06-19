@@ -1,11 +1,6 @@
 // biome-ignore lint/nursery/noUndeclaredDependencies:
 import { $ } from "bun";
-import {
-	type EdgeModel,
-	type NodeModel,
-	type NodeRef,
-	fromDot,
-} from "ts-graphviz";
+import { type EdgeModel, type NodeRef, fromDot } from "ts-graphviz";
 
 $.throws(true);
 
@@ -38,15 +33,30 @@ const getEdgeTargets = ({ targets }: EdgeModel) => {
 	};
 };
 
-const getNodeFromRef = ({ id }: NodeRef) => {
+const getChildNodes = (
+	node: NodeRef,
+	edges: ReturnType<typeof getEdgeTargets>[],
+	recursive = false,
+): NodeRef[] => {
+	const children = edges
+		.filter(({ from }) => from.id === node.id)
+		.map(({ to }) => to);
+
+	if (recursive) {
+		return children.flatMap((child) => [
+			child,
+			...getChildNodes(child, edges, true),
+		]);
+	}
+
+	return children;
+};
+
+const getNodeLabel = ({ id }: NodeRef) => {
 	const node = ciTasks.nodes.find((node) => node.id === id);
 	if (!node) {
 		throw new Error(`node with id ${id} not found`);
 	}
-	return node;
-};
-
-const getNodeLabel = (node: NodeModel) => {
 	const label = node.attributes.get("label");
 	if (!label) {
 		throw new Error("missing label in node");
@@ -54,20 +64,26 @@ const getNodeLabel = (node: NodeModel) => {
 	return label;
 };
 
+const edges = ciTasks.edges.map(getEdgeTargets);
+
 const tasks: {
 	name: string;
 	task: string;
-}[] = ciTasks.edges
-	.map(getEdgeTargets)
-	.filter(({ from }) => from.id === rootNode.id)
-	.map(({ to }) => {
-		const taskName = getNodeLabel(getNodeFromRef(to));
-		// remove prefix if exists
-		const name = taskName.split(":")[1] ?? taskName;
-		return {
-			name: name,
-			task: taskName,
-		};
-	});
+	buni: boolean;
+}[] = getChildNodes(rootNode, edges).map((to) => {
+	const taskName = getNodeLabel(to);
+	// remove prefix if exists
+	const name = taskName.split(":")[1] ?? taskName;
+
+	const depends = getChildNodes(to, edges, true).map((node) =>
+		getNodeLabel(node),
+	);
+
+	return {
+		name: name,
+		task: taskName,
+		buni: depends.some((dep) => dep === "buni"),
+	};
+});
 
 console.write(JSON.stringify(tasks));

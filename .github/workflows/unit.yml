@@ -29,6 +29,9 @@ jobs:
         with:
           experimental: true
 
+      - name: Install Dependencies
+        run: mise run buni
+
       - name: Test
         run: mise run test:unit
 

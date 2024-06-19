@@ -58,6 +58,9 @@ jobs:
         with:
           experimental: true
 
+      - name: Install Dependencies
+        run: mise run buni
+
       - name: Build
         run: mise run build
 
