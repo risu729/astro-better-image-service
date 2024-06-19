@@ -14,7 +14,9 @@ export default defineConfig({
 	},
 
 	webServer: {
-		command: "mise run test:e2e:fixtures:server",
+		command: process.env["CI"]
+			? "bun run --cwd tests/e2e/fixtures preview"
+			: "mise run test:e2e:fixtures:server",
 		url: "http://localhost:4321",
 		// set to 5 minutes because image optimization can take a while
 		timeout: 5 * 60 * 1000,

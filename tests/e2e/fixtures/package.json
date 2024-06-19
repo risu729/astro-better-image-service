@@ -4,5 +4,9 @@
 	"type": "module",
 	"dependencies": {
 		"astro-better-image-service": "link:astro-better-image-service"
+	},
+	"scripts": {
+		"build": "astro build",
+		"preview": "astro preview"
 	}
 }
