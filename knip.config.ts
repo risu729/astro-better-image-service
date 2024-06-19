@@ -3,6 +3,7 @@
 import type { KnipConfig } from "knip";
 
 const config: KnipConfig = {
+	ignoreBinaries: ["mise"],
 	workspaces: {
 		".": {
 			ignoreDependencies: [
@@ -16,7 +17,7 @@ const config: KnipConfig = {
 				"@commitlint/cli",
 				"semantic-release",
 			],
-			entry: ["src/index.ts", "scripts/**"],
+			entry: ["src/index.ts", "**/scripts/**"],
 		},
 		"tests/e2e/fixtures": {},
 	},
