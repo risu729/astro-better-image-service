@@ -1,10 +1,12 @@
+// ref: https://cspell.org/configuration/
+
 /**
  * @type {import("@cspell/cspell-types").CSpellUserSettings}
  */
 module.exports = {
 	version: "0.2",
 	language: "en",
-	dictionaries: ["typescript", "node", "npm", "bash"],
+	dictionaries: ["typescript", "node", "npm", "bash", "markdown"],
 	enableGlobDot: true,
 	useGitignore: true,
 	ignorePaths: [
@@ -18,14 +20,21 @@ module.exports = {
 		"*.avif",
 	],
 	words: [
+		// often used
+		"lockb",
+		"buni",
+		// tools
+		"ghalint",
+		"pinact",
+		"taplo",
+		"yamlfmt",
+		// package.json
 		"risu",
 		"astro",
 		"withastro",
-		"bunfig",
-		"lockb",
 		"biomejs",
 		"knip",
 		"commitlint",
-		"automerge",
+		"graphviz",
 	],
 };

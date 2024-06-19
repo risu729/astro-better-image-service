@@ -1,0 +1,15 @@
+# ref: https://yamllint.readthedocs.io/en/stable/configuration.html#extending-the-default-configuration
+
+extends: default
+
+ignore-from-file: .gitignore
+
+rules:
+  comments:
+    min-spaces-from-content: 1 # follow yamlfmt
+  document-start:
+    present: false
+  line-length: disable # cannot disable only for URLs
+  truthy:
+    # false positive for on: in GitHub Actions
+    check-keys: false

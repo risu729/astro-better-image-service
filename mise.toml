@@ -1,0 +1,218 @@
+# ref: https://mise.jdx.dev/configuration.html
+#:schema https://mise.jdx.dev/schema/mise.json
+
+[tools]
+# renovate: packageName=oven-sh/bun extractVersion=^bun-v(?<version>.+)
+bun = "1.1.14"
+# renovate: datasource=node
+node = "22.3.0" # cspell:ignore datasource
+# renovate: datasource=crate
+"ubi" = "0.0.32"
+# renovate: packageName=rhysd/actionlint
+actionlint = "1.7.1" # cspell:ignore rhysd
+# required for actionlint
+# renovate: packageName=koalaman/shellcheck
+shellcheck = "0.10.0" # cspell:ignore koalaman
+"ubi:suzuki-shunsuke/ghalint" = "v0.2.11" # cspell:ignore shunsuke 
+"ubi:suzuki-shunsuke/pinact" = "v0.2.0"
+# taplo does not provide pre-built binaries in github releases
+# ref: https://github.com/tamasfe/taplo/releases/tag/release-taplo-cli-0.9.0
+"cargo:taplo-cli" = "0.9.0"
+# renovate: packageName=google/yamlfmt
+yamlfmt = "0.12.1"
+# renovate: datasource=pypi
+yamllint = "1.35.1" # cspell:ignore pypi
+"ubi:lycheeverse/lychee" = "v0.15.1" # cspell:ignore lycheeverse
+# renovate: extractVersion=^v(?<version>\d+\..+)
+"ubi:crate-ci/typos" = "v1.22.7"
+
+[tasks."buni"]
+run = "bun install --frozen-lockfile"
+
+[tasks.commit]
+depends = ["buni"]
+run = ["git add .", "bun run git-cz"]
+
+[tasks."commit:staged"]
+depends = ["buni"]
+run = "bun run git-cz"
+
+[tasks.dev]
+depends = ["buni"]
+run = ["bun run tsc --project tsconfig.src.json --watch"]
+
+[tasks.build]
+depends = ["buni"]
+run = "bun run tsc --project tsconfig.src.json"
+
+[tasks."test:unit"]
+depends = ["buni"]
+run = "bun test tests/unit"
+
+[tasks."test:e2e"]
+depends = ["buni"]
+run = "bun run playwright test vrt format"
+
+[tasks."test:e2e:snapshots"]
+depends = ["buni"]
+run = "bun run playwright test vrt --update-snapshots"
+
+[tasks."test:e2e:fixtures:install"]
+depends = ["build"]
+run = "bun install --frozen-lockfile --cwd tests/e2e/fixtures"
+
+[tasks."test:e2e:fixtures:build"]
+depends = ["test:e2e:fixtures:install"]
+run = "bun run --cwd tests/e2e/fixtures astro build"
+
+[tasks."test:e2e:fixtures:server"]
+depends = ["test:e2e:fixtures:build"]
+run = "bun run --cwd tests/e2e/fixtures astro preview"
+
+[tasks."test:e2e:fixtures:remove-symlinks"]
+# remove before some checks to avoid symlink loops
+run = "rm -rf node_modules/astro-better-image-service"
+dir = "tests/e2e/fixtures"
+hide = true
+
+[tasks.check]
+depends = [
+	"check:*", # lint and/or fix formatting
+	"lint:*", # lint only
+]
+
+[tasks.precommit]
+# only run tasks that are fast
+depends = ["check:biome", "check:tsc", "check:cspell"]
+run = "git add ."
+hide = true
+
+[tasks.ci]
+depends = [
+	"ci:*", # lint and/or check formatting
+	"lint:*", # lint only
+]
+hide = true
+
+[tasks."check:biome"]
+depends = ["buni"]
+run = "bun run biome check --write --error-on-warnings"
+[tasks."ci:biome"]
+depends = ["buni"]
+run = "bun run biome ci --error-on-warnings"
+hide = true
+
+[tasks."check:tsc"]
+depends = ["buni"]
+run = [
+	"bun run tsc --project tsconfig.src.json --noEmit",
+	"bun run tsc --project tsconfig.base.json",
+]
+[tasks."ci:tsc"]
+depends = ["buni"]
+run = [
+	"bun run tsc --project tsconfig.src.json --incremental false --noEmit",
+	"bun run tsc --project tsconfig.base.json --incremental false",
+]
+hide = true
+
+[tasks."check:knip"]
+depends = ["buni"]
+run = "bun run knip-bun --cache"
+[tasks."ci:knip"]
+depends = ["buni"]
+run = "bun run knip-bun"
+hide = true
+
+[tasks."lint:jsonschema"]
+depends = ["buni"]
+run = "bun run scripts/validate-json-schema.ts"
+alias = "check:jsonschema"
+
+[tasks."lint:actionlint"]
+run = "actionlint -color"
+alias = "check:actionlint"
+
+[tasks."lint:ghalint"]
+run = "ghalint run"
+alias = "check:ghalint"
+
+[tasks."check:pinact"]
+run = "pinact run --verify"
+[tasks."ci:pinact"]
+depends = ["check:pinact"]
+run = "mise run util:nodiff"
+hide = true
+
+[tasks."check:taplo"]
+depends = ["test:e2e:fixtures:remove-symlinks"]
+run = ["taplo lint", "taplo fmt"]
+[tasks."ci:taplo"]
+depends = ["test:e2e:fixtures:remove-symlinks"]
+run = ["taplo lint", "taplo fmt --check --diff"]
+hide = true
+
+[tasks."check:prettier"]
+depends = ["buni"]
+run = "bun run prettier --write --cache ."
+[tasks."ci:prettier"]
+depends = ["buni"]
+run = "bun run prettier --check ."
+hide = true
+
+[tasks."check:markdownlint"]
+depends = ["buni", "test:e2e:fixtures:remove-symlinks"]
+run = "bun run markdownlint-cli2 --fix"
+[tasks."ci:markdownlint"]
+depends = ["buni", "test:e2e:fixtures:remove-symlinks"]
+run = "bun run markdownlint-cli2"
+hide = true
+
+[tasks."check:yamlfmt"]
+run = "yamlfmt ."
+[tasks."ci:yamlfmt"]
+run = "yamlfmt -lint ."
+hide = true
+
+[tasks."lint:yamllint"]
+run = "yamllint --strict ."
+alias = "check:yamllint"
+
+[tasks."lint:renovate"]
+depends = ["buni"]
+run = "bun run renovate-config-validator --strict"
+alias = "check:renovate"
+
+[tasks."check:cspell"]
+depends = ["buni"]
+run = "bun run cspell --cache \"**/*\""
+[tasks."ci:cspell"]
+depends = ["buni"]
+run = "bun run cspell \"**/*\""
+hide = true
+
+[tasks."check:lychee"]
+depends = ["test:e2e:fixtures:remove-symlinks"]
+run = "lychee --cache \"**/*\""
+[tasks."ci:lychee"]
+depends = ["test:e2e:fixtures:remove-symlinks"]
+run = "lychee --verbose \"**/*\""
+hide = true
+
+[tasks."check:typos"]
+run = "typos --write-changes"
+[tasks."ci:typos"]
+run = "typos"
+hide = true
+
+[tasks."check:ignore-sync"]
+depends = ["buni"]
+run = "bun run ignore-sync ."
+[tasks."ci:ignore-sync"]
+depends = ["check:ignore-sync"]
+run = "mise run util:nodiff"
+hide = true
+
+[tasks."util:nodiff"] # cspell:ignore nodiff
+run = ["git add .", "git diff --staged --exit-code"]
+hide = true

@@ -1,4 +1,6 @@
 {
+	// ref: https://code.visualstudio.com/docs/getstarted/settings#_workspace-settings
+
 	"files.autoSave": "afterDelay",
 	"editor.formatOnSave": true,
 	"editor.formatOnPaste": true,
@@ -11,24 +13,30 @@
 	},
 	"biome.rename": true,
 	// ref: https://biomejs.dev/internals/language-support/
-	"[javascript][typescript][javascriptreact][typescriptreact][json][jsonc]": {
+	"[javascript][typescript][json][jsonc]": {
 		"editor.defaultFormatter": "biomejs.biome"
 	},
 
-	"[toml]": {
-		// cspell:ignore tamasfe
-		"editor.defaultFormatter": "tamasfe.even-better-toml"
-	},
-	"[markdown][github-actions-workflow]": {
-		// cspell:ignore esbenp
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	"[yaml][github-actions-workflow]": {
+		// cspell:ignore bluebrown
+		"editor.defaultFormatter": "bluebrown.yamlfmt"
 	},
 	"[astro]": {
 		"editor.defaultFormatter": "astro-build.astro-vscode"
 	},
+	"[toml]": {
+		// cspell:ignore tamasfe
+		"editor.defaultFormatter": "tamasfe.even-better-toml"
+	},
+	"[markdown][json5]": {
+		// cspell:ignore esbenp
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
 
 	"files.associations": {
 		"*ignore-sync": "ini",
+		// cspell:ignore czrc
+		".czrc": "jsonc",
 		"**/.husky/*": "shellscript"
 	},
 
@@ -37,5 +45,6 @@
 		".gitignore": true
 	},
 
-	"typescript.disableAutomaticTypeAcquisition": true
+	"typescript.disableAutomaticTypeAcquisition": true,
+	"typescript.tsdk": "node_modules/typescript/lib"
 }

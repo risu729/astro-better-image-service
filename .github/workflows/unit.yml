@@ -14,38 +14,37 @@ defaults:
     shell: bash
 
 jobs:
-  check:
+  test-unit:
     runs-on: ubuntu-24.04
-
+    timeout-minutes: 10
     permissions:
       contents: read # for checkout
-      actions: read # for actions-timeline
 
     steps:
-      - name: actions-timeline
-        # skip if the workflow is called from another workflow
-        if: contains(github.workflow_ref, '/unit.yml')
-        # cspell:ignore kesin
-        uses: Kesin11/actions-timeline@1c2ab3f28225878ae4dd1f76d31279f16ea29e29 # v2.1.1
-
       - name: Checkout
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
-      - name: Setup bun
-        uses: oven-sh/setup-bun@f4d14e03ff726c06358e5557344e1da148b56cf7 # v1.2.2
-
-      - name: Setup Node.js
-        # Install to use the latest version of Node.js when shebang is specified
-        # ref: https://bun.sh/docs/cli/run#bun
-        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
+      - name: Install mise
+        uses: jdx/mise-action@d6e32c1796099e0f1f3ac741c220a8b7eae9e5dd # v2.0.6
         with:
-          node-version-file: package.json
-
-      - name: Install Dependencies
-        id: install
-        run: bun install --frozen-lockfile
-        env:
-          HUSKY: 0
+          experimental: true
 
       - name: Test
-        run: bun run test:unit
+        run: mise run test:unit
+
+  actions-timeline:
+    needs:
+      - test-unit
+
+    # skip if the workflow is called from another workflow
+    if: ${{ !cancelled() && contains(github.workflow_ref, '/unit.yml') }}
+
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      actions: read
+
+    steps:
+      - name: actions-timeline
+        # cspell:ignore kesin
+        uses: Kesin11/actions-timeline@1c2ab3f28225878ae4dd1f76d31279f16ea29e29 # v2.1.1

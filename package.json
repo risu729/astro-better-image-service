@@ -21,21 +21,7 @@
 		"url": "https://github.com/risu729/astro-better-image-service/issues"
 	},
 	"scripts": {
-		"dev": "tsc --project tsconfig.src.json --watch",
-		"build": "tsc --project tsconfig.src.json",
-		"commit": "git-cz",
-		"check": "concurrently \"bun:check:*(!type:)\"",
-		"check:biome": "biome check --fix --error-on-warnings",
-		"check:type": "concurrently \"bun:check:type:*\"",
-		"check:type:base": "tsc --project tsconfig.base.json",
-		"check:type:src": "tsc --noEmit --project tsconfig.src.json",
-		"check:spell": "cspell --cache \"**/*\"",
-		"check:knip": "knip",
-		"test:unit": "bun test tests/unit",
-		"test:e2e": "playwright test vrt format",
-		"test:e2e:snapshots": "playwright test vrt --update-snapshots",
-		"ignore-sync": "ignore-sync .",
-		"prepare": "husky"
+		"prepare": "husky && bun link"
 	},
 	"dependencies": {
 		"astro": "4.10.3",
@@ -54,21 +40,37 @@
 		"@tsconfig/bun": "1.0.6",
 		"@tsconfig/strictest": "2.0.5",
 		"@types/bun": "1.1.4",
+		"@types/ignore-walk": "4.0.3",
 		"@types/node": "20.14.5",
+		"ajv": "8.16.0",
+		"ajv-draft-04": "1.0.0",
+		"ajv-formats": "3.0.1",
 		"commitizen": "4.3.0",
-		"concurrently": "8.2.2",
 		"cspell": "8.9.0",
 		"husky": "9.0.11",
 		"ignore-sync": "7.0.1",
+		"ignore-walk": "6.0.5",
+		"json5": "2.2.3",
+		"jsonc-parser": "3.2.1",
 		"knip": "5.22.0",
+		"markdownlint-cli2": "0.13.0",
+		"prettier": "3.3.2",
+		"renovate": "37.412.1",
 		"semantic-release": "24.0.0",
+		"ts-graphviz": "2.1.2",
 		"typescript": "5.4.5"
 	},
-	"trustedDependencies": ["@biomejs/biome", "esbuild", "sharp"],
+	"trustedDependencies": [
+		"@biomejs/biome",
+		"better-sqlite3",
+		"core-js-pure",
+		"dtrace-provider",
+		"esbuild",
+		"protobufjs",
+		"re2",
+		"sharp"
+	],
 	"type": "module",
-	"volta": {
-		"node": "22.3.0"
-	},
 	"files": ["dist"],
 	"exports": {
 		".": "./dist/index.js",

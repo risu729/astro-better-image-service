@@ -1,14 +1,19 @@
 {
+	// ref: https://code.visualstudio.com/docs/editor/extension-marketplace#_workspace-recommended-extensions
 	"recommendations": [
 		"oven.bun-vscode",
-		"biomejs.biome",
 		"ms-playwright.playwright",
-		// cspell:ignore tamasfe
-		"tamasfe.even-better-toml", // for bunfig.toml
+		"astro-build.astro-vscode",
+		"biomejs.biome",
+		// cspell:ignore bluebrown
+		"bluebrown.yamlfmt",
 		"github.vscode-github-actions",
+		// cspell:ignore mrmlnc
+		"mrmlnc.vscode-json5",
 		// cspell:ignore esbenp
-		"esbenp.prettier-vscode", // for yaml and markdown
-		"astro-build.astro-vscode", // for formatting astro files
+		"esbenp.prettier-vscode",
+		// cspell:ignore tamasfe
+		"tamasfe.even-better-toml",
 		"streetsidesoftware.code-spell-checker"
 	]
 }

@@ -1,0 +1,9 @@
+# ref: https://taplo.tamasfe.dev/configuration/file.html
+#: schema taplo://taplo.toml
+
+exclude = ["**/node_modules/**"]
+
+[formatting]
+indent_string = "\t"
+# to avoid git diff noise
+align_comments = false
