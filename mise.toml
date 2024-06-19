@@ -156,6 +156,7 @@ hide = true
 depends = ["buni"]
 run = "bun run prettier --write --cache ."
 [tasks."ci:prettier"]
+depends = ["buni"]
 run = "bun run prettier --check ."
 hide = true
 
