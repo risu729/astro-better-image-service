@@ -2,8 +2,9 @@ import type { KnipConfig } from "knip";
 
 const config: KnipConfig = {
 	ignoreDependencies: [
-		// used in .husky/commit-msg, but knip doesn't work properly for bun run
+		// bun run cannot be detected by Knip
 		"@commitlint/cli",
+		"semantic-release",
 	],
 	workspaces: {
 		".": {},
@@ -11,5 +12,4 @@ const config: KnipConfig = {
 	},
 };
 
-// biome-ignore lint/style/noDefaultExport: required for Knip config
 export default config;

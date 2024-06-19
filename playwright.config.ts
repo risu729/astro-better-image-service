@@ -1,6 +1,5 @@
 import { defineConfig } from "@playwright/test";
 
-// biome-ignore lint/style/noDefaultExport: required for Playwright config
 export default defineConfig({
 	testDir: "./tests/e2e",
 	reporter: "html",

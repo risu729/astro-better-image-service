@@ -14,28 +14,13 @@
 	"linter": {
 		"rules": {
 			"all": true,
-			"style": {
-				// Astro dynamic routes include special characters
-				// cspell:ignore filenaming
-				"useFilenamingConvention": "off"
-			},
 			"complexity": {
 				// collides with the noPropertyAccessFromIndexSignature tsconfig option
 				// ref: https://github.com/biomejs/biome/issues/463
 				"useLiteralKeys": "off"
 			},
-			"performance": {
-				// collides with the lint/nursery/useImportRestrictions rule
-				"noBarrelFile": "off"
-			},
-			"correctness": {
-				// this package runs on Node.js
-				"noNodejsModules": "off"
-			},
 			"nursery": {
-				"all": true,
-				// handled by Knip
-				"noUndeclaredDependencies": "off"
+				"all": true
 			}
 		}
 	},
@@ -43,5 +28,53 @@
 		"parser": {
 			"allowComments": true
 		}
-	}
+	},
+	"overrides": [
+		{
+			// disable noDefaultExport rule for config files
+			"include": ["**/*.config.*"],
+			"linter": {
+				"rules": {
+					"style": {
+						"noDefaultExport": "off"
+					}
+				}
+			}
+		},
+		{
+			// disable noNodejsModules rule for files running in bun or Node.js
+			"include": ["**/*.config.*", "tests/**"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noNodejsModules": "off"
+					}
+				}
+			}
+		},
+		{
+			"include": ["tests/e2e/fixtures/**"],
+			"linter": {
+				"rules": {
+					"nursery": {
+						// cannot read dependencies from package.json in subdirectories
+						// ref: https://github.com/biomejs/biome/issues/2010
+						"noUndeclaredDependencies": "off"
+					}
+				}
+			}
+		},
+		{
+			// disable useFilenamingConvention rule for Astro routes
+			// cspell:ignore filenaming
+			"include": ["tests/e2e/fixtures/src/pages/**"],
+			"linter": {
+				"rules": {
+					"style": {
+						"useFilenamingConvention": "off"
+					}
+				}
+			}
+		}
+	]
 }
