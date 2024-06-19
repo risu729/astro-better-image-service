@@ -15,7 +15,7 @@ defaults:
 
 jobs:
   general:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     permissions:
       contents: read # for checkout
@@ -96,7 +96,7 @@ jobs:
           path: playwright-report/
 
   conversion:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     permissions:
       contents: read # for checkout
@@ -222,7 +222,7 @@ jobs:
     # skip if the workflow is called from another workflow
     if: ${{ !cancelled() && contains(github.workflow_ref, '/e2e.yml') }}
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     permissions:
       actions: read # for actions-timeline
