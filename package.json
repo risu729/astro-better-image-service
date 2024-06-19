@@ -49,7 +49,7 @@
 		"@commitlint/cz-commitlint": "19.2.0",
 		"@commitlint/types": "19.0.3",
 		"@cspell/cspell-types": "8.8.4",
-		"@playwright/test": "1.44.1",
+		"@playwright/test": "1.45.0-beta-1718733727000",
 		"@tsconfig/bun": "1.0.6",
 		"@tsconfig/node-lts": "20.1.3",
 		"@tsconfig/strictest": "2.0.5",
