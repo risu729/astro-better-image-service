@@ -57,17 +57,14 @@ run = "bun run playwright test vrt format"
 depends = ["buni"]
 run = "bun run playwright test vrt --update-snapshots"
 
-[tasks."test:e2e:fixtures:install"]
-depends = ["build"]
-run = "bun install --frozen-lockfile --cwd tests/e2e/fixtures"
-
-[tasks."test:e2e:fixtures:build"]
-depends = ["test:e2e:fixtures:install"]
-run = "bun run --cwd tests/e2e/fixtures astro build"
-
 [tasks."test:e2e:fixtures:server"]
-depends = ["test:e2e:fixtures:build"]
-run = "bun run --cwd tests/e2e/fixtures astro preview"
+depends = ["build"]
+run = [
+	"bun install --frozen-lockfile",
+	"bun run build",
+	"bun run preview",
+]
+dir = "tests/e2e/fixtures"
 
 [tasks."test:e2e:fixtures:remove-symlinks"]
 # remove before some checks to avoid symlink loops

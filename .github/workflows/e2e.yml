@@ -29,6 +29,20 @@ jobs:
         with:
           experimental: true
 
+      - name: Install package.json dependencies
+        run: mise run buni
+
+      - name: Build Package
+        run: mise run build
+
+      - name: Install E2E Test Fixtures Dependencies
+        run: bun install --frozen-lockfile
+        working-directory: tests/e2e/fixtures
+
+      - name: Build E2E Test Fixtures with astro-better-image-service
+        run: bun run build
+        working-directory: tests/e2e/fixtures
+
       - name: Store Dependency Versions
         id: dependency-versions
         run: |
@@ -41,9 +55,6 @@ jobs:
         with:
           path: ~/.cache/ms-playwright
           key: playwright-browsers-${{ runner.os }}-${{ steps.dependency-versions.outputs.playwright }}
-
-      - name: Install package.json dependencies
-        run: mise run buni
 
       - name: Install Playwright Browsers and Dependencies
         id: playwright-install
@@ -89,6 +100,12 @@ jobs:
         with:
           experimental: true
 
+      - name: Install package.json dependencies
+        run: mise run buni
+
+      - name: Build Package
+        run: mise run build
+
       - name: Store Dependency Versions
         id: dependency-versions
         run: |
@@ -103,9 +120,6 @@ jobs:
         with:
           path: ~/.cache/ms-playwright
           key: playwright-browsers-${{ runner.os }}-${{ steps.dependency-versions.outputs.playwright }}
-
-      - name: Install package.json dependencies
-        run: mise run buni
 
       - name: Install Playwright Browsers and Dependencies
         id: playwright-install
@@ -127,16 +141,21 @@ jobs:
         id: fixtures-hash
         run: echo "hash=${{ hashFiles('tests/e2e/fixtures/**/*', 'tests/e2e/conversion.test.ts') }}" >> "$GITHUB_OUTPUT"
 
+      - name: Install E2E Test Fixtures Dependencies
+        run: bun install --frozen-lockfile
+        working-directory: tests/e2e/fixtures
+
       - name: Restore Snapshots Cache
         id: restore-snapshots-cache
         uses: actions/cache/restore@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.0.2
         with:
           path: tests/e2e/conversion.test.ts-snapshots
-          key: "default-service-snapshots-${{ runner.os }}-${{ steps.dependency-versions.outputs.astro }}-${{ steps.dependency-versions.outputs.playwright }}-${{ steps.fixtures-hash.outputs.hash }} "
+          key: "default-service-snapshots-${{ runner.os }}-${{ steps.dependency-versions.outputs.astro }}-${{ steps.dependency-versions.outputs.playwright }}-${{ steps.fixtures-hash.outputs.hash }}"
 
       - name: Build E2E Test Fixtures with the Default Image Service
         if: steps.restore-snapshots-cache.outputs.cache-hit != 'true'
-        run: mise run test:e2e:fixtures:build
+        run: bun run build
+        working-directory: tests/e2e/fixtures
         env:
           USE_DEFAULT_IMAGE_SERVICE: true
 
@@ -154,7 +173,8 @@ jobs:
           key: ${{ steps.restore-snapshots-cache.outputs.cache-primary-key }}
 
       - name: Build E2E Test Fixtures with astro-better-image-service
-        run: mise run test:e2e:fixtures:build
+        run: bun run build
+        working-directory: tests/e2e/fixtures
 
       - name: Playwright Image Services Consistency Test
         id: playwright-test-conversion
