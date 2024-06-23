@@ -3,7 +3,7 @@
 
 [tools]
 # renovate: packageName=oven-sh/bun extractVersion=^bun-v(?<version>.+)
-bun = "1.1.15"
+bun = "1.1.16"
 # renovate: datasource=node
 node = "22.3.0" # cspell:ignore datasource
 # renovate: datasource=crate
