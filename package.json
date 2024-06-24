@@ -51,7 +51,7 @@
 		"ignore-sync": "7.0.1",
 		"ignore-walk": "6.0.5",
 		"json5": "2.2.3",
-		"jsonc-parser": "3.2.1",
+		"jsonc-parser": "3.3.0",
 		"knip": "5.22.2",
 		"markdownlint-cli2": "0.13.0",
 		"prettier": "3.3.2",
