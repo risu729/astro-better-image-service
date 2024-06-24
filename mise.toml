@@ -19,7 +19,7 @@ shellcheck = "0.10.0" # cspell:ignore koalaman
 # ref: https://github.com/tamasfe/taplo/releases/tag/release-taplo-cli-0.9.0
 "cargo:taplo-cli" = "0.9.0"
 # renovate: packageName=google/yamlfmt
-yamlfmt = "0.12.1"
+yamlfmt = "0.13.0"
 # renovate: datasource=pypi
 yamllint = "1.35.1" # cspell:ignore pypi
 "ubi:lycheeverse/lychee" = "v0.15.1" # cspell:ignore lycheeverse
