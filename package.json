@@ -35,7 +35,7 @@
 		"@commitlint/cz-commitlint": "19.2.0",
 		"@commitlint/types": "19.0.3",
 		"@cspell/cspell-types": "8.9.1",
-		"@playwright/test": "1.46.0-alpha-2024-06-26",
+		"@playwright/test": "1.45.0",
 		"@total-typescript/tsconfig": "1.0.4",
 		"@tsconfig/bun": "1.0.6",
 		"@tsconfig/strictest": "2.0.5",
