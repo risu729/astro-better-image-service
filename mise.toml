@@ -13,7 +13,7 @@ actionlint = "1.7.1" # cspell:ignore rhysd
 # required for actionlint
 # renovate: packageName=koalaman/shellcheck
 shellcheck = "0.10.0" # cspell:ignore koalaman
-"ubi:suzuki-shunsuke/ghalint" = "v0.2.11" # cspell:ignore shunsuke 
+"ubi:suzuki-shunsuke/ghalint" = "v0.2.12" # cspell:ignore shunsuke 
 "ubi:suzuki-shunsuke/pinact" = "v0.2.0"
 # taplo does not provide pre-built binaries in github releases
 # ref: https://github.com/tamasfe/taplo/releases/tag/release-taplo-cli-0.9.0
