@@ -58,7 +58,7 @@
 		"renovate": "37.421.6",
 		"semantic-release": "24.0.0",
 		"ts-graphviz": "2.1.2",
-		"typescript": "5.5.2"
+		"typescript": "5.5.3"
 	},
 	"trustedDependencies": [
 		"@biomejs/biome",
