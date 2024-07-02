@@ -5,7 +5,7 @@
 # renovate: packageName=oven-sh/bun extractVersion=^bun-v(?<version>.+)
 bun = "1.1.17"
 # renovate: datasource=node
-node = "22.3.0" # cspell:ignore datasource
+node = "22.4.0" # cspell:ignore datasource
 # renovate: datasource=crate
 "ubi" = "0.0.32"
 # renovate: packageName=rhysd/actionlint
