@@ -54,7 +54,7 @@
 		"jsonc-parser": "3.3.1",
 		"knip": "5.25.2",
 		"markdownlint-cli2": "0.13.0",
-		"prettier": "3.3.2",
+		"prettier": "3.3.3",
 		"renovate": "37.431.4",
 		"semantic-release": "24.0.0",
 		"ts-graphviz": "2.1.2",
