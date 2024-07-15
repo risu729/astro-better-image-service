@@ -71,7 +71,7 @@
 		"sharp"
 	],
 	"type": "module",
-	"files": ["dist", "!*.tsbuildinfo"],
+	"files": ["dist", "!*.tsbuildinfo", "src"],
 	"exports": {
 		".": "./dist/index.js",
 		"./image-service": "./dist/image-service.js",
