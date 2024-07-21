@@ -7,7 +7,7 @@ bun = "1.1.20"
 # renovate: datasource=node
 node = "22.5.1" # cspell:ignore datasource
 # renovate: datasource=crate
-"ubi" = "0.0.32"
+"ubi" = "0.1.0"
 # renovate: packageName=rhysd/actionlint
 actionlint = "1.7.1" # cspell:ignore rhysd
 # required for actionlint
