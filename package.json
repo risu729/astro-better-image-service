@@ -41,7 +41,7 @@
 		"@tsconfig/strictest": "2.0.5",
 		"@types/bun": "1.1.6",
 		"@types/ignore-walk": "4.0.3",
-		"@types/node": "20.14.12",
+		"@types/node": "20.14.13",
 		"ajv": "8.17.1",
 		"ajv-draft-04": "1.0.0",
 		"ajv-formats": "3.0.1",
