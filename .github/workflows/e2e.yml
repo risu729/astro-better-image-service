@@ -80,7 +80,7 @@ jobs:
         # use failure() because success() is used implicitly
         # ref: https://docs.github.com/en/actions/learn-github-actions/expressions#status-check-functions
         if: failure() && steps.playwright-test.outcome == 'failure'
-        uses: actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b # v4.3.4
+        uses: actions/upload-artifact@89ef406dd8d7e03cfd12d9e0a4a378f454709029 # v4.3.5
         with:
           name: playwright-report-${{ github.sha }}
           path: playwright-report/
@@ -184,7 +184,7 @@ jobs:
         # use failure() because success() is used implicitly
         # ref: https://docs.github.com/en/actions/learn-github-actions/expressions#status-check-functions
         if: failure() && steps.playwright-test-conversion.outcome == 'failure'
-        uses: actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b # v4.3.4
+        uses: actions/upload-artifact@89ef406dd8d7e03cfd12d9e0a4a378f454709029 # v4.3.5
         with:
           name: playwright-report-conversion-${{ github.sha }}
           path: playwright-report/
