@@ -47,7 +47,7 @@
 		"ajv-formats": "3.0.1",
 		"commitizen": "4.3.0",
 		"cspell": "8.14.2",
-		"husky": "9.1.4",
+		"husky": "9.1.5",
 		"ignore-sync": "7.0.1",
 		"ignore-walk": "6.0.5",
 		"json5": "2.2.3",
