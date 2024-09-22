@@ -1,5 +1,7 @@
 // ref: https://cspell.org/configuration/
 
+"use strict";
+
 /**
  * @type {import("@cspell/cspell-types").CSpellUserSettings}
  */

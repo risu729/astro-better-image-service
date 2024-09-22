@@ -5,7 +5,6 @@ import Ajv04 from "ajv-draft-04";
 import addFormats from "ajv-formats";
 import Ajv2019 from "ajv/dist/2019";
 import draft7MetaSchema from "ajv/dist/refs/json-schema-draft-07.json";
-// biome-ignore lint/nursery/noUndeclaredDependencies:
 import { file } from "bun";
 import walk from "ignore-walk";
 import { parse as parseJson5 } from "json5";
