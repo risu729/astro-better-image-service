@@ -28,6 +28,16 @@ jobs:
         uses: jdx/mise-action@d6e32c1796099e0f1f3ac741c220a8b7eae9e5dd # v2.0.6
         with:
           experimental: true
+        # cspell:ignore reshim
+        # mise reshim is required to avoid "No such file or directory" error
+        # ref: https://github.com/jdx/mise/issues/2260
+        continue-on-error: true
+
+      - name: Reshim mise
+        run: mise reshim --verbose
+
+      - name: Install mise tools
+        run: mise install --verbose
 
       - name: Install package.json dependencies
         run: mise run buni
@@ -99,6 +109,16 @@ jobs:
         uses: jdx/mise-action@d6e32c1796099e0f1f3ac741c220a8b7eae9e5dd # v2.0.6
         with:
           experimental: true
+        # cspell:ignore reshim
+        # mise reshim is required to avoid "No such file or directory" error
+        # ref: https://github.com/jdx/mise/issues/2260
+        continue-on-error: true
+
+      - name: Reshim mise
+        run: mise reshim --verbose
+
+      - name: Install mise tools
+        run: mise install --verbose
 
       - name: Install package.json dependencies
         run: mise run buni
