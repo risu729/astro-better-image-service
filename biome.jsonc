@@ -21,7 +21,9 @@
 				"useLiteralKeys": "off"
 			},
 			"nursery": {
-				"all": true
+				"all": true,
+				// prefer process.env over config files
+				"noProcessEnv": "off"
 			}
 		}
 	},
@@ -58,7 +60,7 @@
 			"include": ["**/scripts/**"],
 			"linter": {
 				"rules": {
-					"nursery": {
+					"suspicious": {
 						"noConsole": "off"
 					}
 				}
@@ -68,7 +70,7 @@
 			"include": ["tests/e2e/fixtures/**"],
 			"linter": {
 				"rules": {
-					"nursery": {
+					"correctness": {
 						// cannot read dependencies from package.json in subdirectories
 						// ref: https://github.com/biomejs/biome/issues/2010
 						"noUndeclaredDependencies": "off"
