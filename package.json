@@ -52,7 +52,7 @@
 		"ignore-walk": "7.0.0",
 		"json5": "2.2.3",
 		"jsonc-parser": "3.3.1",
-		"knip": "5.30.4",
+		"knip": "5.30.5",
 		"markdownlint-cli2": "0.14.0",
 		"prettier": "3.3.3",
 		"renovate": "38.93.5",
