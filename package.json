@@ -45,7 +45,7 @@
 		"ajv": "8.17.1",
 		"ajv-draft-04": "1.0.0",
 		"ajv-formats": "3.0.1",
-		"commitizen": "4.3.0",
+		"commitizen": "4.3.1",
 		"cspell": "8.14.4",
 		"husky": "9.1.6",
 		"ignore-sync": "7.0.1",
