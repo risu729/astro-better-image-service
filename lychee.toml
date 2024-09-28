@@ -17,3 +17,8 @@ exclude_path = [
 	"tests/e2e/fixtures/src/images",
 	"tests/e2e/vrt.test.ts-snapshots",
 ]
+
+exclude = [
+	# ignore because somehow it returns a 429
+	"^https://github.com/risu729/astro-better-image-service/commits/main/",
+]
