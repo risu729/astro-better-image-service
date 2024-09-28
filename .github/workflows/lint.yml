@@ -94,7 +94,7 @@ jobs:
         run: mise run ${{ matrix.task }}
         env:
           # pass GITHUB_TOKEN to avoid rate limit
-          GITHUB_TOKEN: ${{ matrix.name == 'lychee' && secrets.GITHUB_TOKEN || '' }}
+          GITHUB_TOKEN: ${{ matrix.name == 'lychee' && secrets.GITHUB_TOKEN }}
 
   lint-commitlint:
     runs-on: ubuntu-24.04
