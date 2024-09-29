@@ -9,7 +9,7 @@ node = "22.9.0" # cspell:ignore datasource
 # renovate: datasource=crate
 "ubi" = "0.1.0"
 # renovate: packageName=rhysd/actionlint
-actionlint = "1.7.2" # cspell:ignore rhysd
+actionlint = "1.7.3" # cspell:ignore rhysd
 # required for actionlint
 # renovate: packageName=koalaman/shellcheck
 shellcheck = "0.10.0" # cspell:ignore koalaman
