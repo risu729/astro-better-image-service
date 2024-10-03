@@ -2,21 +2,17 @@
 #:schema https://mise.jdx.dev/schema/mise.json
 
 [tools]
-# renovate: packageName=oven-sh/bun extractVersion=^bun-v(?<version>.+)
 bun = "1.1.29"
-# renovate: datasource=node
-node = "22.9.0" # cspell:ignore datasource
+node = "22.9.0"
+# cspell:ignore datasource
 # renovate: datasource=crate
 "ubi" = "0.1.0"
-# renovate: packageName=rhysd/actionlint
-actionlint = "1.7.3" # cspell:ignore rhysd
+actionlint = "1.7.3"
 # required for actionlint
-# renovate: packageName=koalaman/shellcheck
-shellcheck = "0.10.0" # cspell:ignore koalaman
+shellcheck = "0.10.0"
 "ubi:suzuki-shunsuke/ghalint" = "v0.2.12" # cspell:ignore shunsuke 
 "ubi:suzuki-shunsuke/pinact" = "v0.2.1"
 "ubi:tamasfe/taplo" = "0.9.2" # cspell:ignore tamasfe
-# renovate: packageName=google/yamlfmt
 yamlfmt = "0.13.0"
 # renovate: datasource=pypi
 yamllint = "1.35.1" # cspell:ignore pypi

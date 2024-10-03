@@ -14,10 +14,10 @@
 		"dependencies",
 		"{{#unless (equals manager 'regex')}}{{manager}}{{/unless}}",
 	],
+	// ref: https://docs.renovatebot.com/modules/manager/regex/#advanced-capture
 	customManagers: [
-		// mise-en-place is not yet supported by Renovate
-		// ref: https://github.com/renovatebot/renovate/issues/28918
-		// ref: https://docs.renovatebot.com/modules/manager/regex/#advanced-capture
+		// renovate does not support tools not listed
+		// ref: https://docs.renovatebot.com/modules/manager/mise/#additional-information
 		{
 			customType: "regex",
 			description: "Updates tool versions in mise.toml (asdf backend, github-releases datasource)",
@@ -42,6 +42,8 @@
 				"# renovate: datasource=(?<datasource>[a-z-]+?)(?: packageName=(?<packageName>.+?))?(?: versioning=(?<versioning>[a-z-]+?))?(?: extractVersion=(?<extractVersion>.+?))?\\n\"?(?<depName>[^:]+?)\"? *= *\"?(?<currentValue>.+?)\"? *(?:#.*)?\\n",
 			],
 		},
+		// renovate does not support backends except core and asdf
+		// ref: https://github.com/renovatebot/renovate/issues/30387
 		{
 			customType: "regex",
 			description: "Updates tool versions in mise.toml (Cargo backend)",
