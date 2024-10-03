@@ -34,6 +34,7 @@ const betterImageService: LocalImageService<MergedConfig> = {
 	// biome-ignore lint/style/noNonNullAssertion: optional method but baseService implements it
 	getSrcSet: baseService.getSrcSet!,
 
+	// biome-ignore lint/nursery/useExplicitFunctionReturnType: not needed because betterImageService type is already defined
 	async validateOptions(options, imageConfig) {
 		// save the original format for later use, because baseService.validateOptions
 		// changes the options.format to SVG if options.src.format is SVG
@@ -56,6 +57,7 @@ const betterImageService: LocalImageService<MergedConfig> = {
 
 	// based on sharp image service
 	// https://github.com/withastro/astro/blob/8d5ea2df5d52ad9a311c407533b9f4226480faa8/packages/astro/src/assets/services/sharp.ts#L44-L89
+	// biome-ignore lint/nursery/useExplicitFunctionReturnType: not needed because betterImageService type is already defined
 	async transform(inputBuffer, transformOptions, config) {
 		const imageServiceConfig = config.service.config;
 

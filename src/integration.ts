@@ -1,4 +1,8 @@
-import type { AstroIntegration, AstroIntegrationLogger } from "astro";
+import type {
+	AstroConfig,
+	AstroIntegration,
+	AstroIntegrationLogger,
+} from "astro";
 import { betterImageService } from "./config.js";
 
 /**
@@ -6,6 +10,7 @@ import { betterImageService } from "./config.js";
  * @param config Configuration for the image optimization libraries.
  * @returns Astro integration object.
  */
+// biome-ignore lint/nursery/useExplicitFunctionReturnType: type should be inferred
 export const astroIntegration = (
 	config?: Parameters<typeof betterImageService>[0],
 ) =>
@@ -19,9 +24,9 @@ export const astroIntegration = (
 			}: {
 				updateConfig: (config: {
 					image: { service: ReturnType<typeof betterImageService> };
-				}) => unknown;
+				}) => AstroConfig;
 				logger: AstroIntegrationLogger;
-			}) => {
+			}): void => {
 				updateConfig({
 					image: {
 						service: betterImageService(config),
