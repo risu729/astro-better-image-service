@@ -110,9 +110,6 @@ export default defineConfig({
 	integrations: [
 		betterImageService(),
 		compress({
-			HTML: true,
-			CSS: true,
-			JavaScript: true,
 			Image: false,
 			SVG: false,
 		}),
