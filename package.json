@@ -28,7 +28,7 @@
 		"svgo": "^3.3.2"
 	},
 	"peerDependencies": {
-		"astro": "4.15.11"
+		"astro": "^4.0.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.3",
@@ -47,6 +47,7 @@
 		"ajv": "8.17.1",
 		"ajv-draft-04": "1.0.0",
 		"ajv-formats": "3.0.1",
+		"astro": "4.15.11",
 		"commitizen": "4.3.1",
 		"cspell": "8.14.4",
 		"husky": "9.1.6",
