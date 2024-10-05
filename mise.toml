@@ -10,7 +10,7 @@ node = "22.9.0"
 actionlint = "1.7.3"
 # required for actionlint
 shellcheck = "0.10.0"
-"ubi:suzuki-shunsuke/ghalint" = "v0.2.12" # cspell:ignore shunsuke 
+"ubi:suzuki-shunsuke/ghalint" = "v1.0.0" # cspell:ignore shunsuke 
 "ubi:suzuki-shunsuke/pinact" = "v1.0.0"
 "ubi:tamasfe/taplo" = "0.9.2" # cspell:ignore tamasfe
 yamlfmt = "0.13.0"
