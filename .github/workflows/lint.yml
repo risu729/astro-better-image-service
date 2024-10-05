@@ -154,6 +154,25 @@ jobs:
         if: steps.commitlint-push-initial.outcome == 'skipped' && steps.commitlint-push.outcome == 'skipped' && steps.commitlint-pr.outcome == 'skipped'
         run: bun run commitlint --verbose --from ${{ github.sha }}~1 --to ${{ github.sha }}
 
+  lint-status:
+    needs:
+      - lint
+      - lint-commitlint
+
+    # skip if the workflow is called from another workflow
+    if: ${{ !cancelled() && contains(github.workflow_ref, '/lint.yml') }}
+
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    steps:
+      - name: All jobs passed
+        if: ${{ !(contains(needs.*.result, 'failure')) }}
+        run: exit 0
+      - name: Some jobs failed
+        if: ${{ contains(needs.*.result, 'failure') }}
+        run: exit 1
+
   actions-timeline:
     needs:
       - lint
