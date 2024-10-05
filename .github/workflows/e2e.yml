@@ -130,7 +130,12 @@ jobs:
         id: dependency-versions
         run: |
           playwright_version=$(bun pm ls | sed -nE 's/.*@playwright\/test@(.+)/\1/p')
-          astro_version=$(bun pm ls | sed -nE 's/.*astro@(.+)/\1/p')
+          astro_version=$(bun pm ls | sed -nE 's/.*astro@(.+)/\1/p' | uniq)
+          # throw error if several versions are found
+          if [[ $(echo "$astro_version" | wc -l) -gt 1 ]]; then
+            echo "Multiple versions of Astro found: $astro_version"
+            exit 1
+          fi
           echo "playwright=$playwright_version" >> "$GITHUB_OUTPUT"
           echo "astro=$astro_version" >> "$GITHUB_OUTPUT"
 
