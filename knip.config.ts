@@ -7,19 +7,23 @@ const config: KnipConfig = {
 	workspaces: {
 		".": {
 			ignoreDependencies: [
-				// mise.toml is not recognized by Knip
+				// mise.toml is not recognized
 				"@biomejs/biome",
 				"cspell",
 				"ignore-sync",
 				"markdownlint-cli2",
 				"renovate",
-				// bun run cannot be detected by Knip
+				// bun run cannot be detected
 				"@commitlint/cli",
 				"semantic-release",
 			],
 			entry: ["src/index.ts", "**/scripts/**"],
+			// peerDependencies are not recognized as plugins
+			astro: true,
 		},
-		"tests/e2e/fixtures": {},
+		"tests/e2e/fixtures": {
+			ignoreBinaries: ["astro"],
+		},
 	},
 };
 
