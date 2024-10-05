@@ -164,14 +164,8 @@ jobs:
 
     runs-on: ubuntu-24.04
     timeout-minutes: 5
-    permissions:
-      actions: read
 
     steps:
-      - name: actions-timeline
-        # cspell:ignore kesin
-        uses: Kesin11/actions-timeline@3046833d9aacfd7745c5264b7f3af851c3e2a619 # v2.2.1
-
       - name: Check the status of the jobs
         run: |
           if [[ $(echo '${{ toJson(needs.*.result) }}' | jq 'all(. == "success")') == "false" ]]; then
@@ -179,3 +173,19 @@ jobs:
             exit 1
           fi
           echo 'All jobs are successful.'
+
+  actions-timeline:
+    needs:
+      - lint-status
+
+    if: needs.lint-status.result == 'success' || needs.lint-status.result == 'failure'
+
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      actions: read
+
+    steps:
+      - name: actions-timeline
+        # cspell:ignore kesin
+        uses: Kesin11/actions-timeline@3046833d9aacfd7745c5264b7f3af851c3e2a619 # v2.2.1
