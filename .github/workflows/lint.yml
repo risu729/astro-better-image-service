@@ -174,10 +174,8 @@ jobs:
 
       - name: Check the status of the jobs
         run: |
-          if [[ $(echo "${{ toJson(needs.*.result) }}" | jq 'all(. == "success")') == "true" ]]; then
-            echo "All jobs are successful."
-            exit 0
-          else
-            echo "Some jobs are failed, cancelled, or skipped."
+          if [[ $(echo '${{ toJson(needs.*.result) }}' | jq 'all(. == "success")') == "false" ]]; then
+            echo 'Some jobs are failed, cancelled, or skipped.'
             exit 1
           fi
+          echo 'All jobs are successful.'
