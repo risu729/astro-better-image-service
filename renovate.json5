@@ -82,6 +82,19 @@
 		},
 	],
 	packageRules: [
+		// disable pinning for dependencies and peerDependencies
+		{
+			matchFileNames: ["package.json"],
+			matchDepTypes: ["dependencies"],
+			// bump for dependencies and release a patch update
+			rangeStrategy: "bump",
+		},
+		{
+			matchFileNames: ["package.json"],
+			matchDepTypes: ["peerDependencies"],
+			// widen range for peerDependencies as far as possible
+			rangeStrategy: "widen",
+		},
 		// set semantic commit types
 		{
 			matchFileNames: ["tests/"],
