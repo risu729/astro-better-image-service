@@ -24,9 +24,11 @@
 		"prepare": "husky && bun link"
 	},
 	"dependencies": {
-		"astro": "4.15.11",
 		"sharp": "0.33.5",
 		"svgo": "3.3.2"
+	},
+	"peerDependencies": {
+		"astro": "4.15.11"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.3",
