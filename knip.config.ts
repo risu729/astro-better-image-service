@@ -21,9 +21,7 @@ const config: KnipConfig = {
 			// peerDependencies are not recognized as plugins
 			astro: true,
 		},
-		"tests/e2e/fixtures": {
-			ignoreBinaries: ["astro"],
-		},
+		"tests/e2e/fixtures": {},
 	},
 };
 
