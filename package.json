@@ -24,9 +24,11 @@
 		"prepare": "husky && bun link"
 	},
 	"dependencies": {
-		"astro": "4.15.11",
-		"sharp": "0.33.5",
-		"svgo": "3.3.2"
+		"sharp": "^0.33.5",
+		"svgo": "^3.3.2"
+	},
+	"peerDependencies": {
+		"astro": "^4.7.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.3",
@@ -45,6 +47,7 @@
 		"ajv": "8.17.1",
 		"ajv-draft-04": "1.0.0",
 		"ajv-formats": "3.0.1",
+		"astro": "4.15.11",
 		"commitizen": "4.3.1",
 		"cspell": "8.14.4",
 		"husky": "9.1.6",
@@ -57,6 +60,7 @@
 		"prettier": "3.3.3",
 		"renovate": "38.110.2",
 		"semantic-release": "24.1.2",
+		"semver": "7.6.3",
 		"ts-graphviz": "2.1.4",
 		"typescript": "5.6.2"
 	},
