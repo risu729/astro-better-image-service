@@ -1,6 +1,5 @@
 import { $ } from "bun";
-// cspell:ignore rcompare
-import { parse, rcompare, satisfies } from "semver";
+import { compare, parse, satisfies } from "semver";
 import packageJson from "../../../package.json" with { type: "json" };
 
 $.throws(true);
@@ -11,20 +10,29 @@ const versions = (await $`npm view astro versions --json`.json()) as string[];
 
 const versionsInRange = versions
 	.filter((version) => satisfies(version, peerRange))
-	// sort in descending order
-	.sort(rcompare);
+	.sort(compare);
 
-const versionsToTest = Object.values(
-	Object.groupBy(versionsInRange, (version) => {
-		const semver = parse(version);
-		if (!semver) {
-			throw new Error(`Invalid version: ${version}`);
-		}
-		return `${semver.major}.${semver.minor}`;
-	}),
-)
-	// test the latest 5 versions for the latest minor version, and the latest version for the rest
-	.flatMap((versions, index) => versions?.slice(0, index === 0 ? 5 : 1))
-	.filter((version) => version !== undefined);
+const groupedVersions = Object.groupBy(versionsInRange, (version) => {
+	const semver = parse(version);
+	if (!semver) {
+		throw new Error(`Invalid version: ${version}`);
+	}
+	return `${semver.major}.${semver.minor}`;
+});
+
+const versionsToTest = [
+	...new Set([
+		// oldest 3 versions
+		...versionsInRange.slice(0, 3),
+		// oldest version of each major version
+		...Object.entries(groupedVersions)
+			.filter(([key]) => key.endsWith(".0"))
+			.map(([, versions]) => versions?.at(0)),
+		// latest version of each minor version
+		...Object.values(groupedVersions).map((versions) => versions?.at(-1)),
+		// latest 5 versions
+		...versionsInRange.slice(-5),
+	]),
+];
 
 console.write(JSON.stringify(versionsToTest));
