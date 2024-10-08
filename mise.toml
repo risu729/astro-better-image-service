@@ -5,7 +5,7 @@
 bun = "1.1.29"
 node = "22.9.0"
 # cspell:ignore datasource
-# renovate: datasource=crate
+# renovate: packageName=ubi-cli datasource=crate
 "ubi" = "0.2.0"
 actionlint = "1.7.3"
 # required for actionlint
