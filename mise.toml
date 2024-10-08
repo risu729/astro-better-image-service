@@ -2,7 +2,7 @@
 #:schema https://mise.jdx.dev/schema/mise.json
 
 [tools]
-bun = "1.1.29"
+bun = "1.1.30"
 node = "22.9.0"
 # cspell:ignore datasource
 # renovate: datasource=crate packageName=ubi-cli
