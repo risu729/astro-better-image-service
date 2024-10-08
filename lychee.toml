@@ -21,4 +21,6 @@ exclude_path = [
 exclude = [
 	# ignore because somehow it returns a 429
 	"^https://github.com/risu729/astro-better-image-service/commits/main/",
+	# ignore because the request is forbidden
+	"^https://code.visualstudio.com/",
 ]
