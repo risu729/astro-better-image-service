@@ -3,6 +3,8 @@
 [install]
 exact = true
 auto = "disable"
+# peerDependencies are also installed as devDependencies
+peer = false
 
 [test]
 coverage = true
