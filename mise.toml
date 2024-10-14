@@ -4,9 +4,6 @@
 [tools]
 bun = "1.1.30"
 node = "22.9.0"
-# cspell:ignore datasource
-# renovate: datasource=crate packageName=ubi-cli
-"ubi" = "0.2.0"
 actionlint = "1.7.3"
 # required for actionlint
 shellcheck = "0.10.0"
@@ -14,6 +11,7 @@ shellcheck = "0.10.0"
 "ubi:suzuki-shunsuke/pinact" = "v1.0.0"
 "ubi:tamasfe/taplo" = "0.9.2" # cspell:ignore tamasfe
 yamlfmt = "0.13.0"
+# cspell:ignore datasource
 # renovate: datasource=pypi
 yamllint = "1.35.1" # cspell:ignore pypi
 "ubi:lycheeverse/lychee" = "v0.15.1" # cspell:ignore lycheeverse
