@@ -3,7 +3,7 @@
 
 [tools]
 bun = "1.1.30"
-node = "22.9.0"
+node = "22.10.0"
 actionlint = "1.7.3"
 # required for actionlint
 shellcheck = "0.10.0"
