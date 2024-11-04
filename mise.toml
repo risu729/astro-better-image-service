@@ -4,7 +4,7 @@
 [tools]
 bun = "1.1.34"
 node = "22.11.0"
-actionlint = "1.7.3"
+actionlint = "1.7.4"
 # required for actionlint
 shellcheck = "0.10.0"
 "ubi:suzuki-shunsuke/ghalint" = "v1.0.0" # cspell:ignore shunsuke 
