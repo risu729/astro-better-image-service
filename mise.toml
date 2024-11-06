@@ -16,7 +16,7 @@ yamlfmt = "0.14.0"
 yamllint = "1.35.1" # cspell:ignore pypi
 "ubi:lycheeverse/lychee" = "v0.15.1" # cspell:ignore lycheeverse
 # renovate: extractVersion=^v(?<version>\d+\..+)
-"ubi:crate-ci/typos" = "v1.27.1"
+"ubi:crate-ci/typos" = "v1.27.2"
 
 [tasks."buni"]
 run = "bun install --frozen-lockfile"
