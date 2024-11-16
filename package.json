@@ -58,7 +58,7 @@
 		"knip": "5.37.1",
 		"markdownlint-cli2": "0.15.0",
 		"prettier": "3.3.3",
-		"renovate": "39.18.0",
+		"renovate": "39.18.1",
 		"semantic-release": "24.2.0",
 		"semver": "7.6.3",
 		"ts-graphviz": "2.1.4",
