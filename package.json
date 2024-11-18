@@ -50,7 +50,7 @@
 		"astro": "4.16.13",
 		"commitizen": "4.3.1",
 		"cspell": "8.16.0",
-		"husky": "9.1.6",
+		"husky": "9.1.7",
 		"ignore-sync": "7.0.1",
 		"ignore-walk": "7.0.0",
 		"json5": "2.2.3",
