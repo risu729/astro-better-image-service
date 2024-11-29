@@ -3,7 +3,7 @@
 	"private": true,
 	"type": "module",
 	"dependencies": {
-		"astro": "4.15.11",
+		"astro": "4.16.1",
 		"astro-better-image-service": "link:astro-better-image-service"
 	},
 	"scripts": {
