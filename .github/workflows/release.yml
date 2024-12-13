@@ -54,7 +54,7 @@ jobs:
           fetch-depth: 0 # fetch all history for semantic-release
 
       - name: Install mise
-        uses: jdx/mise-action@63a673876c7072c1d6ecb2049c0d572976c83b22 # v2.1.7
+        uses: jdx/mise-action@5bb8f8c1911837cf42064e6490e7634fc842ee7e # v2.1.8
         with:
           experimental: true
           install: false
