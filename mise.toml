@@ -4,200 +4,45 @@
 [tools]
 bun = "1.1.42"
 node = "22.12.0"
+# cspell:ignore datasource binstall
+# renovate: datasource=crate
+cargo-binstall = "1.10.11"
+uv = "0.5.14"
+"aqua:biomejs/biome" = "1.9.3"
 actionlint = "1.7.5"
 # required for actionlint
 shellcheck = "0.10.0"
-"ubi:suzuki-shunsuke/ghalint" = "v1.1.0" # cspell:ignore shunsuke 
-"ubi:suzuki-shunsuke/pinact" = "v1.1.2"
-"ubi:tamasfe/taplo" = "0.9.2" # cspell:ignore tamasfe
+# renovate: extractVersion=^v(?<version>.+)
+"aqua:suzuki-shunsuke/ghalint" = "1.2.1" # cspell:ignore shunsuke
+# renovate: extractVersion=^v(?<version>.+)
+"aqua:suzuki-shunsuke/pinact" = "1.1.2"
+# cspell:ignore tamasfe
+# renovate: packageName=tamasfe/taplo
+taplo = "0.9.3"
+"npm:prettier" = "3.4.2"
+markdownlint-cli2 = "0.17.1"
 yamlfmt = "0.14.0"
-# cspell:ignore datasource
-# renovate: datasource=pypi
-yamllint = "1.35.1" # cspell:ignore pypi
-"ubi:lycheeverse/lychee" = "v0.15.1" # cspell:ignore lycheeverse
-# renovate: extractVersion=^v(?<version>\d+\..+)
-"ubi:crate-ci/typos" = "v1.29.3"
+yamllint = "1.35.1"
+"npm:cspell" = "8.17.1"
+"cargo:lychee" = "0.18.0"
+typos = "1.29.3"
+"npm:ignore-sync" = "8.0.0"
 
-[tasks."buni"]
-run = "bun install --frozen-lockfile"
+[settings]
+experimental = true
 
-[tasks.commit]
-depends = ["buni"]
-run = ["git add .", "bun run git-cz"]
+[settings.npm]
+bun = true
 
-[tasks."commit:staged"]
-depends = ["buni"]
-run = "bun run git-cz"
+# cspell:ignore pipx
+[settings.pipx]
+uvx = true
 
-[tasks.dev]
-depends = ["buni"]
-run = ["bun run tsc --project tsconfig.src.json --watch"]
+[task_config]
+includes = ["tasks.toml", "tasks"]
 
-[tasks.build]
-depends = ["buni"]
-run = "bun run tsc --project tsconfig.src.json"
-
-[tasks."test:unit"]
-depends = ["buni"]
-run = "bun test tests/unit"
-
-[tasks."test:e2e"]
-depends = ["buni"]
-run = "bun run playwright test vrt format"
-
-[tasks."test:e2e:snapshots"]
-depends = ["buni"]
-run = "bun run playwright test vrt --update-snapshots"
-
-[tasks."test:e2e:fixtures:server"]
-depends = ["build"]
-run = ["bun install --frozen-lockfile", "bun run build", "bun run preview"]
-dir = "tests/e2e/fixtures"
-
-[tasks."test:e2e:fixtures:remove-symlinks"]
-# remove before some checks to avoid symlink loops
-run = "rm -rf node_modules/astro-better-image-service"
-dir = "tests/e2e/fixtures"
-hide = true
-
-[tasks.check]
-depends = [
-	"check:*", # lint and/or fix formatting
-	"lint:*", # lint only
-]
-
-[tasks.precommit]
-# only run tasks that are fast
-depends = ["check:biome", "check:tsc", "check:cspell"]
-run = "git add ."
-hide = true
-
-[tasks.ci]
-depends = [
-	"ci:*", # lint and/or check formatting
-	"lint:*", # lint only
-]
-hide = true
-
-[tasks."check:biome"]
-depends = ["buni"]
-run = "bun run biome check --write --error-on-warnings"
-[tasks."ci:biome"]
-depends = ["buni"]
-run = "bun run biome ci --error-on-warnings"
-hide = true
-
-[tasks."check:tsc"]
-depends = ["buni"]
-run = [
-	"bun run tsc --project tsconfig.src.json --noEmit",
-	"bun run tsc --project tsconfig.base.json",
-]
-[tasks."ci:tsc"]
-depends = ["buni"]
-run = [
-	"bun run tsc --project tsconfig.src.json --incremental false --noEmit",
-	"bun run tsc --project tsconfig.base.json --incremental false",
-]
-hide = true
-
-[tasks."check:knip"]
-depends = ["buni"]
-run = "bun run knip-bun --cache"
-[tasks."ci:knip"]
-depends = ["buni"]
-run = "bun run knip-bun"
-hide = true
-
-[tasks."lint:jsonschema"]
-depends = ["buni"]
-run = "bun run scripts/validate-json-schema.ts"
-alias = "check:jsonschema"
-
-[tasks."lint:actionlint"]
-run = "actionlint -color"
-alias = "check:actionlint"
-
-[tasks."lint:ghalint"]
-run = "ghalint run"
-alias = "check:ghalint"
-
-[tasks."check:pinact"]
-run = "pinact run --verify"
-[tasks."ci:pinact"]
-depends = ["check:pinact"]
-run = "mise run util:nodiff"
-hide = true
-
-[tasks."check:taplo"]
-depends = ["test:e2e:fixtures:remove-symlinks"]
-run = ["taplo lint", "taplo fmt"]
-[tasks."ci:taplo"]
-depends = ["test:e2e:fixtures:remove-symlinks"]
-run = ["taplo lint", "taplo fmt --check --diff"]
-hide = true
-
-[tasks."check:prettier"]
-depends = ["buni"]
-run = "bun run prettier --write --cache ."
-[tasks."ci:prettier"]
-depends = ["buni"]
-run = "bun run prettier --check ."
-hide = true
-
-[tasks."check:markdownlint"]
-depends = ["buni", "test:e2e:fixtures:remove-symlinks"]
-run = "bun run markdownlint-cli2 --fix"
-[tasks."ci:markdownlint"]
-depends = ["buni", "test:e2e:fixtures:remove-symlinks"]
-run = "bun run markdownlint-cli2"
-hide = true
-
-[tasks."check:yamlfmt"]
-run = "yamlfmt ."
-[tasks."ci:yamlfmt"]
-run = "yamlfmt -lint ."
-hide = true
-
-[tasks."lint:yamllint"]
-run = "yamllint --strict ."
-alias = "check:yamllint"
-
-[tasks."lint:renovate"]
-depends = ["buni"]
-run = "bun run renovate-config-validator --strict"
-alias = "check:renovate"
-
-[tasks."check:cspell"]
-depends = ["buni"]
-run = "bun run cspell --cache \"**/*\""
-[tasks."ci:cspell"]
-depends = ["buni"]
-run = "bun run cspell \"**/*\""
-hide = true
-
-[tasks."check:lychee"]
-depends = ["test:e2e:fixtures:remove-symlinks"]
-run = "lychee --cache \"**/*\""
-[tasks."ci:lychee"]
-depends = ["test:e2e:fixtures:remove-symlinks"]
-run = "lychee --verbose \"**/*\""
-hide = true
-
-[tasks."check:typos"]
-run = "typos --write-changes"
-[tasks."ci:typos"]
-run = "typos"
-hide = true
-
-[tasks."check:ignore-sync"]
-depends = ["buni"]
-run = "bun run ignore-sync ."
-[tasks."ci:ignore-sync"]
-depends = ["check:ignore-sync"]
-run = "mise run util:nodiff"
-hide = true
-
-[tasks."util:nodiff"] # cspell:ignore nodiff
-run = ["git add .", "git diff --staged --exit-code"]
-hide = true
+[hooks]
+postinstall = ["""
+{% if env.CI is undefined %}
+  mise run buni
+{% endif %}""", "bun link"]
