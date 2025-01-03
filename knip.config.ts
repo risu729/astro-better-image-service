@@ -13,6 +13,8 @@ const config: KnipConfig = {
 				// cannot be detected automatically
 				"@commitlint/cli",
 				"markdownlint-cli2",
+				// referenced in resolved config of commitlint.config.ts but not a dependency
+				"conventional-changelog-conventionalcommits",
 			],
 			entry: ["src/index.ts", "**/scripts/**", "tasks/**"],
 			// peerDependencies are not recognized as plugins
