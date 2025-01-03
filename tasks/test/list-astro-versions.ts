@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 //MISE description="List astro versions to test"
 //MISE hide=true
-//MISE depends=["buni"]
+//MISE depends=["buni --silent"]
 
 import { $ } from "bun";
 import { compare, parse, satisfies } from "semver";
