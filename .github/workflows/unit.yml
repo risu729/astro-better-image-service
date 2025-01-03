@@ -2,12 +2,10 @@ name: Unit Test
 
 on:
   pull_request:
-    branches:
-      - main
   workflow_call:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * SUN"
+    - cron: '0 0 * * SUN'
 
 permissions: {}
 
@@ -25,16 +23,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-        with:
-          persist-credentials: false
 
       - name: Install mise
         uses: jdx/mise-action@5083fe46898c414b2475087cc79da59e7da859e8 # v2.1.11
         with:
-          version: 2025.1.0
-          cache_save: ${{ github.ref_name == 'main' }}
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+          experimental: true
+          install: false
+
+      - name: Install mise tools
+        # cspell:ignore reshim
+        # reshim is required to avoid "No such file or directory" error
+        # ref: https://github.com/jdx/mise/issues/2260
+        run: mise install || (mise reshim && mise install)
+
+      - name: Install Dependencies
+        run: mise run buni
 
       - name: Test
         run: mise run test:unit
@@ -42,6 +45,7 @@ jobs:
   actions-timeline:
     needs:
       - test-unit
+
     # skip if the workflow is called from another workflow
     if: ${{ !cancelled() && contains(github.workflow_ref, '/unit.yml') }}
 

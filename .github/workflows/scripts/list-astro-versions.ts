@@ -1,13 +1,10 @@
-#!/usr/bin/env bun
-//MISE description="List astro versions to test"
-//MISE hide=true
-//MISE depends=["buni"]
-
 import { $ } from "bun";
 import { compare, parse, satisfies } from "semver";
-import packageJson from "../../package.json" with { type: "json" };
+import packageJson from "../../../package.json" with { type: "json" };
 
-const peerRange = packageJson.peerDependencies.astro;
+$.throws(true);
+
+const peerRange = packageJson.peerDependencies.astro as string;
 
 const versions = (await $`npm view astro versions --json`.json()) as string[];
 

@@ -23,6 +23,7 @@ module.exports = {
 	],
 	words: [
 		// often used
+		"lockb",
 		"buni",
 		// tools
 		"ghalint",
@@ -36,5 +37,6 @@ module.exports = {
 		"biomejs",
 		"knip",
 		"commitlint",
+		"graphviz",
 	],
 };

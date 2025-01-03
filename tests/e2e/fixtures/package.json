@@ -1,5 +1,4 @@
 {
-	"$schema": "https://json.schemastore.org/package.json",
 	"name": "@astro-better-image-service/e2e-test-fixtures",
 	"private": true,
 	"type": "module",
