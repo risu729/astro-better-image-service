@@ -42,7 +42,7 @@ jobs:
       - name: List astro versions for E2E tests
         id: list
         run: |
-          versions=$(bun run .github/workflows/scripts/list-astro-versions.ts)
+          versions=$(mise run test:list-astro-versions)
           echo "versions=${versions}" >> "${GITHUB_OUTPUT}"
 
   test-e2e-general:
