@@ -201,6 +201,7 @@ Run the following commands to start development.
 gh repo clone risu729/astro-better-image-service
 cd astro-better-image-service
 mise install
+mise run buni
 ```
 
 ### Testing
