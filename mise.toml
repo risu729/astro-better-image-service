@@ -42,8 +42,7 @@ uvx = true
 includes = ["tasks.toml", "tasks"]
 
 [hooks]
-postinstall = """
+postinstall = ["""
 {% if env.CI is undefined %}
-  mise run buni && bun link
-{% endif %}
-"""
+  mise run buni
+{% endif %}""", "bun link"]
