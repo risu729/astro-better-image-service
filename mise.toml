@@ -8,6 +8,7 @@ node = "22.12.0"
 # renovate: datasource=crate
 cargo-binstall = "1.10.11"
 uv = "0.5.14"
+"npm:semantic-release" = "24.2.1"
 "aqua:biomejs/biome" = "1.9.3"
 actionlint = "1.7.5"
 # required for actionlint
