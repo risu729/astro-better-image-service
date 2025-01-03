@@ -1,6 +1,5 @@
 // import from astro instead of astro/config because ImageServiceConfig in astro/config is not generic
 import type { ImageServiceConfig } from "astro";
-import type { SharpImageServiceConfig } from "astro/config";
 import type {
 	AvifOptions,
 	JpegOptions,
@@ -9,6 +8,7 @@ import type {
 	WebpOptions,
 } from "sharp";
 import type { Config as SvgoConfig } from "svgo";
+import type { SharpImageServiceConfig } from "./astro-internals.js";
 
 interface LibrariesConfig {
 	/**
