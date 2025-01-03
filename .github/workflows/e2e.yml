@@ -2,10 +2,12 @@ name: E2E Test
 
 on:
   pull_request:
+    branches:
+      - main
   workflow_call:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * SUN'
+    - cron: "0 0 * * SUN"
 
 permissions: {}
 
@@ -26,27 +28,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
       - name: Install mise
         uses: jdx/mise-action@5083fe46898c414b2475087cc79da59e7da859e8 # v2.1.11
         with:
-          experimental: true
-          install: false
-
-      - name: Install mise tools
-        # cspell:ignore reshim
-        # reshim is required to avoid "No such file or directory" error
-        # ref: https://github.com/jdx/mise/issues/2260
-        run: mise install || (mise reshim && mise install)
-
-      - name: Install package.json dependencies
-        run: mise run buni
+          version: 2025.1.0
+          cache_save: ${{ github.ref_name == 'main' }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: List astro versions for E2E tests
         id: list
         run: |
-          versions=$(bun run .github/workflows/scripts/list-astro-versions.ts)
-          echo "versions=$versions" >> "$GITHUB_OUTPUT"
+          versions=$(mise run test:list-astro-versions)
+          echo "versions=${versions}" >> "${GITHUB_OUTPUT}"
 
   test-e2e-general:
     needs:
@@ -66,21 +63,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
       - name: Install mise
         uses: jdx/mise-action@5083fe46898c414b2475087cc79da59e7da859e8 # v2.1.11
         with:
-          experimental: true
-          install: false
-
-      - name: Install mise tools
-        # cspell:ignore reshim
-        # reshim is required to avoid "No such file or directory" error
-        # ref: https://github.com/jdx/mise/issues/2260
-        run: mise install || (mise reshim && mise install)
-
-      - name: Install package.json dependencies
-        run: mise run buni
+          version: 2025.1.0
+          cache_save: ${{ github.ref_name == 'main' }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Build Package
         run: mise run build
@@ -97,7 +89,7 @@ jobs:
         id: dependency-versions
         run: |
           playwright_version=$(bun pm ls | sed -nE 's/.*@playwright\/test@(.+)/\1/p')
-          echo "playwright=$playwright_version" >> "$GITHUB_OUTPUT"
+          echo "playwright=${playwright_version}" >> "${GITHUB_OUTPUT}"
 
       - name: Restore Playwright Browsers Cache
         id: restore-browsers-cache
@@ -144,21 +136,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
       - name: Install mise
         uses: jdx/mise-action@5083fe46898c414b2475087cc79da59e7da859e8 # v2.1.11
         with:
-          experimental: true
-          install: false
-
-      - name: Install mise tools
-        # cspell:ignore reshim
-        # reshim is required to avoid "No such file or directory" error
-        # ref: https://github.com/jdx/mise/issues/2260
-        run: mise install || (mise reshim && mise install)
-
-      - name: Install package.json dependencies
-        run: mise run buni
+          version: 2025.1.0
+          cache_save: ${{ github.ref_name == 'main' }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Build Package
         run: mise run build
@@ -169,12 +156,12 @@ jobs:
           playwright_version=$(bun pm ls | sed -nE 's/.*@playwright\/test@(.+)/\1/p')
           astro_version=$(bun pm ls | sed -nE 's/.*astro@(.+)/\1/p' | uniq)
           # throw error if several versions are found
-          if [[ $(echo "$astro_version" | wc -l) -gt 1 ]]; then
-            echo "Multiple versions of Astro found: $astro_version"
+          if [[ $(echo "${astro_version}" | wc -l) -gt 1 ]]; then
+            echo "Multiple versions of Astro found: ${astro_version}"
             exit 1
           fi
-          echo "playwright=$playwright_version" >> "$GITHUB_OUTPUT"
-          echo "astro=$astro_version" >> "$GITHUB_OUTPUT"
+          echo "playwright=${playwright_version}" >> "${GITHUB_OUTPUT}"
+          echo "astro=${astro_version}" >> "${GITHUB_OUTPUT}"
 
       - name: Restore Playwright Browsers Cache
         id: restore-browsers-cache
@@ -201,7 +188,7 @@ jobs:
 
       - name: Store Hash of E2E Test Fixtures and Image Service Consistency Test
         id: fixtures-hash
-        run: echo "hash=${{ hashFiles('tests/e2e/fixtures/**/*', 'tests/e2e/conversion.test.ts') }}" >> "$GITHUB_OUTPUT"
+        run: echo "hash=${{ hashFiles('tests/e2e/fixtures/**/*', 'tests/e2e/conversion.test.ts') }}" >> "${GITHUB_OUTPUT}"
 
       - name: Install E2E Test Fixtures Dependencies
         run: bun install --frozen-lockfile
@@ -251,31 +238,12 @@ jobs:
           name: playwright-report-conversion-${{ github.sha }}
           path: playwright-report/
 
-  test-e2e-status:
+  actions-timeline:
     needs:
       - test-e2e-general
       - test-e2e-conversion
-
     # skip if the workflow is called from another workflow
     if: ${{ !cancelled() && contains(github.workflow_ref, '/e2e.yml') }}
-
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
-
-    steps:
-      - name: Check the status of the jobs
-        run: |
-          if [[ $(echo '${{ toJson(needs.*.result) }}' | jq 'all(. == "success")') == "false" ]]; then
-            echo 'Some jobs are failed, cancelled, or skipped.'
-            exit 1
-          fi
-          echo 'All jobs are successful.'
-
-  actions-timeline:
-    needs:
-      - test-e2e-status
-
-    if: needs.test-e2e-status.result == 'success' || needs.test-e2e-status.result == 'failure'
 
     runs-on: ubuntu-24.04
     timeout-minutes: 5
