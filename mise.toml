@@ -39,7 +39,7 @@ bun = true
 uvx = true
 
 [task_config]
-includes = ["tasks.toml"]
+includes = ["tasks.toml", "tasks"]
 
 [hooks]
 postinstall = """

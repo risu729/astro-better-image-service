@@ -14,7 +14,7 @@ const config: KnipConfig = {
 				"@commitlint/cli",
 				"markdownlint-cli2",
 			],
-			entry: ["src/index.ts", "**/scripts/**"],
+			entry: ["src/index.ts", "**/scripts/**", "tasks/**"],
 			// peerDependencies are not recognized as plugins
 			astro: true,
 			// mise tools are not recognized as plugins
