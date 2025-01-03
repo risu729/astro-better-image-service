@@ -55,16 +55,6 @@
 		"semver": "7.6.3",
 		"typescript": "5.7.2"
 	},
-	"trustedDependencies": [
-		"@biomejs/biome",
-		"better-sqlite3",
-		"core-js-pure",
-		"dtrace-provider",
-		"esbuild",
-		"protobufjs",
-		"re2",
-		"sharp"
-	],
 	"type": "module",
 	"files": ["dist", "!*.tsbuildinfo", "src"],
 	"exports": {
