@@ -20,9 +20,6 @@
 	"bugs": {
 		"url": "https://github.com/risu729/astro-better-image-service/issues"
 	},
-	"scripts": {
-		"prepare": "husky && bun link"
-	},
 	"dependencies": {
 		"sharp": "^0.33.5",
 		"svgo": "^3.3.2"
@@ -31,7 +28,6 @@
 		"astro": "^4.7.0 || ^5.0.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "1.9.3",
 		"@commitlint/cli": "19.6.1",
 		"@commitlint/config-conventional": "19.6.0",
 		"@commitlint/cz-commitlint": "19.6.1",
@@ -49,19 +45,13 @@
 		"ajv-formats": "3.0.1",
 		"astro": "5.1.2",
 		"commitizen": "4.3.1",
-		"cspell": "8.17.1",
-		"husky": "9.1.7",
-		"ignore-sync": "8.0.0",
 		"ignore-walk": "7.0.0",
 		"json5": "2.2.3",
 		"jsonc-parser": "3.3.1",
 		"knip": "5.41.1",
 		"markdownlint-cli2": "0.17.1",
 		"prettier": "3.4.2",
-		"renovate": "39.90.2",
-		"semantic-release": "24.2.1",
 		"semver": "7.6.3",
-		"ts-graphviz": "2.1.5",
 		"typescript": "5.7.2"
 	},
 	"trustedDependencies": [

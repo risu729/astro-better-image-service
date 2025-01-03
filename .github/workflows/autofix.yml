@@ -1,13 +1,12 @@
-name: Unit Test
+# name must be autofix.ci for security reasons
+# ref: https://autofix.ci/security
+name: autofix.ci
 
 on:
   pull_request:
     branches:
       - main
-  workflow_call:
   workflow_dispatch:
-  schedule:
-    - cron: "0 0 * * SUN"
 
 permissions: {}
 
@@ -16,9 +15,9 @@ defaults:
     shell: bash
 
 jobs:
-  test-unit:
+  autofix:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 5
     permissions:
       contents: read # for checkout
 
@@ -36,21 +35,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
-      - name: Test
-        run: mise run test:unit
+      - name: Run autofix
+        run: mise run check --continue-on-error
+        continue-on-error: true
 
-  actions-timeline:
-    needs:
-      - test-unit
-    # skip if the workflow is called from another workflow
-    if: ${{ !cancelled() && contains(github.workflow_ref, '/unit.yml') }}
-
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
-    permissions:
-      actions: read
-
-    steps:
-      - name: actions-timeline
-        # cspell:ignore kesin
-        uses: Kesin11/actions-timeline@3046833d9aacfd7745c5264b7f3af851c3e2a619 # v2.2.1
+      - name: autofix.ci
+        uses: autofix-ci/action@2891949f3779a1cafafae1523058501de3d4e944 # v1.3.1
+        with:
+          commit-message: 'style: apply automated fixes'
+          # set to false to avoid notifications of canceled workflows
+          fail-fast: false

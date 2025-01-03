@@ -1,6 +1,6 @@
 {
 	// ref: https://biomejs.dev/reference/configuration/
-	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"$schema": "https://biomejs.dev/schemas/1.9.3/schema.json",
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
@@ -16,9 +16,13 @@
 		"rules": {
 			"all": true,
 			"complexity": {
-				// collides with the noPropertyAccessFromIndexSignature tsconfig option
+				// incompatible with `noPropertyAccessFromIndexSignature` option in tsconfig
 				// ref: https://github.com/biomejs/biome/issues/463
 				"useLiteralKeys": "off"
+			},
+			"correctness": {
+				// this project does not use React
+				"useHookAtTopLevel": "off"
 			},
 			"nursery": {
 				"all": true,
@@ -56,12 +60,15 @@
 			}
 		},
 		{
-			// disable noConsole rule for scripts
+			// disable noConsole and useTopLevelRegex rules for scripts
 			"include": ["**/scripts/**"],
 			"linter": {
 				"rules": {
 					"suspicious": {
 						"noConsole": "off"
+					},
+					"performance": {
+						"useTopLevelRegex": "off"
 					}
 				}
 			}
