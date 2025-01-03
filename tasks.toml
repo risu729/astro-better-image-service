@@ -1,0 +1,131 @@
+# ref: https://mise.jdx.dev/tasks/
+#:schema https://mise.jdx.dev/schema/mise-task.json
+
+[dev]
+depends = ["buni"]
+run = ["bun run tsc --project tsconfig.src.json --watch"]
+
+[build]
+depends = ["buni"]
+run = "bun run tsc --project tsconfig.src.json"
+
+["test:unit"]
+depends = ["buni"]
+run = "bun test tests/unit"
+
+["test:e2e"]
+depends = ["buni"]
+run = "bun run playwright test vrt format"
+
+["test:e2e:snapshots"]
+depends = ["buni"]
+run = "bun run playwright test vrt --update-snapshots"
+
+["test:e2e:fixtures:server"]
+depends = ["build"]
+run = ["bun install --frozen-lockfile", "bun run build", "bun run preview"]
+dir = "tests/e2e/fixtures"
+
+["test:e2e:fixtures:remove-symlinks"]
+# remove before some checks to avoid symlink loops
+run = "rm -rf node_modules/astro-better-image-service"
+dir = "tests/e2e/fixtures"
+hide = true
+
+[commit]
+depends = ["buni"]
+run = ["git add .", "bun run git-cz"]
+
+["commit:staged"]
+depends = ["buni"]
+run = "bun run git-cz"
+
+[check]
+depends = ["check:*"]
+
+["check:biome"]
+run = "biome {% if env.LINT is undefined %}check --write{% else %}ci{% endif %} --error-on-warnings"
+
+["check:tsc"]
+depends = ["buni"]
+run = [
+	"bun run tsc --project tsconfig.src.json --noEmit {% if env.CI is defined %}--incremental false{% endif %}",
+	"bun run tsc --project tsconfig.base.json {% if env.CI is defined %}--incremental false{% endif %}",
+]
+
+["check:knip"]
+depends = ["buni"]
+run = "bun run knip-bun"
+
+["check:jsonschema"]
+depends = ["buni"]
+run = "bun run scripts/validate-json-schema.ts"
+
+["check:actionlint"]
+run = "actionlint -color"
+# SC2312: check-extra-masked-returns
+# pipefail is set by shell: bash in GitHub Actions but cannot be detected by shellcheck
+# ref: https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#defaultsrunshell
+env = { "SHELLCHECK_OPTS" = "--enable=all --exclude=SC2312" }
+
+["check:ghalint"]
+wait_for = ["check:pinact"]
+run = "ghalint run"
+
+["check:pinact"]
+run = "pinact run --verify"
+depends_post = [
+	"{% if env.CI is defined %}util:nodiff{% else %}util:donothing{% endif %}",
+]
+
+["check:taplo"]
+depends = ["test:e2e:fixtures:remove-symlinks"]
+run = [
+	"taplo lint",
+	"taplo fmt {% if env.LINT is undefined %}--check --diff{% endif %}",
+]
+
+["check:prettier"]
+run = """
+prettier {% if env.LINT is undefined %}--write{% else %}--check{% endif %} \
+	{% if env.CI is undefined %}--cache{% endif %} ."""
+
+["check:markdownlint"]
+depends = ["test:e2e:fixtures:remove-symlinks"]
+run = "markdownlint-cli2 {% if env.LINT is undefined %}--fix{% endif %}"
+
+["check:yamlfmt"]
+run = "yamlfmt {% if env.LINT is defined %}-lint{% endif %} ."
+
+["check:yamllint"]
+run = "yamllint --strict ."
+
+["check:cspell"]
+run = "cspell {% if env.CI is undefined %}--cache{% endif %} \"**/*\""
+
+["check:lychee"]
+depends = ["test:e2e:fixtures:remove-symlinks"]
+run = """
+lychee {% if env.LINT is defined %}--verbose{% endif %} \
+	{% if env.CI is undefined %}--cache{% endif %} \"**/*\""""
+
+["check:typos"]
+run = "typos {% if env.LINT is undefined %}--write-changes{% endif %}"
+
+["check:ignore-sync"]
+run = "ignore-sync ."
+depends_post = [
+	"{% if env.CI is defined %}util:nodiff{% else %}util:donothing{% endif %}",
+]
+
+["buni"]
+run = "bun install --frozen-lockfile"
+
+["util:nodiff"] # cspell:ignore nodiff
+run = ["git add .", "git diff --staged --exit-code"]
+hide = true
+
+# cspell:ignore donothing
+["util:donothing"]
+run = ""
+hide = true
