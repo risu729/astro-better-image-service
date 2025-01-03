@@ -1,0 +1,32 @@
+{
+	// ref: https://docs.renovatebot.com/configuration-options/
+	$schema: "https://docs.renovatebot.com/renovate-schema.json",
+	extends: [
+		"github>risu729/renovate-config#1.2.2",
+	],
+	// un-ignore test directories
+	// ref: https://docs.renovatebot.com/presets-default/#ignoremodulesandtests
+"ignorePaths": [
+    "**/node_modules/**"
+  ],
+	packageRules: [
+		// disable pinning for dependencies and peerDependencies
+		{
+			matchFileNames: ["package.json"],
+			matchDepTypes: ["dependencies"],
+			// bump for dependencies and release a patch update
+			rangeStrategy: "bump",
+		},
+		{
+			matchFileNames: ["package.json"],
+			matchDepTypes: ["peerDependencies"],
+			// widen range for peerDependencies as far as possible
+			rangeStrategy: "widen",
+		},
+		// set semantic commit types
+		{
+			matchFileNames: ["tests/"],
+			semanticCommitType: "test",
+		},
+	],
+}
