@@ -82,7 +82,7 @@ depends_post = [
 depends = ["test:e2e:fixtures:remove-symlinks"]
 run = [
 	"taplo lint",
-	"taplo fmt {% if env.LINT is undefined %}--check --diff{% endif %}",
+	"taplo fmt {% if env.LINT is defined %}--check --diff{% endif %}",
 ]
 
 ["check:prettier"]
