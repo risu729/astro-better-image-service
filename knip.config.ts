@@ -16,7 +16,7 @@ const config: KnipConfig = {
 				// referenced in resolved config of commitlint.config.ts but not a dependency
 				"conventional-changelog-conventionalcommits",
 			],
-			entry: ["src/index.ts", "**/scripts/**", "tasks/**"],
+			entry: ["src/index.ts", "tasks/**"],
 			// peerDependencies are not recognized as plugins
 			astro: true,
 			// mise tools are not recognized as plugins

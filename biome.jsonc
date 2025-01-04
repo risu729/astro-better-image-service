@@ -50,7 +50,7 @@
 		},
 		{
 			// disable noNodejsModules rule for files running in bun or Node.js
-			"include": ["**/*.config.*", "tests/**", "**/scripts/**", "tasks/**"],
+			"include": ["**/*.config.*", "tests/**", "tasks/**"],
 			"linter": {
 				"rules": {
 					"correctness": {
@@ -61,7 +61,7 @@
 		},
 		{
 			// disable noConsole and useTopLevelRegex rules for scripts
-			"include": ["**/scripts/**", "tasks/**"],
+			"include": ["tasks/**"],
 			"linter": {
 				"rules": {
 					"suspicious": {
