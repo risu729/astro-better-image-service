@@ -58,8 +58,7 @@ depends = ["buni"]
 run = "bun run knip-bun"
 
 ["check:jsonschema"]
-depends = ["buni"]
-run = "bun run scripts/validate-json-schema.ts"
+run = "jschema-validator"
 
 ["check:actionlint"]
 run = "actionlint -color"

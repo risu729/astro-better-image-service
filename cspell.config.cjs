@@ -29,6 +29,7 @@ module.exports = {
 		"pinact",
 		"taplo",
 		"yamlfmt",
+		"jschema",
 		// package.json
 		"risu",
 		"astro",
