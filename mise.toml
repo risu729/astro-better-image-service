@@ -8,7 +8,7 @@ cargo-binstall = "1.10.19" # cspell:ignore binstall
 uv = "0.5.14"
 "npm:semantic-release" = "24.2.1"
 "aqua:biomejs/biome" = "1.9.3"
-actionlint = "1.7.5"
+actionlint = "1.7.6"
 # required for actionlint
 shellcheck = "0.10.0"
 "aqua:suzuki-shunsuke/ghalint" = "1.2.1" # cspell:ignore shunsuke
