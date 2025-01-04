@@ -22,7 +22,7 @@ yamllint = "1.35.1"
 "cargo:lychee" = "0.18.0"
 typos = "1.29.4"
 "npm:ignore-sync" = "8.0.0"
-"npm:jschema-validator" = "1.0.3"
+"npm:jschema-validator" = "1.0.4"
 
 [settings]
 experimental = true
