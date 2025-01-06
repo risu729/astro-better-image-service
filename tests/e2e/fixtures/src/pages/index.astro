@@ -4,23 +4,24 @@ import { AVAILABLE_FORMAT_CONVERSIONS } from "../formats.ts";
 
 // biome-ignore lint/correctness/noUnusedVariables: used in the template
 const imageService = process.env["USE_DEFAULT_IMAGE_SERVICE"]
-	? "sharpImageService"
+	? // biome-ignore lint/nursery/noSecrets: false positive
+		"sharpImageService"
 	: "astro-better-image-service";
 ---
 
 <html>
-  <body>
-    <h1>{imageService}</h1>
-    <ul>
-      {
-        AVAILABLE_FORMAT_CONVERSIONS.map(({ path, name }) => {
-          return (
-            <li>
-              <a href={path}>{name}</a>
-            </li>
-          );
-        })
-      }
-    </ul>
-  </body>
+	<body>
+		<h1>{imageService}</h1>
+		<ul>
+			{
+				AVAILABLE_FORMAT_CONVERSIONS.map(({ path, name }) => {
+					return (
+						<li>
+							<a href={path}>{name}</a>
+						</li>
+					);
+				})
+			}
+		</ul>
+	</body>
 </html>

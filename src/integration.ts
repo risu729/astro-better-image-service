@@ -10,7 +10,7 @@ import { betterImageService } from "./config.js";
  * @param config Configuration for the image optimization libraries.
  * @returns Astro integration object.
  */
-// biome-ignore lint/nursery/useExplicitFunctionReturnType: type should be inferred
+// biome-ignore lint/nursery/useExplicitType: type should be inferred
 export const astroIntegration = (
 	config?: Parameters<typeof betterImageService>[0],
 ) =>

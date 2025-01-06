@@ -14,6 +14,7 @@ const config: KnipConfig = {
 				"@commitlint/cli",
 				"markdownlint-cli2",
 				// referenced in resolved config of commitlint.config.ts but not a dependency
+				// biome-ignore lint/nursery/noSecrets: false positive
 				"conventional-changelog-conventionalcommits",
 			],
 			entry: ["src/index.ts", "tasks/**"],
