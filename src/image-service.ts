@@ -1,4 +1,8 @@
-import type { ImageOutputFormat, LocalImageService } from "astro";
+import type {
+	ImageOutputFormat,
+	ImageTransform,
+	LocalImageService,
+} from "astro";
 import { baseService } from "astro/assets";
 import { isESMImportedImage } from "astro/assets/utils";
 import type { FormatEnum } from "sharp";
@@ -34,8 +38,7 @@ const betterImageService: LocalImageService<MergedConfig> = {
 	// biome-ignore lint/style/noNonNullAssertion: optional method but baseService implements it
 	getSrcSet: baseService.getSrcSet!,
 
-	// biome-ignore lint/nursery/useExplicitFunctionReturnType: not needed because betterImageService type is already defined
-	async validateOptions(options, imageConfig) {
+	async validateOptions(options, imageConfig): Promise<ImageTransform> {
 		// save the original format for later use, because baseService.validateOptions
 		// changes the options.format to SVG if options.src.format is SVG
 		// ref: https://github.com/withastro/astro/blob/8d5ea2df5d52ad9a311c407533b9f4226480faa8/packages/astro/src/assets/services/service.ts#L200-L203
@@ -57,8 +60,14 @@ const betterImageService: LocalImageService<MergedConfig> = {
 
 	// based on sharp image service
 	// https://github.com/withastro/astro/blob/8d5ea2df5d52ad9a311c407533b9f4226480faa8/packages/astro/src/assets/services/sharp.ts#L44-L89
-	// biome-ignore lint/nursery/useExplicitFunctionReturnType: not needed because betterImageService type is already defined
-	async transform(inputBuffer, transformOptions, config) {
+	async transform(
+		inputBuffer,
+		transformOptions,
+		config,
+	): Promise<{
+		data: Uint8Array;
+		format: ImageOutputFormat;
+	}> {
 		const imageServiceConfig = config.service.config;
 
 		const { width, height, format, quality } =
