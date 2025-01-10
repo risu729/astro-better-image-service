@@ -55,7 +55,7 @@ run = [
 
 ["check:knip"]
 depends = ["buni"]
-run = "bun run knip-bun"
+run = "bun run knip-bun {% if env.CI is undefined %}--cache{% endif %}"
 
 ["check:jsonschema"]
 run = "jschema-validator"
