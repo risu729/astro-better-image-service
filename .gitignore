@@ -184,6 +184,7 @@ dist
 playwright-report/
 test-results/
 tests/e2e/conversion.test.ts-snapshots/
+tests/e2e/fixtures/bun.lock
 
 # Windows thumbnail cache files
 Thumbs.db

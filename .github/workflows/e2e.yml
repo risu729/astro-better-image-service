@@ -191,7 +191,7 @@ jobs:
         run: echo "hash=${{ hashFiles('tests/e2e/fixtures/**/*', 'tests/e2e/conversion.test.ts') }}" >> "${GITHUB_OUTPUT}"
 
       - name: Install E2E Test Fixtures Dependencies
-        run: bun install --frozen-lockfile
+        run: bun install --save-text-lockfile
         working-directory: tests/e2e/fixtures
 
       - name: Restore Snapshots Cache

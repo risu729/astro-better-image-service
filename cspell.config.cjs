@@ -15,7 +15,7 @@ module.exports = {
 		".git/",
 		// ignore auto-generated files
 		".gitignore",
-		"bun.lockb",
+		"bun.lock",
 		// ignore license files
 		"LICENSE",
 		// ignore binary files

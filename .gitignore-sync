@@ -1,7 +1,7 @@
 # ref: https://github.com/foray1010/ignore-sync?tab=readme-ov-file#how-to-use
 
 [oven-sh/bun]
-src/cli/gitignore-for-init
+src/cli/init/gitignore.default
 
 [inline]
 .cspellcache
@@ -10,6 +10,8 @@ playwright-report/
 test-results/
 # ignore snapshots generated in CI
 tests/e2e/conversion.test.ts-snapshots/
+# ignore fixtures bun lockfile because Renovate cannot update lockfile with linked dependencies
+tests/e2e/fixtures/bun.lock
 
 [github/gitignore]
 Global/Windows.gitignore
