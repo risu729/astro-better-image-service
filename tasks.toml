@@ -23,7 +23,7 @@ run = "bun run playwright test vrt --update-snapshots"
 
 ["test:e2e:fixtures:server"]
 depends = ["build"]
-run = ["bun install --frozen-lockfile", "bun run build", "bun run preview"]
+run = ["bun install --save-text-lockfile", "bun run build", "bun run preview"]
 dir = "tests/e2e/fixtures"
 
 ["test:e2e:fixtures:remove-symlinks"]
