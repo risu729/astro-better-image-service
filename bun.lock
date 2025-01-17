@@ -21,7 +21,7 @@
         "astro": "5.1.7",
         "commitizen": "4.3.1",
         "knip": "5.42.1",
-        "markdownlint-cli2": "0.17.1",
+        "markdownlint-cli2": "0.17.2",
         "prettier": "3.4.2",
         "semver": "7.6.3",
         "typescript": "5.7.3",
@@ -732,9 +732,9 @@
 
     "markdown-table": ["markdown-table@3.0.4", "", {}, "sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw=="],
 
-    "markdownlint": ["markdownlint@0.37.3", "", { "dependencies": { "markdown-it": "14.1.0", "micromark": "4.0.1", "micromark-core-commonmark": "2.0.2", "micromark-extension-directive": "3.0.2", "micromark-extension-gfm-autolink-literal": "2.1.0", "micromark-extension-gfm-footnote": "2.1.0", "micromark-extension-gfm-table": "2.1.0", "micromark-extension-math": "3.1.0", "micromark-util-types": "2.0.1" } }, "sha512-eoQqH0291YCCjd+Pe1PUQ9AmWthlVmS0XWgcionkZ8q34ceZyRI+pYvsWksXJJL8OBkWCPwp1h/pnXxrPFC4oA=="],
+    "markdownlint": ["markdownlint@0.37.4", "", { "dependencies": { "markdown-it": "14.1.0", "micromark": "4.0.1", "micromark-core-commonmark": "2.0.2", "micromark-extension-directive": "3.0.2", "micromark-extension-gfm-autolink-literal": "2.1.0", "micromark-extension-gfm-footnote": "2.1.0", "micromark-extension-gfm-table": "2.1.0", "micromark-extension-math": "3.1.0", "micromark-util-types": "2.0.1" } }, "sha512-u00joA/syf3VhWh6/ybVFkib5Zpj2e5KB/cfCei8fkSRuums6nyisTWGqjTWIOFoFwuXoTBQQiqlB4qFKp8ncQ=="],
 
-    "markdownlint-cli2": ["markdownlint-cli2@0.17.1", "", { "dependencies": { "globby": "14.0.2", "js-yaml": "4.1.0", "jsonc-parser": "3.3.1", "markdownlint": "0.37.3", "markdownlint-cli2-formatter-default": "0.0.5", "micromatch": "4.0.8" }, "bin": { "markdownlint-cli2": "markdownlint-cli2-bin.mjs" } }, "sha512-n1Im9lhKJJE12/u2N0GWBwPqeb0HGdylN8XpSFg9hbj35+QalY9Vi6mxwUQdG6wlSrrIq9ZDQ0Q85AQG9V2WOg=="],
+    "markdownlint-cli2": ["markdownlint-cli2@0.17.2", "", { "dependencies": { "globby": "14.0.2", "js-yaml": "4.1.0", "jsonc-parser": "3.3.1", "markdownlint": "0.37.4", "markdownlint-cli2-formatter-default": "0.0.5", "micromatch": "4.0.8" }, "bin": { "markdownlint-cli2": "markdownlint-cli2-bin.mjs" } }, "sha512-XH06ZOi8wCrtOSSj3p8y3yJzwgzYOSa7lglNyS3fP05JPRzRGyjauBb5UvlLUSCGysMmULS1moxdRHHudV+g/Q=="],
 
     "markdownlint-cli2-formatter-default": ["markdownlint-cli2-formatter-default@0.0.5", "", { "peerDependencies": { "markdownlint-cli2": ">=0.0.4" } }, "sha512-4XKTwQ5m1+Txo2kuQ3Jgpo/KmnG+X90dWt4acufg6HVGadTUG5hzHF/wssp9b5MBYOMCnZ9RMPaU//uHsszF8Q=="],
 
