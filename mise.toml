@@ -6,7 +6,7 @@ bun = "1.1.45"
 node = "23.6.0"
 "npm:semantic-release" = "24.2.1"
 "aqua:biomejs/biome" = "1.9.4"
-actionlint = "1.7.6"
+actionlint = "1.7.7"
 # required for actionlint
 shellcheck = "0.10.0"
 "aqua:suzuki-shunsuke/ghalint" = "1.2.1" # cspell:ignore shunsuke
