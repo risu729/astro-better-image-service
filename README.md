@@ -238,5 +238,5 @@ MIT License
 ## 💖 Special Thanks
 
 - [Astro](https://astro.build) team and community for the project and the powerful Image Service API.
-- [sharp](https://sharp.pixelplumbing.com/) and [svgo](https://svgo.dev/) contributors for the awesome image processing libraries.
+- [sharp](https://sharp.pixelplumbing.com/) and [svgo](https://github.com/svg/svgo) contributors for the awesome image processing libraries.
 - [Playform](https://github.com/PlayForm) for the inspiration from the [`@playform/compress`](https://github.com/PlayForm/Compress) package.
