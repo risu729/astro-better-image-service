@@ -2,7 +2,7 @@
 #:schema https://mise.jdx.dev/schema/mise.json
 
 [tools]
-bun = "1.1.45"
+bun = "1.2.0"
 node = "23.6.1"
 "npm:semantic-release" = "24.2.1"
 "aqua:biomejs/biome" = "1.9.4"
