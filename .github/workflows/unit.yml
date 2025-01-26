@@ -53,4 +53,4 @@ jobs:
     steps:
       - name: actions-timeline
         # cspell:ignore kesin
-        uses: Kesin11/actions-timeline@3046833d9aacfd7745c5264b7f3af851c3e2a619 # v2.2.1
+        uses: Kesin11/actions-timeline@a677de8cb916a7f4c94cfd86023bcc73be52f2b6 # v2.2.2
