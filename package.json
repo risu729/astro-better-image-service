@@ -37,7 +37,7 @@
 		"@total-typescript/tsconfig": "1.0.4",
 		"@tsconfig/bun": "1.0.7",
 		"@tsconfig/strictest": "2.0.5",
-		"@types/bun": "1.2.1",
+		"@types/bun": "1.2.2",
 		"@types/semver": "7.5.8",
 		"astro": "5.2.3",
 		"commitizen": "4.3.1",
