@@ -19,7 +19,7 @@
         "@tsconfig/strictest": "2.0.5",
         "@types/bun": "1.2.2",
         "@types/semver": "7.5.8",
-        "astro": "5.2.3",
+        "astro": "5.2.4",
         "commitizen": "4.3.1",
         "knip": "5.43.6",
         "markdownlint-cli2": "0.17.2",
