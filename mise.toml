@@ -9,7 +9,7 @@ node = "23.7.0"
 actionlint = "1.7.7"
 # required for actionlint
 shellcheck = "0.10.0"
-"aqua:suzuki-shunsuke/ghalint" = "1.2.1" # cspell:ignore shunsuke
+"aqua:suzuki-shunsuke/ghalint" = "1.2.3" # cspell:ignore shunsuke
 "aqua:suzuki-shunsuke/pinact" = "1.2.0"
 taplo = "0.9.3"
 "npm:prettier" = "3.4.2"
