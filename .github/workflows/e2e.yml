@@ -93,7 +93,7 @@ jobs:
 
       - name: Restore Playwright Browsers Cache
         id: restore-browsers-cache
-        uses: actions/cache/restore@0c907a75c2c80ebcb7f088228285e798b750cf8f # v4.2.1
+        uses: actions/cache/restore@d4323d4df104b026a6aa633fdb11d772146be0bf # v4.2.2
         with:
           path: ~/.cache/ms-playwright
           key: playwright-browsers-${{ runner.os }}-${{ steps.dependency-versions.outputs.playwright }}
@@ -105,7 +105,7 @@ jobs:
 
       - name: Save Playwright Browsers Cache
         if: steps.restore-browsers-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@0c907a75c2c80ebcb7f088228285e798b750cf8f # v4.2.1
+        uses: actions/cache/save@d4323d4df104b026a6aa633fdb11d772146be0bf # v4.2.2
         with:
           path: ~/.cache/ms-playwright
           key: ${{ steps.restore-browsers-cache.outputs.cache-primary-key }}
@@ -165,7 +165,7 @@ jobs:
 
       - name: Restore Playwright Browsers Cache
         id: restore-browsers-cache
-        uses: actions/cache/restore@0c907a75c2c80ebcb7f088228285e798b750cf8f # v4.2.1
+        uses: actions/cache/restore@d4323d4df104b026a6aa633fdb11d772146be0bf # v4.2.2
         with:
           path: ~/.cache/ms-playwright
           key: playwright-browsers-${{ runner.os }}-${{ steps.dependency-versions.outputs.playwright }}
@@ -177,7 +177,7 @@ jobs:
 
       - name: Save Playwright Browsers Cache
         if: steps.restore-browsers-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@0c907a75c2c80ebcb7f088228285e798b750cf8f # v4.2.1
+        uses: actions/cache/save@d4323d4df104b026a6aa633fdb11d772146be0bf # v4.2.2
         with:
           path: ~/.cache/ms-playwright
           key: ${{ steps.restore-browsers-cache.outputs.cache-primary-key }}
@@ -196,7 +196,7 @@ jobs:
 
       - name: Restore Snapshots Cache
         id: restore-snapshots-cache
-        uses: actions/cache/restore@0c907a75c2c80ebcb7f088228285e798b750cf8f # v4.2.1
+        uses: actions/cache/restore@d4323d4df104b026a6aa633fdb11d772146be0bf # v4.2.2
         with:
           path: tests/e2e/conversion.test.ts-snapshots
           key: "default-service-snapshots-${{ runner.os }}-${{ steps.dependency-versions.outputs.astro }}-${{ steps.dependency-versions.outputs.playwright }}-${{ steps.fixtures-hash.outputs.hash }}"
@@ -216,7 +216,7 @@ jobs:
 
       - name: Save Snapshots Cache
         if: steps.restore-snapshots-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@0c907a75c2c80ebcb7f088228285e798b750cf8f # v4.2.1
+        uses: actions/cache/save@d4323d4df104b026a6aa633fdb11d772146be0bf # v4.2.2
         with:
           path: tests/e2e/conversion.test.ts-snapshots
           key: ${{ steps.restore-snapshots-cache.outputs.cache-primary-key }}
