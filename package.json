@@ -28,10 +28,10 @@
 		"astro": "^4.7.0 || ^5.0.0"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "19.7.1",
-		"@commitlint/config-conventional": "19.7.1",
-		"@commitlint/cz-commitlint": "19.6.1",
-		"@commitlint/types": "19.5.0",
+		"@commitlint/cli": "19.8.0",
+		"@commitlint/config-conventional": "19.8.0",
+		"@commitlint/cz-commitlint": "19.8.0",
+		"@commitlint/types": "19.8.0",
 		"@cspell/cspell-types": "8.17.5",
 		"@playwright/test": "1.51.0",
 		"@total-typescript/tsconfig": "1.0.4",
