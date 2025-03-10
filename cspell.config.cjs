@@ -1,4 +1,4 @@
-// ref: https://cspell.org/configuration/
+// https://cspell.org/docs/Configuration
 
 "use strict";
 
