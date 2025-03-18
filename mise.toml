@@ -20,7 +20,7 @@ yamllint = "1.36.2"
 "ubi:lycheeverse/lychee" = "lychee-v0.18.1" # cspell:ignore lycheeverse
 typos = "1.30.2"
 "npm:ignore-sync" = "8.0.0"
-"npm:jschema-validator" = "1.0.11"
+"npm:jschema-validator" = "1.0.12"
 
 [settings]
 experimental = true
