@@ -72,10 +72,7 @@ wait_for = ["check:pinact"]
 run = "ghalint run"
 
 ["check:pinact"]
-run = "pinact run --verify"
-depends_post = [
-	"{% if env.CI is defined %}util:nodiff{% else %}util:donothing{% endif %}",
-]
+run = "pinact run --verify {% if env.LINT is defined %}--check{% endif %}"
 
 ["check:taplo"]
 depends = ["test:e2e:fixtures:remove-symlinks"]
