@@ -78,8 +78,10 @@ jobs:
         run: mise run build
 
       - name: Install E2E Test Fixtures Dependencies
-        run: bun install astro@${{ matrix.version }}
+        run: bun install "astro@${VERSION}"
         working-directory: tests/e2e/fixtures
+        env:
+          VERSION: ${{ matrix.version }}
 
       - name: Build E2E Test Fixtures with astro-better-image-service
         run: bun run build
