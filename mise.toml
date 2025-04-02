@@ -19,6 +19,7 @@ taplo = "0.9.3"
 "npm:prettier" = "3.5.3"
 markdownlint-cli2 = "0.17.2"
 yamlfmt = "0.16.0"
+# cspell:ignore pipx
 # required for pipx backend
 uv = "0.6.11"
 yamllint = "1.37.0"
@@ -30,18 +31,9 @@ typos = "1.31.1"
 
 [settings]
 experimental = true
-disable_backends = [
-	# cspell:ignore pipx
-	# disable pipx backend not to require pipx/uv
-	"pipx",
-]
 
 [settings.npm]
 bun = true
-
-# cspell:ignore pipx
-[settings.pipx]
-uvx = true
 
 [task_config]
 includes = ["tasks.toml", "tasks"]
