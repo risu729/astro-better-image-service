@@ -34,11 +34,11 @@ hide = true
 
 [commit]
 depends = ["buni"]
-run = ["git add .", "bun run git-cz"]
-
-["commit:staged"]
-depends = ["buni"]
-run = "bun run git-cz"
+run = [
+	"{% if flag(name='staged') == 'false' %}git add .{% endif %}",
+	"bun run git-cz",
+]
+raw = true
 
 [check]
 depends = ["check:*"]
