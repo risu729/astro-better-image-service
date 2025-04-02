@@ -121,7 +121,9 @@ jobs:
         id: commitlint-pr
         if: github.event_name == 'pull_request'
         run: |
-          bun run commitlint --verbose --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }}
+          bun run commitlint --verbose --from ${{ github.event.pull_request.base.sha }} --to "${HEAD_SHA}"
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
 
       - name: commitlint (pull request title)
         # continue even if the previous step fails
