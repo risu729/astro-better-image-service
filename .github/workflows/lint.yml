@@ -81,6 +81,7 @@ jobs:
         run: mise run ${{ matrix.task }}
         env:
           LINT: true
+          GITHUB_TOKEN: ${{ github.token }}
 
   commitlint:
     runs-on: ubuntu-24.04
