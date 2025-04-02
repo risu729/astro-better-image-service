@@ -223,7 +223,7 @@ To commit, run the following command.
 ```bash
 mise run commit
 # or to commit only staged files
-mise run commit:staged
+mise run commit --staged
 ```
 
 ### Release
