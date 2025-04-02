@@ -30,18 +30,9 @@ typos = "1.31.1"
 
 [settings]
 experimental = true
-disable_backends = [
-	# cspell:ignore pipx
-	# disable pipx backend not to require pipx/uv
-	"pipx",
-]
 
 [settings.npm]
 bun = true
-
-# cspell:ignore pipx
-[settings.pipx]
-uvx = true
 
 [task_config]
 includes = ["tasks.toml", "tasks"]
