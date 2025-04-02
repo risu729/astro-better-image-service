@@ -15,6 +15,8 @@ taplo = "0.9.3"
 "npm:prettier" = "3.5.3"
 markdownlint-cli2 = "0.17.2"
 yamlfmt = "0.16.0"
+# required for pipx backend
+uv = "0.6.11"
 yamllint = "1.37.0"
 "npm:cspell" = "8.18.1"
 "ubi:lycheeverse/lychee" = "lychee-v0.18.1" # cspell:ignore lycheeverse
@@ -32,6 +34,10 @@ disable_backends = [
 
 [settings.npm]
 bun = true
+
+# cspell:ignore pipx
+[settings.pipx]
+uvx = true
 
 [task_config]
 includes = ["tasks.toml", "tasks"]
