@@ -30,6 +30,7 @@ module.exports = {
 		"taplo",
 		"yamlfmt",
 		"jschema",
+		"zizmor",
 		// package.json
 		"risu",
 		"astro",
