@@ -10,7 +10,7 @@ actionlint = "1.7.7"
 # required for actionlint
 shellcheck = "0.10.0"
 "aqua:suzuki-shunsuke/ghalint" = "1.3.0" # cspell:ignore shunsuke
-"aqua:suzuki-shunsuke/pinact" = "3.0.2"
+"aqua:suzuki-shunsuke/pinact" = "3.0.3"
 # required for cargo backend
 # cspell:ignore binstall
 cargo-binstall = "1.12.2"
