@@ -13,7 +13,7 @@ shellcheck = "0.10.0"
 "aqua:suzuki-shunsuke/pinact" = "3.0.3"
 # required for cargo backend
 # cspell:ignore binstall
-cargo-binstall = "1.12.2"
+cargo-binstall = "1.12.3"
 "cargo:zizmor" = "1.5.2"
 taplo = "0.9.3"
 "npm:prettier" = "3.5.3"
