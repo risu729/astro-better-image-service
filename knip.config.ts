@@ -17,7 +17,12 @@ const config: KnipConfig = {
 				// biome-ignore lint/nursery/noSecrets: false positive
 				"conventional-changelog-conventionalcommits",
 			],
-			entry: ["src/index.ts", "tasks/**"],
+			entry: [
+				"src/index.ts",
+				"tasks/**",
+				// knip doesn't have bun:test plugin
+				"tests/unit/*.test.ts",
+			],
 			// peerDependencies are not recognized as plugins
 			astro: true,
 			// mise tools are not recognized as plugins
