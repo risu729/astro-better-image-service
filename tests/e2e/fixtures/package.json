@@ -4,7 +4,7 @@
 	"private": true,
 	"type": "module",
 	"dependencies": {
-		"astro": "5.7.2",
+		"astro": "5.7.3",
 		"astro-better-image-service": "link:astro-better-image-service"
 	},
 	"scripts": {
