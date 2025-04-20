@@ -1,0 +1,9 @@
+# ref: https://github.com/foray1010/ignore-sync?tab=readme-ov-file#how-to-use
+
+[inline]
+# ignore snapshots generated in CI
+conversion.test.ts-snapshots/
+# ignore .astro directory generated during the build process
+.astro/
+# ignore bun lockfile because Renovate cannot update lockfile with linked dependencies
+bun.lock
