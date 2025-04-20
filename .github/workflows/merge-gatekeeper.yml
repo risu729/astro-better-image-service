@@ -26,3 +26,5 @@ jobs:
         with:
           token: ${{ github.token }}
           ignored: actions-timeline
+          # use timeout-minutes instead of timeout
+          timeout: 3600
