@@ -13,12 +13,16 @@ run = "bun run tsc --project tsconfig.src.json"
 depends = ["buni"]
 run = "bun test tests/unit"
 
-["test:e2e"]
+["test:e2e:install-deps"]
 depends = ["buni"]
+run = "bun run playwright install chromium --with-deps"
+
+["test:e2e"]
+depends = ["buni", "test:e2e:install-deps"]
 run = "bun run playwright test vrt format"
 
 ["test:e2e:snapshots"]
-depends = ["buni"]
+depends = ["buni", "test:e2e:install-deps"]
 run = "bun run playwright test vrt --update-snapshots"
 
 ["test:e2e:fixtures:server"]
