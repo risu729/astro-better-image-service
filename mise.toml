@@ -14,7 +14,7 @@ shellcheck = "0.10.0"
 # required for cargo backend
 # cspell:ignore binstall
 cargo-binstall = "1.12.3"
-"cargo:zizmor" = "1.5.2"
+"cargo:zizmor" = "1.6.0"
 taplo = "0.9.3"
 "npm:prettier" = "3.5.3"
 markdownlint-cli2 = "0.17.2"
