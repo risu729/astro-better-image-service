@@ -103,7 +103,7 @@ jobs:
       - name: Install Playwright Browsers and Dependencies
         id: playwright-install
         if: steps.restore-browsers-cache.outputs.cache-hit != 'true'
-        run: bun run playwright install chromium --with-deps
+        run: mise run test:e2e:install-deps
 
       - name: Save Playwright Browsers Cache
         if: steps.restore-browsers-cache.outputs.cache-hit != 'true'
@@ -175,7 +175,7 @@ jobs:
       - name: Install Playwright Browsers and Dependencies
         id: playwright-install
         if: steps.restore-browsers-cache.outputs.cache-hit != 'true'
-        run: bun run playwright install chromium --with-deps
+        run: mise run test:e2e:install-deps
 
       - name: Save Playwright Browsers Cache
         if: steps.restore-browsers-cache.outputs.cache-hit != 'true'
