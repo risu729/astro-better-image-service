@@ -1,5 +1,12 @@
 # ref: https://github.com/lycheeverse/lychee/blob/master/lychee.example.toml
 
+accept = [
+	"100..=103",
+	"200..=299",
+	# GitHub API rate limit is unavoidable even using the cache
+	"429",
+]
+
 exclude_all_private = true
 
 exclude_path = [
