@@ -21,7 +21,7 @@ markdownlint-cli2 = "0.17.2"
 yamlfmt = "0.16.0"
 # cspell:ignore pipx
 # required for pipx backend
-uv = "0.7.2"
+uv = "0.7.3"
 yamllint = "1.37.1"
 "npm:cspell" = "9.0.0"
 lychee = "0.18.1"
