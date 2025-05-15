@@ -22,7 +22,7 @@
         "astro": "5.7.13",
         "commitizen": "4.3.1",
         "knip": "5.56.0",
-        "markdownlint-cli2": "0.18.0",
+        "markdownlint-cli2": "0.18.1",
         "prettier": "3.5.3",
         "semver": "7.7.2",
         "typescript": "5.8.3",
@@ -763,7 +763,7 @@
 
     "markdownlint": ["markdownlint@0.38.0", "", { "dependencies": { "micromark": "4.0.2", "micromark-core-commonmark": "2.0.3", "micromark-extension-directive": "4.0.0", "micromark-extension-gfm-autolink-literal": "2.1.0", "micromark-extension-gfm-footnote": "2.1.0", "micromark-extension-gfm-table": "2.1.1", "micromark-extension-math": "3.1.0", "micromark-util-types": "2.0.2" } }, "sha512-xaSxkaU7wY/0852zGApM8LdlIfGCW8ETZ0Rr62IQtAnUMlMuifsg09vWJcNYeL4f0anvr8Vo4ZQar8jGpV0btQ=="],
 
-    "markdownlint-cli2": ["markdownlint-cli2@0.18.0", "", { "dependencies": { "globby": "14.1.0", "js-yaml": "4.1.0", "jsonc-parser": "3.3.1", "markdown-it": "14.1.0", "markdownlint": "0.38.0", "markdownlint-cli2-formatter-default": "0.0.5", "micromatch": "4.0.8" }, "bin": { "markdownlint-cli2": "markdownlint-cli2-bin.mjs" } }, "sha512-gHvff1KxBxTqaN1F5cTxRSxBipx+Qkki430tyg0wPxty67iQNZzxREZkXy8ltbj7ObMz1eYD4aspnYXfV0sHAw=="],
+    "markdownlint-cli2": ["markdownlint-cli2@0.18.1", "", { "dependencies": { "globby": "14.1.0", "js-yaml": "4.1.0", "jsonc-parser": "3.3.1", "markdown-it": "14.1.0", "markdownlint": "0.38.0", "markdownlint-cli2-formatter-default": "0.0.5", "micromatch": "4.0.8" }, "bin": { "markdownlint-cli2": "markdownlint-cli2-bin.mjs" } }, "sha512-/4Osri9QFGCZOCTkfA8qJF+XGjKYERSHkXzxSyS1hd3ZERJGjvsUao2h4wdnvpHp6Tu2Jh/bPHM0FE9JJza6ng=="],
 
     "markdownlint-cli2-formatter-default": ["markdownlint-cli2-formatter-default@0.0.5", "", { "peerDependencies": { "markdownlint-cli2": ">=0.0.4" } }, "sha512-4XKTwQ5m1+Txo2kuQ3Jgpo/KmnG+X90dWt4acufg6HVGadTUG5hzHF/wssp9b5MBYOMCnZ9RMPaU//uHsszF8Q=="],
 
