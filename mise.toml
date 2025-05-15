@@ -17,7 +17,7 @@ cargo-binstall = "1.12.3"
 "cargo:zizmor" = "1.6.0"
 taplo = "0.9.3"
 "npm:prettier" = "3.5.3"
-markdownlint-cli2 = "0.18.0"
+markdownlint-cli2 = "0.18.1"
 yamlfmt = "0.16.0"
 # cspell:ignore pipx
 # required for pipx backend
