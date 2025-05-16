@@ -1,7 +1,7 @@
 {
 	// ref: https://docs.renovatebot.com/configuration-options/
 	$schema: "https://docs.renovatebot.com/renovate-schema.json",
-	extends: ["github>risu729/renovate-config#3.2.7"],
+	extends: ["github>risu729/renovate-config#3.3.0"],
 	packageRules: [
 		// disable pinning for dependencies and peerDependencies
 		{
