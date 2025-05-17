@@ -1,0 +1,23 @@
+name: Delete Action Cache
+
+on:
+  pull_request:
+    types:
+      - closed
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  delete-cache:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      actions: write # for delete cache
+
+    steps:
+      - name: Delete Action Cache
+        # cspell:ignore toshimaru
+        uses: toshimaru/delete-action-cache@ab45c03c4f82162f880096a984a1fe1e7775a292 # v1.0.1
+        with:
+          limit: 1000
