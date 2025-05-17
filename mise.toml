@@ -9,8 +9,8 @@ biome = "1.9.4"
 actionlint = "1.7.7"
 # required for actionlint
 shellcheck = "0.10.0"
-"aqua:suzuki-shunsuke/ghalint" = "1.4.0" # cspell:ignore shunsuke
-"aqua:suzuki-shunsuke/pinact" = "3.1.1"
+ghalint = "1.4.0"
+pinact = "3.1.1"
 # required for cargo backend
 # cspell:ignore binstall
 cargo-binstall = "1.12.3"
