@@ -21,7 +21,7 @@
 		"url": "https://github.com/risu729/astro-better-image-service/issues"
 	},
 	"dependencies": {
-		"sharp": "^0.34.1",
+		"sharp": "^0.34.2",
 		"svgo": "^3.3.2"
 	},
 	"peerDependencies": {
