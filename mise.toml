@@ -14,7 +14,7 @@ pinact = "3.1.2"
 # required for cargo backend
 # cspell:ignore binstall
 cargo-binstall = "1.12.5"
-"cargo:zizmor" = "=1.6.0"
+"cargo:zizmor" = "=1.8.0"
 taplo = "0.10.0"
 "npm:prettier" = "3.5.3"
 markdownlint-cli2 = "0.18.1"
