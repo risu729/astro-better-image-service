@@ -25,7 +25,7 @@ uv = "0.7.9"
 yamllint = "1.37.1"
 "npm:cspell" = "9.0.2"
 lychee = "0.18.1"
-typos = "1.32.0"
+typos = "1.33.1"
 "npm:ignore-sync" = "8.0.0"
 "npm:jschema-validator" = "1.0.15"
 
