@@ -79,7 +79,7 @@ jobs:
         run: mise run "${TASK_NAME}"
         env:
           LINT: true
-          GITHUB_TOKEN: ${{ matrix.require_gh_token == 'true' && github.token || '' }}
+          GITHUB_TOKEN: ${{ github.token }}
           TASK_NAME: ${{ matrix.task }}
 
   commitlint:
