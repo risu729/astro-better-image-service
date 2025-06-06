@@ -76,10 +76,11 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: Run ${{ matrix.name }}
-        run: mise run ${{ matrix.task }}
+        run: mise run "${TASK_NAME}"
         env:
           LINT: true
           GITHUB_TOKEN: ${{ github.token }}
+          TASK_NAME: ${{ matrix.task }}
 
   commitlint:
     runs-on: ubuntu-24.04
@@ -108,19 +109,25 @@ jobs:
         id: commitlint-push-initial
         # commit hash will be 000... if it doesn't exist
         if: github.event_name == 'push' && github.event.before == '0000000000000000000000000000000000000000'
-        run: bun run commitlint --verbose --to ${{ github.event.after }}
+        run: bun run commitlint --verbose --to "${AFTER_SHA}"
+        env:
+          AFTER_SHA: ${{ github.event.after }}
 
       - name: commitlint (push)
         id: commitlint-push
         if: github.event_name == 'push' && steps.commitlint-push-initial.outcome == 'skipped'
-        run: bun run commitlint --verbose --from ${{ github.event.before }} --to ${{ github.event.after }}
+        run: bun run commitlint --verbose --from "${BEFORE_SHA}" --to "${AFTER_SHA}"
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.event.after }}
 
       - name: commitlint (pull_request)
         id: commitlint-pr
         if: github.event_name == 'pull_request'
         run: |
-          bun run commitlint --verbose --from ${{ github.event.pull_request.base.sha }} --to "${HEAD_SHA}"
+          bun run commitlint --verbose --from "${BASE_SHA}" --to "${HEAD_SHA}"
         env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
 
       - name: commitlint (pull request title)
@@ -135,7 +142,9 @@ jobs:
 
       - name: commitlint (last commit)
         if: steps.commitlint-push-initial.outcome == 'skipped' && steps.commitlint-push.outcome == 'skipped' && steps.commitlint-pr.outcome == 'skipped'
-        run: bun run commitlint --verbose --from ${{ github.sha }}~1 --to ${{ github.sha }}
+        run: bun run commitlint --verbose --from "${SHA}"~1 --to "${SHA}"
+        env:
+          SHA: ${{ github.sha }}
 
   actions-timeline:
     needs:
