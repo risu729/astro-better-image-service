@@ -13,7 +13,7 @@
         "@commitlint/cz-commitlint": "19.8.1",
         "@commitlint/types": "19.8.1",
         "@cspell/cspell-types": "9.0.2",
-        "@playwright/test": "1.52.0",
+        "@playwright/test": "1.53.0",
         "@total-typescript/tsconfig": "1.0.4",
         "@tsconfig/bun": "1.0.8",
         "@tsconfig/strictest": "2.0.5",
@@ -229,7 +229,7 @@
 
     "@oxc-resolver/binding-win32-x64-msvc": ["@oxc-resolver/binding-win32-x64-msvc@11.1.0", "", { "os": "win32", "cpu": "x64" }, "sha512-CxalsPMU4oSoZviLMaw01RhLglyN7jrUUhTDRv4pYGcsRxxt5S7e/wO9P/lm5BYgAAq4TtP5MkGuGuMrm//a0g=="],
 
-    "@playwright/test": ["@playwright/test@1.52.0", "", { "dependencies": { "playwright": "1.52.0" }, "bin": { "playwright": "cli.js" } }, "sha512-uh6W7sb55hl7D6vsAeA+V2p5JnlAqzhqFyF0VcJkKZXkgnFcVG9PziERRHQfPLfNGx1C292a4JqbWzhR8L4R1g=="],
+    "@playwright/test": ["@playwright/test@1.53.0", "", { "dependencies": { "playwright": "1.53.0" }, "bin": { "playwright": "cli.js" } }, "sha512-15hjKreZDcp7t6TL/7jkAo6Df5STZN09jGiv5dbP9A6vMVncXRqE7/B2SncsyOwrkZRBH2i6/TPOL8BVmm3c7w=="],
 
     "@rollup/pluginutils": ["@rollup/pluginutils@5.1.4", "", { "dependencies": { "@types/estree": "^1.0.0", "estree-walker": "^2.0.2", "picomatch": "^4.0.2" }, "peerDependencies": { "rollup": "^1.20.0||^2.0.0||^3.0.0||^4.0.0" }, "optionalPeers": ["rollup"] }, "sha512-USm05zrsFxYLPdWWq+K3STlWiT/3ELn3RcV5hJMghpeAIhxfsUIg6mt12CBJBInWMV4VneoV7SfGv8xIwo2qNQ=="],
 
@@ -947,9 +947,9 @@
 
     "picomatch": ["picomatch@4.0.2", "", {}, "sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg=="],
 
-    "playwright": ["playwright@1.52.0", "", { "dependencies": { "playwright-core": "1.52.0" }, "optionalDependencies": { "fsevents": "2.3.2" }, "bin": { "playwright": "cli.js" } }, "sha512-JAwMNMBlxJ2oD1kce4KPtMkDeKGHQstdpFPcPH3maElAXon/QZeTvtsfXmTMRyO9TslfoYOXkSsvao2nE1ilTw=="],
+    "playwright": ["playwright@1.53.0", "", { "dependencies": { "playwright-core": "1.53.0" }, "optionalDependencies": { "fsevents": "2.3.2" }, "bin": { "playwright": "cli.js" } }, "sha512-ghGNnIEYZC4E+YtclRn4/p6oYbdPiASELBIYkBXfaTVKreQUYbMUYQDwS12a8F0/HtIjr/CkGjtwABeFPGcS4Q=="],
 
-    "playwright-core": ["playwright-core@1.52.0", "", { "bin": { "playwright-core": "cli.js" } }, "sha512-l2osTgLXSMeuLZOML9qYODUQoPPnUsKsb5/P6LJ2e6uPKXUdPK5WYhN4z03G+YNbWmGDY4YENauNu4ZKczreHg=="],
+    "playwright-core": ["playwright-core@1.53.0", "", { "bin": { "playwright-core": "cli.js" } }, "sha512-mGLg8m0pm4+mmtB7M89Xw/GSqoNC+twivl8ITteqvAndachozYe2ZA7srU6uleV1vEdAHYqjq+SV8SNxRRFYBw=="],
 
     "postcss": ["postcss@8.5.3", "", { "dependencies": { "nanoid": "^3.3.8", "picocolors": "^1.1.1", "source-map-js": "^1.2.1" } }, "sha512-dle9A3yYxlBSrt8Fu+IpjGT8SY8hN0mlaA6GY8t0P5PjIOZemULz/E2Bnm/2dcUOena75OTNkHI76uZBNUUq3A=="],
 
