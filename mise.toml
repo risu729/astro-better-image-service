@@ -13,7 +13,7 @@ ghalint = "1.4.1"
 pinact = "3.1.2"
 # required for cargo backend
 # cspell:ignore binstall
-cargo-binstall = "1.12.7"
+cargo-binstall = "1.13.0"
 "cargo:zizmor" = "=1.9.0"
 taplo = "0.10.0"
 "npm:prettier" = "3.5.3"
