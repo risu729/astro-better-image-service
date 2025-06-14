@@ -10,7 +10,7 @@ actionlint = "1.7.7"
 # required for actionlint
 shellcheck = "0.10.0"
 ghalint = "1.4.1"
-pinact = "3.2.0"
+pinact = "3.3.0"
 # required for cargo backend
 # cspell:ignore binstall
 cargo-binstall = "1.13.0"
