@@ -3,10 +3,17 @@
 [![Version](https://img.shields.io/npm/v/astro-better-image-service)](https://www.npmjs.com/package/astro-better-image-service)
 [![License](https://img.shields.io/npm/l/astro-better-image-service)](https://github.com/risu729/astro-better-image-service?tab=License-1-ov-file)
 [![NPM Downloads](https://img.shields.io/npm/dm/astro-better-image-service)](https://www.npmjs.com/package/astro-better-image-service)
+[![Network Dependents](https://dependents.info/risu729/astro-better-image-service/badge)](https://dependents.info/risu729/astro-better-image-service)
 [![Last commit](https://img.shields.io/github/last-commit/risu729/astro-better-image-service)](https://github.com/risu729/astro-better-image-service/commits/main/)
 [![Repo stars](https://img.shields.io/github/stars/risu729/astro-better-image-service)](https://github.com/risu729/astro-better-image-service/stargazers)
 
 **`astro-better-image-service`** is an Astro integration for image compression and conversion, superseding Astro's default image service.
+
+## 🧑‍💻 Used by
+
+<a href="https://dependents.info/risu729/astro-better-image-service">
+  <img src="https://dependents.info/risu729/astro-better-image-service/image" />
+</a>
 
 ## 🖼️ Features
 
