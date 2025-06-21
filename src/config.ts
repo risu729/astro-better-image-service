@@ -79,18 +79,7 @@ export const defaultConfig = {
 			indent: 0,
 			pretty: false,
 		},
-		plugins: [
-			{
-				name: "preset-default",
-				params: {
-					overrides: {
-						// viewBox is important for some use cases
-						// ref: https://github.com/svg/svgo/issues/1128
-						removeViewBox: false,
-					},
-				},
-			},
-		],
+		plugins: ["preset-default"],
 	},
 } as const satisfies Required<LibrariesConfig>;
 
