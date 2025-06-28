@@ -1,9 +1,26 @@
 {
 	// ref: https://code.visualstudio.com/docs/getstarted/settings#_workspace-settings
 
-	"files.autoSave": "afterDelay",
-	"editor.formatOnSave": true,
-	"editor.formatOnPaste": true,
+	"[astro]": {
+		"editor.defaultFormatter": "astro-build.astro-vscode"
+	},
+	// ref: https://biomejs.dev/internals/language-support/
+	"[javascript][typescript][json][jsonc]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[markdown][json5]": {
+		// cspell:ignore esbenp
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[toml]": {
+		// cspell:ignore tamasfe
+		"editor.defaultFormatter": "tamasfe.even-better-toml"
+	},
+
+	"[yaml][github-actions-workflow]": {
+		// cspell:ignore bluebrown
+		"editor.defaultFormatter": "bluebrown.yamlfmt"
+	},
 
 	// ref: https://biomejs.dev/reference/vscode/
 	"editor.codeActionsOnSave": {
@@ -11,32 +28,16 @@
 		"quickfix.biome": "explicit",
 		"source.organizeImports.biome": "explicit"
 	},
-	// ref: https://biomejs.dev/internals/language-support/
-	"[javascript][typescript][json][jsonc]": {
-		"editor.defaultFormatter": "biomejs.biome"
-	},
-
-	"[yaml][github-actions-workflow]": {
-		// cspell:ignore bluebrown
-		"editor.defaultFormatter": "bluebrown.yamlfmt"
-	},
-	"[astro]": {
-		"editor.defaultFormatter": "astro-build.astro-vscode"
-	},
-	"[toml]": {
-		// cspell:ignore tamasfe
-		"editor.defaultFormatter": "tamasfe.even-better-toml"
-	},
-	"[markdown][json5]": {
-		// cspell:ignore esbenp
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
 
 	"files.associations": {
-		"*ignore-sync": "ini",
-		// cspell:ignore czrc
-		".czrc": "jsonc"
+		".czrc": "jsonc",
+		"*ignore-sync": "ini"
 	},
+	// ref: https://code.visualstudio.com/docs/getstarted/settings#_workspace-settings
+
+	"files.autoSave": "afterDelay",
 
 	"files.readonlyInclude": {
 		// auto-generated

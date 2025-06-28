@@ -32,8 +32,8 @@ export const AVAILABLE_FORMAT_CONVERSIONS = VALID_INPUT_FORMATS.flatMap(
 			),
 		].map((outputFormat) => ({
 			inputFormat,
+			name: `${inputFormat} to ${outputFormat ?? "default"}`,
 			outputFormat,
 			path: `/${inputFormat}/${outputFormat ?? "default"}`,
-			name: `${inputFormat} to ${outputFormat ?? "default"}`,
 		})),
 );

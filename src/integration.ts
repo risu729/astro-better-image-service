@@ -16,7 +16,6 @@ export const astroIntegration = (
 ) =>
 	// loose type for compatibility with other astro versions
 	({
-		name: "astro-better-image-service",
 		hooks: {
 			"astro:config:setup": ({
 				updateConfig,
@@ -35,4 +34,5 @@ export const astroIntegration = (
 				logger.info("Image service entrypoint set.");
 			},
 		},
+		name: "astro-better-image-service",
 	}) as const satisfies AstroIntegration;

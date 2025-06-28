@@ -1,14 +1,14 @@
 {
 	"$schema": "https://json.schemastore.org/package.json",
-	"name": "@astro-better-image-service/e2e-test-fixtures",
-	"private": true,
-	"type": "module",
 	"dependencies": {
 		"astro": "5.10.1",
 		"astro-better-image-service": "link:astro-better-image-service"
 	},
+	"name": "@astro-better-image-service/e2e-test-fixtures",
+	"private": true,
 	"scripts": {
 		"build": "astro build",
 		"preview": "astro preview"
-	}
+	},
+	"type": "module"
 }

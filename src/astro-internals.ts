@@ -33,10 +33,10 @@ export const parseQuality = (quality: string): string | number => {
 
 // https://github.com/withastro/astro/blob/8d5ea2df5d52ad9a311c407533b9f4226480faa8/packages/astro/src/assets/services/sharp.ts#L20
 export const qualityTable: Record<ImageQualityPreset, number> = {
-	low: 25,
-	mid: 50,
 	high: 80,
+	low: 25,
 	max: 100,
+	mid: 50,
 };
 
 // import type { SharpImageServiceConfig } from "astro/config"; // NOT available in Astro 5 anymore

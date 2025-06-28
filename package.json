@@ -1,22 +1,6 @@
 {
 	"$schema": "https://json.schemastore.org/package.json",
-	"name": "astro-better-image-service",
-	"version": "0.0.0-development",
-	"description": "Astro integration for image compression and conversion, superseding Astro's default image service.",
-	"keywords": [
-		"astro-integration",
-		"withastro",
-		"astro",
-		"images",
-		"compression"
-	],
-	"license": "MIT",
 	"author": "risu729",
-	"homepage": "https://github.com/risu729/astro-better-image-service#readme",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/risu729/astro-better-image-service.git"
-	},
 	"bugs": {
 		"url": "https://github.com/risu729/astro-better-image-service/issues"
 	},
@@ -24,9 +8,7 @@
 		"sharp": "^0.34.2",
 		"svgo": "^4.0.0"
 	},
-	"peerDependencies": {
-		"astro": "^4.7.0 || ^5.0.0"
-	},
+	"description": "Astro integration for image compression and conversion, superseding Astro's default image service.",
 	"devDependencies": {
 		"@commitlint/cli": "19.8.1",
 		"@commitlint/config-conventional": "19.8.1",
@@ -47,16 +29,38 @@
 		"semver": "7.7.2",
 		"typescript": "5.8.3"
 	},
-	"type": "module",
-	"files": ["dist", "!*.tsbuildinfo", "src"],
 	"exports": {
 		".": "./dist/index.js",
 		"./image-service": "./dist/image-service.js",
 		"./package.json": "./package.json"
 	},
-	"types": "./dist/index.d.ts",
+	"files": [
+		"dist",
+		"!*.tsbuildinfo",
+		"src"
+	],
+	"homepage": "https://github.com/risu729/astro-better-image-service#readme",
+	"keywords": [
+		"astro-integration",
+		"withastro",
+		"astro",
+		"images",
+		"compression"
+	],
+	"license": "MIT",
+	"name": "astro-better-image-service",
+	"peerDependencies": {
+		"astro": "^4.7.0 || ^5.0.0"
+	},
 	"publishConfig": {
 		"access": "public",
 		"provenance": true
-	}
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/risu729/astro-better-image-service.git"
+	},
+	"type": "module",
+	"types": "./dist/index.d.ts",
+	"version": "0.0.0-development"
 }

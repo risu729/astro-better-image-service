@@ -6,11 +6,8 @@
  * @type {import("@cspell/cspell-types").CSpellUserSettings}
  */
 module.exports = {
-	version: "0.2",
-	language: "en",
 	dictionaries: ["typescript", "node", "npm", "bash", "markdown"],
 	enableGlobDot: true,
-	useGitignore: true,
 	ignorePaths: [
 		".git/",
 		// ignore auto-generated files
@@ -21,6 +18,9 @@ module.exports = {
 		// ignore binary files
 		"*.avif",
 	],
+	language: "en",
+	useGitignore: true,
+	version: "0.2",
 	words: [
 		// often used
 		"buni",

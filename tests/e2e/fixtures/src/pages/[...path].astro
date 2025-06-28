@@ -25,14 +25,14 @@ import pngImage from "../images/sloth.png";
 
 export const getStaticPaths = ((): GetStaticPathsResult => {
 	const images = {
+		avif: avifImage,
+		gif: gifImage,
 		jpeg: jpegImage,
 		jpg: jpgImage,
 		png: pngImage,
+		svg: svgImage,
 		tiff: tiffImage,
 		webp: webpImage,
-		gif: gifImage,
-		svg: svgImage,
-		avif: avifImage,
 	} as const satisfies {
 		[K in (typeof VALID_INPUT_FORMATS)[number]]: ImageMetadata;
 	};
@@ -43,9 +43,9 @@ export const getStaticPaths = ((): GetStaticPathsResult => {
 				path,
 			},
 			props: {
-				outputFormat,
-				name,
 				image: images[inputFormat],
+				name,
+				outputFormat,
 				quality: qualities[i % qualities.length],
 			},
 		}),

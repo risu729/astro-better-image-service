@@ -1,4 +1,5 @@
 import { readdir } from "node:fs/promises";
+import process from "node:process";
 import { setTimeout } from "node:timers/promises";
 import { expect, test } from "@playwright/test";
 // biome-ignore lint/nursery/useImportRestrictions: import required for test
@@ -46,9 +47,9 @@ test.describe("Consistent Image Conversion between Image Services", () => {
 				await setTimeout(1000);
 			}
 			await expect(page).toHaveScreenshot(`${snapshotBaseFilename}.png`, {
+				fullPage: true,
 				// compression config is different between services so we allow a small difference
 				maxDiffPixelRatio: 0.01,
-				fullPage: true,
 				omitBackground: true,
 			});
 		});
