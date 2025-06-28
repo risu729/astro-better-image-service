@@ -24,7 +24,7 @@ export type BaseServiceTransform = {
 
 // https://github.com/withastro/astro/blob/8d5ea2df5d52ad9a311c407533b9f4226480faa8/packages/astro/src/assets/services/service.ts#L19-L26
 export const parseQuality = (quality: string): string | number => {
-	const result = Number.parseInt(quality);
+	const result = Number.parseInt(quality, 10);
 	if (Number.isNaN(result)) {
 		return quality;
 	}
