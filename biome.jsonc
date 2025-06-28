@@ -151,17 +151,6 @@
 			}
 		},
 		{
-			// disable noNodejsModules rule for files running in bun or Node.js
-			"includes": ["**/*.config.*", "tests/**", "tasks/**"],
-			"linter": {
-				"rules": {
-					"correctness": {
-						"noNodejsModules": "off"
-					}
-				}
-			}
-		},
-		{
 			// disable noConsole and useTopLevelRegex rules for scripts
 			"includes": ["tasks/**"],
 			"linter": {
@@ -171,30 +160,6 @@
 					},
 					"suspicious": {
 						"noConsole": "off"
-					}
-				}
-			}
-		},
-		{
-			"includes": ["tests/e2e/fixtures/**"],
-			"linter": {
-				"rules": {
-					"correctness": {
-						// cannot read dependencies from package.json in subdirectories
-						// ref: https://github.com/biomejs/biome/issues/2010
-						"noUndeclaredDependencies": "off"
-					}
-				}
-			}
-		},
-		{
-			// disable useFilenamingConvention rule for Astro routes
-			// cspell:ignore filenaming
-			"includes": ["tests/e2e/fixtures/src/pages/**"],
-			"linter": {
-				"rules": {
-					"style": {
-						"useFilenamingConvention": "off"
 					}
 				}
 			}
