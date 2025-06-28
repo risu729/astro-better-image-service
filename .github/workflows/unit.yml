@@ -17,6 +17,7 @@ defaults:
 
 jobs:
   test-unit:
+    name: Unit Tests
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
@@ -39,6 +40,7 @@ jobs:
         run: mise run test:unit
 
   actions-timeline:
+    name: Generate Actions Timeline
     needs:
       - test-unit
     # skip if the workflow is called from another workflow

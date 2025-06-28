@@ -17,6 +17,7 @@ defaults:
 
 jobs:
   list-tasks:
+    name: List Lint Tasks
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
@@ -83,6 +84,7 @@ jobs:
           TASK_NAME: ${{ matrix.task }}
 
   commitlint:
+    name: Run commitlint
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
@@ -147,6 +149,7 @@ jobs:
           SHA: ${{ github.sha }}
 
   actions-timeline:
+    name: Generate Actions Timeline
     needs:
       - lint
       - commitlint

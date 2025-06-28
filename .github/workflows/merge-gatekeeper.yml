@@ -12,6 +12,8 @@ permissions: {}
 
 jobs:
   merge-gatekeeper:
+    # use the same name as the workflow to be ignored by merge-gatekeeper
+    name: merge-gatekeeper
     runs-on: ubuntu-24.04
     # set the longest timeout of all jobs
     timeout-minutes: 30
@@ -25,6 +27,6 @@ jobs:
         uses: upsidr/merge-gatekeeper@09af7a82c1666d0e64d2bd8c01797a0bcfd3bb5d # v1.2.1
         with:
           token: ${{ github.token }}
-          ignored: actions-timeline
+          ignored: Generate Actions Timeline
           # use timeout-minutes instead of timeout
           timeout: 3600

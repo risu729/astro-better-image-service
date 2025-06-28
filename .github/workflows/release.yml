@@ -34,6 +34,7 @@ jobs:
     uses: ./.github/workflows/e2e.yml
 
   release:
+    name: Release
     needs:
       - lint
       - unit
@@ -71,6 +72,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   actions-timeline:
+    name: Generate Actions Timeline
     needs:
       - release
     if: ${{ !cancelled() }}

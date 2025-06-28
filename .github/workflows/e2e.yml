@@ -17,6 +17,7 @@ defaults:
 
 jobs:
   list-astro-versions:
+    name: List Astro Versions for E2E Tests
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
@@ -53,7 +54,7 @@ jobs:
     permissions:
       contents: read # for checkout
 
-    name: test-e2e-general-astro-${{ matrix.version }}
+    name: General E2E Tests (Astro ${{ matrix.version }})
     strategy:
       fail-fast: false
       matrix:
@@ -128,6 +129,7 @@ jobs:
           path: playwright-report/
 
   test-e2e-conversion:
+    name: Image Services Conversion Consistency Test
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
@@ -240,6 +242,7 @@ jobs:
           path: playwright-report/
 
   actions-timeline:
+    name: Generate Actions Timeline
     needs:
       - test-e2e-general
       - test-e2e-conversion

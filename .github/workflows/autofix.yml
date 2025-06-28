@@ -16,6 +16,7 @@ defaults:
 
 jobs:
   autofix:
+    name: Autofix
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
@@ -37,6 +38,8 @@ jobs:
       - name: Run autofix
         run: mise run check --continue-on-error
         continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: autofix.ci
         uses: autofix-ci/action@635ffb0c9798bd160680f18fd73371e355b85f27 # v1.3.2
