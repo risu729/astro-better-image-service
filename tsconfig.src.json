@@ -1,14 +1,14 @@
 {
 	// ref: https://www.typescriptlang.org/tsconfig/
 	"$schema": "https://json.schemastore.org/tsconfig",
+	"compilerOptions": {
+		"declarationMap": true,
+		"incremental": true,
+		"outDir": "dist"
+	},
 	"extends": [
 		"@total-typescript/tsconfig/tsc/no-dom/library",
 		"@tsconfig/strictest/tsconfig.json"
 	],
-	"compilerOptions": {
-		"outDir": "dist",
-		"declarationMap": true,
-		"incremental": true
-	},
 	"include": ["src"]
 }

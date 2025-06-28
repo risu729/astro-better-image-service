@@ -48,37 +48,39 @@ export type MergedConfig = Omit<
 /**
  * Default configuration for the image optimization libraries.
  */
+
+// biome-ignore lint/nursery/useExplicitType: type must be inferred
 export const defaultConfig = {
 	sharp: {
-		sharp: {
-			failOnError: false,
-			pages: -1,
-		},
-		png: {
-			compressionLevel: 9,
-			palette: true,
-			effort: 10,
-		},
-		jpeg: {
-			// cspell:ignore mozjpeg
-			mozjpeg: true,
-		},
-		webp: {
-			effort: 6,
-		},
 		avif: {
 			// cspell:ignore subsampling
 			chromaSubsampling: "4:2:0",
 			effort: 9,
 		},
+		jpeg: {
+			// cspell:ignore mozjpeg
+			mozjpeg: true,
+		},
+		png: {
+			compressionLevel: 9,
+			effort: 10,
+			palette: true,
+		},
+		sharp: {
+			failOnError: false,
+			pages: -1,
+		},
+		webp: {
+			effort: 6,
+		},
 	},
 	svgo: {
-		// cspell:ignore multipass
-		multipass: true,
 		js2svg: {
 			indent: 0,
 			pretty: false,
 		},
+		// cspell:ignore multipass
+		multipass: true,
 		plugins: ["preset-default"],
 	},
 } as const satisfies Required<LibrariesConfig>;
@@ -101,10 +103,21 @@ export const betterImageService = (
 		);
 	}
 	return {
-		entrypoint: "astro-better-image-service/image-service",
 		config: {
 			// shallow merge for sharp configuration
 			sharp: {
+				avif: {
+					...defaultConfig.sharp.avif,
+					...(config.sharp?.avif ?? {}),
+				},
+				jpeg: {
+					...defaultConfig.sharp.jpeg,
+					...(config.sharp?.jpeg ?? {}),
+				},
+				png: {
+					...defaultConfig.sharp.png,
+					...(config.sharp?.png ?? {}),
+				},
 				sharp: {
 					...defaultConfig.sharp.sharp,
 					...("limitInputPixels" in config
@@ -112,21 +125,9 @@ export const betterImageService = (
 						: {}),
 					...(config.sharp?.sharp ?? {}),
 				},
-				png: {
-					...defaultConfig.sharp.png,
-					...(config.sharp?.png ?? {}),
-				},
-				jpeg: {
-					...defaultConfig.sharp.jpeg,
-					...(config.sharp?.jpeg ?? {}),
-				},
 				webp: {
 					...defaultConfig.sharp.webp,
 					...(config.sharp?.webp ?? {}),
-				},
-				avif: {
-					...defaultConfig.sharp.avif,
-					...(config.sharp?.avif ?? {}),
 				},
 			},
 			// shallow merge for svgo configuration except for js2svg
@@ -139,5 +140,6 @@ export const betterImageService = (
 				},
 			},
 		},
+		entrypoint: "astro-better-image-service/image-service",
 	};
 };

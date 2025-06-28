@@ -16,12 +16,12 @@ export const astroIntegration = (
 ) =>
 	// loose type for compatibility with other astro versions
 	({
-		name: "astro-better-image-service",
 		hooks: {
 			"astro:config:setup": ({
 				updateConfig,
 				logger,
 			}: {
+				// biome-ignore lint/nursery/noShadow: false positive
 				updateConfig: (config: {
 					image: { service: ReturnType<typeof betterImageService> };
 				}) => AstroConfig;
@@ -35,4 +35,5 @@ export const astroIntegration = (
 				logger.info("Image service entrypoint set.");
 			},
 		},
+		name: "astro-better-image-service",
 	}) as const satisfies AstroIntegration;

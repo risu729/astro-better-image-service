@@ -1,6 +1,5 @@
 import { setTimeout } from "node:timers/promises";
 import { expect, test } from "@playwright/test";
-// biome-ignore lint/nursery/useImportRestrictions: import required for test
 import { AVAILABLE_FORMAT_CONVERSIONS } from "./fixtures/src/formats.ts";
 
 test.describe("Visual Regression", () => {
@@ -20,9 +19,9 @@ test.describe("Visual Regression", () => {
 				await setTimeout(1000);
 			}
 			await expect(page).toHaveScreenshot(`${name.replaceAll(" ", "-")}.png`, {
+				fullPage: true,
 				// to detect changes of image quality
 				maxDiffPixelRatio: 0,
-				fullPage: true,
 				omitBackground: true,
 			});
 		});

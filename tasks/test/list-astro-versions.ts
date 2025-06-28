@@ -7,23 +7,27 @@ import { $ } from "bun";
 import { compare, parse, satisfies } from "semver";
 import packageJson from "../../package.json" with { type: "json" };
 
-const peerRange = packageJson.peerDependencies.astro;
+const peerRange: string = packageJson.peerDependencies.astro;
 
-const versions = (await $`npm view astro versions --json`.json()) as string[];
+const allVersions =
+	(await $`npm view astro versions --json`.json()) as string[];
 
-const versionsInRange = versions
+const versionsInRange: string[] = allVersions
 	.filter((version) => satisfies(version, peerRange))
 	.sort(compare);
 
-const groupedVersions = Object.groupBy(versionsInRange, (version) => {
-	const semver = parse(version);
-	if (!semver) {
-		throw new Error(`Invalid version: ${version}`);
-	}
-	return `${semver.major}.${semver.minor}`;
-});
+const groupedVersions: Record<string, string[] | undefined> = Object.groupBy(
+	versionsInRange,
+	(version) => {
+		const semver = parse(version);
+		if (!semver) {
+			throw new Error(`Invalid version: ${version}`);
+		}
+		return `${semver.major}.${semver.minor}`;
+	},
+);
 
-const versionsToTest = [
+const versionsToTest: string[] = [
 	...new Set([
 		// oldest 3 versions
 		...versionsInRange.slice(0, 3),
@@ -36,6 +40,6 @@ const versionsToTest = [
 		// latest 5 versions
 		...versionsInRange.slice(-5),
 	]),
-];
+].filter((version) => version !== undefined);
 
 console.write(JSON.stringify(versionsToTest));

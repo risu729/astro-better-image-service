@@ -10,9 +10,9 @@ import sharp from "sharp";
 import { optimize as svgo } from "svgo";
 import {
 	type BaseServiceTransform,
-	type VALID_OUTPUT_FORMATS,
 	parseQuality,
 	qualityTable,
+	type VALID_OUTPUT_FORMATS,
 } from "./astro-internals.js";
 import type { MergedConfig } from "./config.js";
 
@@ -26,40 +26,20 @@ type OutputFormat = Extract<
  */
 const betterImageService: LocalImageService<MergedConfig> = {
 	// biome-ignore lint/style/useNamingConvention: following the Astro API
-	getURL: baseService.getURL,
-
-	// biome-ignore lint/style/useNamingConvention: following the Astro API
-	parseURL: baseService.parseURL,
-
-	// biome-ignore lint/style/useNamingConvention: following the Astro API
 	// biome-ignore lint/style/noNonNullAssertion: optional method but baseService implements it
 	getHTMLAttributes: baseService.getHTMLAttributes!,
 
 	// biome-ignore lint/style/noNonNullAssertion: optional method but baseService implements it
 	getSrcSet: baseService.getSrcSet!,
+	// biome-ignore lint/style/useNamingConvention: following the Astro API
+	getURL: baseService.getURL,
 
-	async validateOptions(options, imageConfig): Promise<ImageTransform> {
-		// save the original format for later use, because baseService.validateOptions
-		// changes the options.format to SVG if options.src.format is SVG
-		// ref: https://github.com/withastro/astro/blob/8d5ea2df5d52ad9a311c407533b9f4226480faa8/packages/astro/src/assets/services/service.ts#L200-L203
-		const targetFormat = options.format;
-
-		// biome-ignore lint/style/noNonNullAssertion: optional method but baseService implements it
-		const result = await baseService.validateOptions!(options, imageConfig);
-
-		// restore the original format
-		if (
-			isESMImportedImage(options.src) &&
-			options.src.format === "svg" &&
-			targetFormat
-		) {
-			result.format = targetFormat;
-		}
-		return result;
-	},
+	// biome-ignore lint/style/useNamingConvention: following the Astro API
+	parseURL: baseService.parseURL,
 
 	// based on sharp image service
 	// https://github.com/withastro/astro/blob/8d5ea2df5d52ad9a311c407533b9f4226480faa8/packages/astro/src/assets/services/sharp.ts#L44-L89
+	// biome-ignore lint/nursery/useExplicitType: type should be inferred
 	async transform(
 		inputBuffer,
 		transformOptions,
@@ -118,9 +98,30 @@ const betterImageService: LocalImageService<MergedConfig> = {
 		const { data, info } = await result.toBuffer({ resolveWithObject: true });
 
 		return {
-			data: data,
+			data,
 			format: info.format as ImageOutputFormat,
 		};
+	},
+
+	// biome-ignore lint/nursery/useExplicitType: type should be inferred
+	async validateOptions(options, imageConfig): Promise<ImageTransform> {
+		// save the original format for later use, because baseService.validateOptions
+		// changes the options.format to SVG if options.src.format is SVG
+		// ref: https://github.com/withastro/astro/blob/8d5ea2df5d52ad9a311c407533b9f4226480faa8/packages/astro/src/assets/services/service.ts#L200-L203
+		const targetFormat = options.format;
+
+		// biome-ignore lint/style/noNonNullAssertion: optional method but baseService implements it
+		const result = await baseService.validateOptions!(options, imageConfig);
+
+		// restore the original format
+		if (
+			isESMImportedImage(options.src) &&
+			options.src.format === "svg" &&
+			targetFormat
+		) {
+			result.format = targetFormat;
+		}
+		return result;
 	},
 };
 

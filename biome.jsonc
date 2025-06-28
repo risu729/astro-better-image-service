@@ -1,10 +1,12 @@
 {
 	// ref: https://biomejs.dev/reference/configuration/
-	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-	"vcs": {
-		"enabled": true,
-		"clientKind": "git",
-		"useIgnoreFile": true
+	"$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
+	"assist": {
+		"actions": {
+			"source": {
+				"useSortedKeys": "on"
+			}
+		}
 	},
 	"files": {
 		"ignoreUnknown": true
@@ -12,34 +14,134 @@
 	"formatter": {
 		"formatWithErrors": true
 	},
-	"linter": {
-		"rules": {
-			"all": true,
-			"complexity": {
-				// incompatible with `noPropertyAccessFromIndexSignature` option in tsconfig
-				// ref: https://github.com/biomejs/biome/issues/463
-				"useLiteralKeys": "off"
-			},
-			"correctness": {
-				// this project does not use React
-				"useHookAtTopLevel": "off"
-			},
-			"nursery": {
-				"all": true,
-				// prefer process.env over config files
-				"noProcessEnv": "off"
-			}
-		}
-	},
 	"json": {
 		"parser": {
 			"allowComments": true
 		}
 	},
+	"linter": {
+		"domains": {
+			"project": "all",
+			"test": "all"
+		},
+		"rules": {
+			"complexity": {
+				"noExcessiveCognitiveComplexity": "on",
+				"noForEach": "on",
+				"noUselessStringConcat": "on",
+				"noVoid": "on",
+				// incompatible with `noPropertyAccessFromIndexSignature` option in tsconfig
+				// ref: https://github.com/biomejs/biome/issues/463
+				"useLiteralKeys": "off",
+				"useSimplifiedLogicExpression": "on",
+				"useWhile": "on"
+			},
+			"correctness": {
+				"noUndeclaredVariables": "on"
+			},
+			"nursery": {
+				"noAwaitInLoop": "on",
+				"noBitwiseOperators": "on",
+				"noConstantBinaryExpression": "on",
+				"noExcessiveLinesPerFunction": "on",
+				"noGlobalDirnameFilename": "on",
+				"noImplicitCoercion": "on",
+				"noProcessGlobal": "on",
+				"noSecrets": "on",
+				"noShadow": "on",
+				"noTsIgnore": "on",
+				"noUnassignedVariables": "on",
+				"noUselessBackrefInRegex": "on",
+				"noUselessEscapeInString": "on",
+				"noUselessUndefined": "on",
+				"useAdjacentGetterSetter": "on",
+				"useConsistentObjectDefinition": "on",
+				"useConsistentResponse": "on",
+				"useExplicitType": "on",
+				"useExportsLast": "on",
+				"useIndexOf": "on",
+				"useIterableCallbackReturn": "on",
+				"useJsonImportAttribute": "on",
+				"useNumericSeparators": "on",
+				"useObjectSpread": "on",
+				"useParseIntRadix": "on",
+				"useReadonlyClassProperties": "on",
+				"useSingleJsDocAsterisk": "on",
+				"useSymbolDescription": "on",
+				"useUnifiedTypeSignature": "on"
+			},
+			"performance": {
+				"noBarrelFile": "on",
+				"noDelete": "on",
+				"noNamespaceImport": "on",
+				"noReExportAll": "on",
+				"useTopLevelRegex": "on"
+			},
+			"style": {
+				"noCommonJs": "on",
+				"noDefaultExport": "on",
+				"noDoneCallback": "on",
+				"noEnum": "on",
+				"noExportedImports": "on",
+				"noImplicitBoolean": "on",
+				"noInferrableTypes": "on",
+				"noNamespace": "on",
+				"noNegationElse": "on",
+				"noNestedTernary": "on",
+				"noParameterAssign": "on",
+				"noParameterProperties": "on",
+				"noProcessEnv": "on",
+				"noRestrictedGlobals": "on",
+				// cspell:ignore shouty
+				"noShoutyConstants": "on",
+				"noSubstr": "on",
+				"noUnusedTemplateLiteral": "on",
+				"noUselessElse": "on",
+				"noYodaExpression": "on",
+				"useAsConstAssertion": "on",
+				"useAtIndex": "on",
+				"useBlockStatements": "on",
+				"useCollapsedElseIf": "on",
+				"useCollapsedIf": "on",
+				"useConsistentArrayType": "on",
+				"useConsistentBuiltinInstantiation": "on",
+				"useConsistentCurlyBraces": "on",
+				"useConsistentMemberAccessibility": "on",
+				"useDefaultParameterLast": "on",
+				"useDefaultSwitchClause": "on",
+				"useEnumInitializers": "on",
+				"useExplicitLengthCheck": "on",
+				// cspell:ignore filenaming
+				"useFilenamingConvention": "on",
+				"useForOf": "on",
+				"useNamingConvention": "on",
+				"useNodeAssertStrict": "on",
+				"useNumberNamespace": "on",
+				"useShorthandAssign": "on",
+				"useSingleVarDeclarator": "on",
+				"useThrowNewError": "on",
+				"useThrowOnlyError": "on",
+				"useTrimStartEnd": "on"
+			},
+			"suspicious": {
+				"noConsole": "on",
+				"noEmptyBlockStatements": "on",
+				"noEvolvingTypes": "on",
+				"noMisplacedAssertion": "on",
+				"noSkippedTests": "on",
+				"noVar": "on",
+				"useAwait": "on",
+				"useErrorMessage": "on",
+				"useGuardForIn": "on",
+				"useNumberToFixedDigitsArgument": "on",
+				"useStrictMode": "on"
+			}
+		}
+	},
 	"overrides": [
 		{
 			// disable noDefaultExport rule for config files
-			"include": ["**/*.config.*"],
+			"includes": ["**/*.config.*"],
 			"linter": {
 				"rules": {
 					"style": {
@@ -50,7 +152,7 @@
 		},
 		{
 			// disable noNodejsModules rule for files running in bun or Node.js
-			"include": ["**/*.config.*", "tests/**", "tasks/**"],
+			"includes": ["**/*.config.*", "tests/**", "tasks/**"],
 			"linter": {
 				"rules": {
 					"correctness": {
@@ -61,20 +163,20 @@
 		},
 		{
 			// disable noConsole and useTopLevelRegex rules for scripts
-			"include": ["tasks/**"],
+			"includes": ["tasks/**"],
 			"linter": {
 				"rules": {
-					"suspicious": {
-						"noConsole": "off"
-					},
 					"performance": {
 						"useTopLevelRegex": "off"
+					},
+					"suspicious": {
+						"noConsole": "off"
 					}
 				}
 			}
 		},
 		{
-			"include": ["tests/e2e/fixtures/**"],
+			"includes": ["tests/e2e/fixtures/**"],
 			"linter": {
 				"rules": {
 					"correctness": {
@@ -88,7 +190,7 @@
 		{
 			// disable useFilenamingConvention rule for Astro routes
 			// cspell:ignore filenaming
-			"include": ["tests/e2e/fixtures/src/pages/**"],
+			"includes": ["tests/e2e/fixtures/src/pages/**"],
 			"linter": {
 				"rules": {
 					"style": {
@@ -97,5 +199,10 @@
 				}
 			}
 		}
-	]
+	],
+	"vcs": {
+		"clientKind": "git",
+		"enabled": true,
+		"useIgnoreFile": true
+	}
 }
