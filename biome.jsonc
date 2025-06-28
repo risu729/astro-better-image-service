@@ -84,7 +84,7 @@
 				"noEnum": "on",
 				"noExportedImports": "on",
 				"noImplicitBoolean": "on",
-				"noInferrableTypes": "on",
+				"noInferableTypes": "on",
 				"noNamespace": "on",
 				"noNegationElse": "on",
 				"noNestedTernary": "on",
