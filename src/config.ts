@@ -48,6 +48,8 @@ export type MergedConfig = Omit<
 /**
  * Default configuration for the image optimization libraries.
  */
+
+// biome-ignore lint/nursery/useExplicitType: type must be inferred
 export const defaultConfig = {
 	sharp: {
 		avif: {

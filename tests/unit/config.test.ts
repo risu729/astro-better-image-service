@@ -1,5 +1,5 @@
+// biome-ignore-all lint/nursery/noExcessiveLinesPerFunction: disable for test file
 import { describe, expect, test } from "bun:test";
-// biome-ignore lint/nursery/useImportRestrictions:
 import { betterImageService, defaultConfig } from "../../src/config.ts";
 
 describe("default config", () => {

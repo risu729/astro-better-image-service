@@ -1,6 +1,5 @@
 import { setTimeout } from "node:timers/promises";
 import { expect, test } from "@playwright/test";
-// biome-ignore lint/nursery/useImportRestrictions: import required for test
 import { AVAILABLE_FORMAT_CONVERSIONS } from "./fixtures/src/formats.ts";
 
 test.describe("Visual Regression", () => {

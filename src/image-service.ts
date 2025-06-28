@@ -39,6 +39,7 @@ const betterImageService: LocalImageService<MergedConfig> = {
 
 	// based on sharp image service
 	// https://github.com/withastro/astro/blob/8d5ea2df5d52ad9a311c407533b9f4226480faa8/packages/astro/src/assets/services/sharp.ts#L44-L89
+	// biome-ignore lint/nursery/useExplicitType: type should be inferred
 	async transform(
 		inputBuffer,
 		transformOptions,
@@ -102,6 +103,7 @@ const betterImageService: LocalImageService<MergedConfig> = {
 		};
 	},
 
+	// biome-ignore lint/nursery/useExplicitType: type should be inferred
 	async validateOptions(options, imageConfig): Promise<ImageTransform> {
 		// save the original format for later use, because baseService.validateOptions
 		// changes the options.format to SVG if options.src.format is SVG

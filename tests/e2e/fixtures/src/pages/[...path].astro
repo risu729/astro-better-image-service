@@ -23,6 +23,11 @@ import avifImage from "../images/redpanda.avif";
 import gifImage from "../images/seal.gif";
 import pngImage from "../images/sloth.png";
 
+// biome-ignore lint/correctness/noUndeclaredVariables: Astro is globally defined in .astro files
+// biome-ignore lint/correctness/noUnusedVariables: used in the template
+const { outputFormat, name, image, quality } = Astro.props;
+
+// biome-ignore lint/nursery/useExplicitType: duplicate type
 export const getStaticPaths = ((): GetStaticPathsResult => {
 	const images = {
 		avif: avifImage,
@@ -38,6 +43,7 @@ export const getStaticPaths = ((): GetStaticPathsResult => {
 	};
 	const qualities = [undefined, "low", "mid", "high", "max"] as const;
 	return AVAILABLE_FORMAT_CONVERSIONS.flatMap(
+		// biome-ignore lint/nursery/noShadow: Astro.props should be the same name
 		({ inputFormat, outputFormat, path, name }, i) => ({
 			params: {
 				path,
@@ -51,10 +57,6 @@ export const getStaticPaths = ((): GetStaticPathsResult => {
 		}),
 	);
 }) satisfies GetStaticPaths;
-
-// biome-ignore lint/correctness/noUndeclaredVariables: Astro is globally defined in .astro files
-// biome-ignore lint/correctness/noUnusedVariables: used in the template
-const { outputFormat, name, image, quality } = Astro.props;
 ---
 
 <html>
