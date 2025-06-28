@@ -27,6 +27,6 @@ jobs:
         uses: upsidr/merge-gatekeeper@09af7a82c1666d0e64d2bd8c01797a0bcfd3bb5d # v1.2.1
         with:
           token: ${{ github.token }}
-          ignored:  Generate Actions Timeline
+          ignored: Generate Actions Timeline
           # use timeout-minutes instead of timeout
           timeout: 3600
