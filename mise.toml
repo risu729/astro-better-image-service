@@ -4,7 +4,7 @@
 [tools]
 bun = "1.2.17"
 node = "24.3.0"
-"npm:semantic-release" = "24.2.5"
+"npm:semantic-release" = "24.2.6"
 biome = "2.0.6"
 actionlint = "1.7.7"
 # required for actionlint
