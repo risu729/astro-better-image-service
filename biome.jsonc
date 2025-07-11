@@ -47,7 +47,8 @@
 				"noGlobalDirnameFilename": "on",
 				"noImplicitCoercion": "on",
 				"noProcessGlobal": "on",
-				"noSecrets": "on",
+				// many false positives
+				"noSecrets": "off",
 				"noShadow": "on",
 				"noTsIgnore": "on",
 				"noUnassignedVariables": "on",

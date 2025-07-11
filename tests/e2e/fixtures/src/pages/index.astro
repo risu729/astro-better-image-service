@@ -5,8 +5,7 @@ import { AVAILABLE_FORMAT_CONVERSIONS } from "../formats.ts";
 
 // biome-ignore lint/correctness/noUnusedVariables: used in the template
 const imageService: string = process.env["USE_DEFAULT_IMAGE_SERVICE"]
-	? // biome-ignore lint/nursery/noSecrets: false positive
-		"sharpImageService"
+	? "sharpImageService"
 	: "astro-better-image-service";
 ---
 
