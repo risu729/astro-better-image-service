@@ -21,7 +21,6 @@ export const astroIntegration = (
 				updateConfig,
 				logger,
 			}: {
-				// biome-ignore lint/nursery/noShadow: false positive
 				updateConfig: (config: {
 					image: { service: ReturnType<typeof betterImageService> };
 				}) => AstroConfig;

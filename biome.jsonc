@@ -1,6 +1,6 @@
 {
 	// ref: https://biomejs.dev/reference/configuration/
-	"$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.1.1/schema.json",
 	"assist": {
 		"actions": {
 			"source": {
@@ -47,7 +47,8 @@
 				"noGlobalDirnameFilename": "on",
 				"noImplicitCoercion": "on",
 				"noProcessGlobal": "on",
-				"noSecrets": "on",
+				// many false positives
+				"noSecrets": "off",
 				"noShadow": "on",
 				"noTsIgnore": "on",
 				"noUnassignedVariables": "on",
