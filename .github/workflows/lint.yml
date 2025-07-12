@@ -33,7 +33,7 @@ jobs:
           persist-credentials: false
 
       - name: Install mise
-        uses: jdx/mise-action@5cb1df66ed5e1fb3c670ea0b62fd17a76979826a # v2.3.1
+        uses: jdx/mise-action@bfb9fa0b029db830a8c570757cee683df207a6c5 # v2.4.0
         with:
           version: 2025.7.3
         env:
@@ -70,7 +70,7 @@ jobs:
           persist-credentials: false
 
       - name: Install mise
-        uses: jdx/mise-action@5cb1df66ed5e1fb3c670ea0b62fd17a76979826a # v2.3.1
+        uses: jdx/mise-action@bfb9fa0b029db830a8c570757cee683df207a6c5 # v2.4.0
         with:
           version: 2025.7.3
         env:
@@ -98,7 +98,7 @@ jobs:
           persist-credentials: false
 
       - name: Install mise
-        uses: jdx/mise-action@5cb1df66ed5e1fb3c670ea0b62fd17a76979826a # v2.3.1
+        uses: jdx/mise-action@bfb9fa0b029db830a8c570757cee683df207a6c5 # v2.4.0
         with:
           version: 2025.7.3
         env:
