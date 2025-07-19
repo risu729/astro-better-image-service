@@ -20,7 +20,7 @@ yamlfmt = "0.17.2"
 # required for pipx backend
 uv = "0.8.0"
 yamllint = "1.37.1"
-"npm:cspell" = "9.1.5"
+"npm:cspell" = "9.2.0"
 lychee = "0.19.1"
 typos = "1.34.0"
 "npm:ignore-sync" = "8.0.0"
