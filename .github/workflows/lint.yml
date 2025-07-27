@@ -35,7 +35,7 @@ jobs:
       - name: Install mise
         uses: jdx/mise-action@eb2f5cb41b0a8175dad2f797e3daca6fe7795a19 # v2.4.2
         with:
-          version: 2025.7.27
+          version: 2025.7.28
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
@@ -72,7 +72,7 @@ jobs:
       - name: Install mise
         uses: jdx/mise-action@eb2f5cb41b0a8175dad2f797e3daca6fe7795a19 # v2.4.2
         with:
-          version: 2025.7.27
+          version: 2025.7.28
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
@@ -100,7 +100,7 @@ jobs:
       - name: Install mise
         uses: jdx/mise-action@eb2f5cb41b0a8175dad2f797e3daca6fe7795a19 # v2.4.2
         with:
-          version: 2025.7.27
+          version: 2025.7.28
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
