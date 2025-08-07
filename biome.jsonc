@@ -1,6 +1,6 @@
 {
 	// ref: https://biomejs.dev/reference/configuration/
-	"$schema": "https://biomejs.dev/schemas/2.1.3/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.1.4/schema.json",
 	"assist": {
 		"actions": {
 			"source": {
