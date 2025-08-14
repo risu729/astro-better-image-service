@@ -3,7 +3,7 @@
 
 [tools]
 bun = "1.2.20"
-node = "24.5.0"
+node = "24.6.0"
 "npm:semantic-release" = "24.2.7"
 biome = "2.1.4"
 actionlint = "1.7.7"
