@@ -41,6 +41,7 @@ export const qualityTable: Record<ImageQualityPreset, number> = {
 
 // import type { SharpImageServiceConfig } from "astro/config"; // NOT available in Astro 5 anymore
 // https://github.com/withastro/astro/blob/a6a4a66f10d85363b90ff4b7cd5bdd8c2b3c81fb/packages/astro/src/assets/services/sharp.ts#L11
+// biome-ignore lint/nursery/useConsistentTypeDefinitions: follow Astro
 export interface SharpImageServiceConfig {
 	/**
 	 * The `limitInputPixels` option passed to Sharp. See https://sharp.pixelplumbing.com/api-constructor for more information

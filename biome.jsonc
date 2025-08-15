@@ -27,7 +27,7 @@
 		"rules": {
 			"complexity": {
 				"noExcessiveCognitiveComplexity": "on",
-				"noExcessiveLinesPerFunction": "off",
+				"noExcessiveLinesPerFunction": "on",
 				"noForEach": "on",
 				"noImplicitCoercions": "on",
 				"noUselessStringConcat": "on",

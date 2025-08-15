@@ -1,4 +1,4 @@
-// biome-ignore-all lint/nursery/noExcessiveLinesPerFunction: disable for test file
+// biome-ignore-all lint/complexity/noExcessiveLinesPerFunction: disable for test file
 import { describe, expect, test } from "bun:test";
 import { betterImageService, defaultConfig } from "../../src/config.ts";
 
