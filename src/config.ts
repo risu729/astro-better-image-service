@@ -10,7 +10,7 @@ import type {
 import type { Config as SvgoConfig } from "svgo";
 import type { SharpImageServiceConfig } from "./astro-internals.js";
 
-interface LibrariesConfig {
+type LibrariesConfig = {
 	/**
 	 * Configuration for sharp.
 	 */
@@ -28,7 +28,7 @@ interface LibrariesConfig {
 	 * Configuration for svgo.
 	 */
 	svgo?: SvgoConfig;
-}
+};
 
 /**
  * Type of the configuration for the image optimization libraries.
