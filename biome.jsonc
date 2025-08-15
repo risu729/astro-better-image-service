@@ -27,7 +27,9 @@
 		"rules": {
 			"complexity": {
 				"noExcessiveCognitiveComplexity": "on",
+				"noExcessiveLinesPerFunction": "off",
 				"noForEach": "on",
+				"noImplicitCoercions": "on",
 				"noUselessStringConcat": "on",
 				"noVoid": "on",
 				// incompatible with `noPropertyAccessFromIndexSignature` option in tsconfig
@@ -37,41 +39,30 @@
 				"useWhile": "on"
 			},
 			"correctness": {
-				"noUndeclaredVariables": "on"
+				"noGlobalDirnameFilename": "on",
+				"noProcessGlobal": "on",
+				"noUndeclaredVariables": "on",
+				"useJsonImportAttributes": "on",
+				"useSingleJsDocAsterisk": "on"
 			},
 			"nursery": {
-				"noAwaitInLoop": "on",
-				"noBitwiseOperators": "on",
-				"noConstantBinaryExpression": "on",
-				"noExcessiveLinesPerFunction": "on",
-				"noGlobalDirnameFilename": "on",
-				"noImplicitCoercion": "on",
-				"noProcessGlobal": "on",
+				"noMisusedPromises": "on",
+				"noNonNullAssertedOptionalChain": "on",
 				// many false positives
 				"noSecrets": "off",
 				"noShadow": "on",
-				"noTsIgnore": "on",
-				"noUnassignedVariables": "on",
-				"noUselessBackrefInRegex": "on",
-				"noUselessEscapeInString": "on",
+				"noUnnecessaryConditions": "on",
 				"noUselessUndefined": "on",
-				"useAdjacentGetterSetter": "on",
-				"useConsistentObjectDefinition": "on",
-				"useConsistentResponse": "on",
-				"useExplicitType": "on",
-				"useExportsLast": "on",
-				"useIndexOf": "on",
-				"useIterableCallbackReturn": "on",
-				"useJsonImportAttribute": "on",
-				"useNumericSeparators": "on",
-				"useObjectSpread": "on",
-				"useParseIntRadix": "on",
-				"useReadonlyClassProperties": "on",
-				"useSingleJsDocAsterisk": "on",
-				"useSymbolDescription": "on",
-				"useUnifiedTypeSignature": "on"
+				"useConsistentTypeDefinitions": {
+					"level": "on",
+					"options": {
+						"style": "type"
+					}
+				},
+				"useExplicitType": "on"
 			},
 			"performance": {
+				"noAwaitInLoops": "on",
 				"noBarrelFile": "on",
 				"noDelete": "on",
 				"noNamespaceImport": "on",
@@ -108,33 +99,45 @@
 				"useConsistentBuiltinInstantiation": "on",
 				"useConsistentCurlyBraces": "on",
 				"useConsistentMemberAccessibility": "on",
+				"useConsistentObjectDefinitions": "on",
 				"useDefaultParameterLast": "on",
 				"useDefaultSwitchClause": "on",
 				"useEnumInitializers": "on",
 				"useExplicitLengthCheck": "on",
+				"useExportsLast": "on",
 				// cspell:ignore filenaming
 				"useFilenamingConvention": "on",
 				"useForOf": "on",
+				"useGroupedAccessorPairs": "on",
 				"useNamingConvention": "on",
 				"useNodeAssertStrict": "on",
 				"useNumberNamespace": "on",
+				"useNumericSeparators": "on",
+				"useObjectSpread": "on",
+				"useReadonlyClassProperties": "on",
 				"useShorthandAssign": "on",
 				"useSingleVarDeclarator": "on",
+				"useSymbolDescription": "on",
 				"useThrowNewError": "on",
 				"useThrowOnlyError": "on",
-				"useTrimStartEnd": "on"
+				"useTrimStartEnd": "on",
+				"useUnifiedTypeSignatures": "on"
 			},
 			"suspicious": {
+				"noBitwiseOperators": "on",
 				"noConsole": "on",
+				"noConstantBinaryExpressions": "on",
 				"noEmptyBlockStatements": "on",
 				"noEvolvingTypes": "on",
 				"noMisplacedAssertion": "on",
 				"noSkippedTests": "on",
+				"noUnassignedVariables": "on",
 				"noVar": "on",
 				"useAwait": "on",
 				"useErrorMessage": "on",
 				"useGuardForIn": "on",
 				"useNumberToFixedDigitsArgument": "on",
+				"useStaticResponseMethods": "on",
 				"useStrictMode": "on"
 			}
 		}
