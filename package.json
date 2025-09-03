@@ -20,7 +20,7 @@
 		"@tsconfig/bun": "1.0.8",
 		"@tsconfig/strictest": "2.0.5",
 		"@types/bun": "1.2.21",
-		"@types/semver": "7.7.0",
+		"@types/semver": "7.7.1",
 		"astro": "5.13.5",
 		"commitizen": "4.3.1",
 		"knip": "5.63.0",
