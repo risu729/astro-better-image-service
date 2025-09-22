@@ -29,4 +29,7 @@ exclude = [
 	# .vscode/
 	# requests are forbidden
 	"https://code.visualstudio.com",
+	# README.md
+	# requests are forbidden
+	"https://www.npmjs.com",
 ]
