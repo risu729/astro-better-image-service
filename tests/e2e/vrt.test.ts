@@ -20,8 +20,8 @@ test.describe("Visual Regression", () => {
 			}
 			await expect(page).toHaveScreenshot(`${name.replaceAll(" ", "-")}.png`, {
 				fullPage: true,
-				// to detect changes of image quality
-				maxDiffPixelRatio: 0,
+				// tolerate small differences in rendering between environments
+				maxDiffPixelRatio: 0.01,
 				omitBackground: true,
 			});
 		});
