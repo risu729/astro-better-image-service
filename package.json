@@ -27,7 +27,7 @@
 		"markdownlint-cli2": "0.18.1",
 		"prettier": "3.6.2",
 		"semver": "7.7.2",
-		"typescript": "5.9.2"
+		"typescript": "5.9.3"
 	},
 	"exports": {
 		".": "./dist/index.js",
