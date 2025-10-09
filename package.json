@@ -21,7 +21,7 @@
 		"@tsconfig/strictest": "2.0.6",
 		"@types/bun": "1.2.23",
 		"@types/semver": "7.7.1",
-		"astro": "5.14.1",
+		"astro": "5.14.3",
 		"commitizen": "4.3.1",
 		"knip": "5.64.2",
 		"markdownlint-cli2": "0.18.1",
