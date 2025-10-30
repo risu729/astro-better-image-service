@@ -1,7 +1,7 @@
 {
 	"$schema": "https://json.schemastore.org/package.json",
 	"dependencies": {
-		"astro": "5.15.2",
+		"astro": "5.15.3",
 		"astro-better-image-service": "link:astro-better-image-service"
 	},
 	"name": "@astro-better-image-service/e2e-test-fixtures",
