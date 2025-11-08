@@ -14,7 +14,7 @@
 		"@commitlint/config-conventional": "20.0.0",
 		"@commitlint/cz-commitlint": "20.1.0",
 		"@commitlint/types": "20.0.0",
-		"@cspell/cspell-types": "9.2.2",
+		"@cspell/cspell-types": "9.3.0",
 		"@playwright/test": "1.56.1",
 		"@total-typescript/tsconfig": "1.0.4",
 		"@tsconfig/bun": "1.0.9",
