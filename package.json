@@ -5,7 +5,7 @@
 		"url": "https://github.com/risu729/astro-better-image-service/issues"
 	},
 	"dependencies": {
-		"sharp": "^0.34.4",
+		"sharp": "^0.34.5",
 		"svgo": "^4.0.0"
 	},
 	"description": "Astro integration for image compression and conversion, superseding Astro's default image service.",
