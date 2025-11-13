@@ -16,7 +16,7 @@
         "@cspell/cspell-types": "9.3.1",
         "@playwright/test": "1.56.1",
         "@total-typescript/tsconfig": "1.0.4",
-        "@tsconfig/bun": "1.0.9",
+        "@tsconfig/bun": "1.0.10",
         "@tsconfig/strictest": "2.0.7",
         "@types/bun": "1.3.2",
         "@types/semver": "7.7.1",
@@ -314,7 +314,7 @@
 
     "@total-typescript/tsconfig": ["@total-typescript/tsconfig@1.0.4", "", {}, "sha512-fO4ctMPGz1kOFOQ4RCPBRBfMy3gDn+pegUfrGyUFRMv/Rd0ZM3/SHH3hFCYG4u6bPLG8OlmOGcBLDexvyr3A5w=="],
 
-    "@tsconfig/bun": ["@tsconfig/bun@1.0.9", "", {}, "sha512-4M0/Ivfwcpz325z6CwSifOBZYji3DFOEpY6zEUt0+Xi2qRhzwvmqQN9XAHJh3OVvRJuAqVTLU2abdCplvp6mwQ=="],
+    "@tsconfig/bun": ["@tsconfig/bun@1.0.10", "", {}, "sha512-5AV5YknQjNyoYzZ/8NG0dawqew/wH+x7ANiCfCIn29qo0cdbd1EryvFD1k5NSZWLBMOI/fGqMIaxi58GPIP9Cg=="],
 
     "@tsconfig/strictest": ["@tsconfig/strictest@2.0.7", "", {}, "sha512-lG1bXQloBVvQXasPBZSBaWbs7GNW4txZMYs7XMUVzM0s4seCbJACYBPFIRpGNVD3gC8gndK00AZON1uBrJt4Fw=="],
 
