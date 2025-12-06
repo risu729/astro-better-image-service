@@ -9,7 +9,7 @@ biome = "2.2.0"
 actionlint = "1.7.9"
 # required for actionlint
 shellcheck = "0.11.0"
-ghalint = "1.5.3"
+ghalint = "1.5.4"
 pinact = "3.4.5"
 zizmor = "1.11.0"
 taplo = "0.10.0"
