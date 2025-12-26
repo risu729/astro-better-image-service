@@ -23,7 +23,7 @@
 		"@types/semver": "7.7.1",
 		"astro": "5.16.6",
 		"commitizen": "4.3.1",
-		"knip": "5.76.3",
+		"knip": "5.77.0",
 		"markdownlint-cli2": "0.19.1",
 		"prettier": "3.7.4",
 		"semver": "7.7.3",
