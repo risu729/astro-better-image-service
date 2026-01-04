@@ -10,9 +10,9 @@
 	},
 	"description": "Astro integration for image compression and conversion, superseding Astro's default image service.",
 	"devDependencies": {
-		"@commitlint/cli": "20.2.0",
-		"@commitlint/config-conventional": "20.2.0",
-		"@commitlint/cz-commitlint": "20.2.0",
+		"@commitlint/cli": "20.3.0",
+		"@commitlint/config-conventional": "20.3.0",
+		"@commitlint/cz-commitlint": "20.3.0",
 		"@commitlint/types": "20.2.0",
 		"@cspell/cspell-types": "9.5.0",
 		"@playwright/test": "1.57.0",
