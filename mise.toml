@@ -19,7 +19,7 @@ yamlfmt = "0.21.0"
 # cspell:ignore pipx
 # required for pipx backend
 uv = "0.9.24"
-yamllint = "1.37.1"
+yamllint = "1.38.0"
 "npm:cspell" = "9.4.0"
 lychee = "0.22.0"
 typos = "1.42.0"
