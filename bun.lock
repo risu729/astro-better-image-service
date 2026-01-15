@@ -13,7 +13,7 @@
         "@commitlint/config-conventional": "20.3.1",
         "@commitlint/cz-commitlint": "20.3.1",
         "@commitlint/types": "20.3.1",
-        "@cspell/cspell-types": "9.5.0",
+        "@cspell/cspell-types": "9.6.0",
         "@playwright/test": "1.57.0",
         "@total-typescript/tsconfig": "1.0.4",
         "@tsconfig/bun": "1.0.10",
@@ -92,7 +92,7 @@
 
     "@commitlint/types": ["@commitlint/types@20.3.1", "", { "dependencies": { "@types/conventional-commits-parser": "^5.0.0", "chalk": "^5.3.0" } }, "sha512-VmIFV/JkBRhDRRv7N5B7zEUkNZIx9Mp+8Pe65erz0rKycXLsi8Epcw0XJ+btSeRXgTzE7DyOyA9bkJ9mn/yqVQ=="],
 
-    "@cspell/cspell-types": ["@cspell/cspell-types@9.5.0", "", {}, "sha512-S7jiggB7iuvCG9R5O42PA7HoRtSIvWfUVUTRAd4eDBWOAR6vUQRuksbI79Qb+b4mhKajrkUGOCInnPDlniFMpA=="],
+    "@cspell/cspell-types": ["@cspell/cspell-types@9.6.0", "", {}, "sha512-JTqrD47tV+rWc1y2W8T0NTfWLQMlSWX4OF64/Jf3WbsOD+4UXVIfjRlzPry7+1Zekm6pa38+23jkDBytYpu8yw=="],
 
     "@emnapi/core": ["@emnapi/core@1.7.1", "", { "dependencies": { "@emnapi/wasi-threads": "1.1.0", "tslib": "^2.4.0" } }, "sha512-o1uhUASyo921r2XtHYOHy7gdkGLge8ghBEQHMWmyJFoXlpU58kIrhhN3w26lpQb6dspetweapMn2CSNwQ8I4wg=="],
 
