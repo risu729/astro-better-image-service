@@ -10,7 +10,7 @@ actionlint = "1.7.10"
 # required for actionlint
 shellcheck = "0.11.0"
 ghalint = "1.5.5"
-pinact = "3.8.0"
+pinact = "3.9.0"
 zizmor = "1.11.0"
 taplo = "0.10.0"
 "npm:prettier" = "3.8.1"
