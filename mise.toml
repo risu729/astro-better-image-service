@@ -14,7 +14,7 @@ pinact = "3.9.0"
 zizmor = "1.11.0"
 taplo = "0.10.0"
 "npm:prettier" = "3.8.1"
-markdownlint-cli2 = "0.20.0"
+markdownlint-cli2 = "0.21.0"
 yamlfmt = "0.21.0"
 # cspell:ignore pipx
 # required for pipx backend
