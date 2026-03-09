@@ -6,7 +6,7 @@
       "name": "astro-better-image-service",
       "dependencies": {
         "sharp": "^0.34.5",
-        "svgo": "^4.0.0",
+        "svgo": "^4.0.1",
       },
       "devDependencies": {
         "@commitlint/cli": "20.4.3",
