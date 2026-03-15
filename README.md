@@ -81,10 +81,6 @@ You are discouraged using this integration in SSR environments, because it may s
 > We most likely could tune up the settings a bit, though we need to be careful about it taking too much time (notably because of SSR doing it at runtime)  
 > see: <https://discord.com/channels/830184174198718474/830184175176122389/1168307099571331155>
 
-- The default image service does not support SVG images.  
-  It only passes them through without any optimization.  
-  Also, it does not support converting SVG images to raster images. (`format` option is ignored)
-
 ## vs. [`@playform/compress`](https://github.com/Playform/Compress) (f.k.a. `astro-compress`)
 
 - `@playform/compress` does not cache compressed images, so slows down your build time. <https://github.com/PlayForm/Compress/issues/49>
