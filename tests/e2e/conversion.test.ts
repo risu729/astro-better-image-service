@@ -1,5 +1,3 @@
-import { readdir } from "node:fs/promises";
-import process from "node:process";
 import { setTimeout } from "node:timers/promises";
 import { expect, test } from "@playwright/test";
 import { AVAILABLE_FORMAT_CONVERSIONS } from "./fixtures/src/formats.ts";
@@ -13,35 +11,14 @@ test.describe("Consistent Image Conversion between Image Services", () => {
 		path,
 		name,
 	} of AVAILABLE_FORMAT_CONVERSIONS) {
-		test(name, async ({ page }, { snapshotDir }) => {
+		test(name, async ({ page }) => {
 			const snapshotBaseFilename = `${name.replaceAll(" ", "-")}`;
 
-			let snapshots: string[] = [];
-			// use try-catch instead of exists to avoid race condition
-			try {
-				snapshots = await readdir(snapshotDir);
-			} catch (_) {
-				// ignore error and assume snapshots do not exist
-			}
-
-			// test fails if snapshot does not exist, so we need to check if it exists
-			if (
-				snapshots.some((snapshot) => snapshot.includes(snapshotBaseFilename))
-			) {
-				test.fail(
-					inputFormat === "svg" &&
-						(outputFormat === "jpeg" || outputFormat === "jpg"),
-					"svg with transparent background to jpeg/jpg conversion results in black background when using astro-better-image-service",
-				);
-			}
-
 			await page.goto(path);
-			// svg rendering takes longer (svg is always converted to svg when using sharpImageService)
+			// svg rendering takes longer
 			if (
 				inputFormat === "svg" &&
-				(process.env["USE_DEFAULT_IMAGE_SERVICE"] ||
-					outputFormat === undefined ||
-					outputFormat === "svg")
+				(outputFormat === undefined || outputFormat === "svg")
 			) {
 				await setTimeout(1000);
 			}

@@ -31,7 +31,7 @@ const AVAILABLE_FORMAT_CONVERSIONS: {
 		// include undefined to test the default output format
 		undefined,
 		...VALID_OUTPUT_FORMATS.filter(
-			// exclude vector to raster conversions because they are not supported
+			// exclude raster to vector conversions because Astro only supports SVG output for SVG inputs
 			(outputFormat) => inputFormat === "svg" || outputFormat !== "svg",
 		),
 	].map((outputFormat) => ({
