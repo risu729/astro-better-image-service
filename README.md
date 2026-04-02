@@ -27,7 +27,7 @@
 
 ### If you do not use custom config
 
-Remove `betterImageService()` from your `integrations` array and configure Astro's built-in image service with the closest equivalent of this package's default settings.
+Remove `betterImageService()` from your `integrations` array and configure Astro's built-in image service with the minimal equivalent of this package's default settings.
 
 Before:
 
@@ -49,38 +49,29 @@ export default defineConfig({
 	image: {
 		service: {
 			config: {
-				jpeg: {
-					mozjpeg: true,
-				},
 				png: {
-					compressionLevel: 9,
-					effort: 10,
+					compressionLevel: 5,
 					palette: true,
 				},
 				webp: {
-					effort: 6,
+					alphaQuality: 80,
 				},
 				avif: {
-					chromaSubsampling: "4:2:0",
-					effort: 9,
+					effort: 7,
 				},
+				limitInputPixels: false,
 			},
 		},
 	},
 	experimental: {
 		svgo: {
-			js2svg: {
-				indent: 0,
-				pretty: false,
-			},
 			multipass: true,
-			plugins: ["preset-default"],
 		},
 	},
 });
 ```
 
-This is the closest built-in Astro configuration to this package's defaults from [`defaultConfig`](./src/config.ts). It does not replicate:
+This is the minimal built-in Astro configuration for users who want a smaller migration config and only need to carry forward the non-default settings. It does not replicate:
 
 - `sharp.sharp.failOnError: false`
 - `sharp.sharp.pages: -1`
