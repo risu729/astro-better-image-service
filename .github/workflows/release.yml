@@ -41,13 +41,14 @@ jobs:
       - e2e
 
     runs-on: ubuntu-24.04
+    environment: release
     # set a longer timeout because commenting on pull requests can take a while
     timeout-minutes: 30
     permissions:
       contents: write # for GitHub Release
       issues: write # for commenting on issues
       pull-requests: write # for commenting on pull requests
-      id-token: write # for npm provenance
+      id-token: write # for npm trusted publishing (OIDC)
 
     steps:
       - name: Checkout
@@ -69,7 +70,6 @@ jobs:
         run: semantic-release
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   actions-timeline:
     name: Generate Actions Timeline
