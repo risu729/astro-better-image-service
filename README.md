@@ -8,6 +8,188 @@
 
 **`astro-better-image-service`** is an Astro integration for image compression and conversion, superseding Astro's default image service.
 
+## ⚠️ Deprecation Notice
+
+> [!WARNING]
+> `astro-better-image-service` is deprecated and is no longer maintained.
+>
+> This repository is being archived. New projects should use Astro's built-in image service instead.
+>
+> Existing users should migrate now using the guide below. The rest of this README is intentionally preserved unchanged for existing installations and historical reference.
+
+## Migration Guide
+
+### Why migrate
+
+- Astro core already supports SVG rasterization in Astro 6. See the [Astro v6 upgrade guide](https://docs.astro.build/en/guides/upgrade-to/v6/#changed-svg-rasterization).
+- Astro core already includes image-service options such as [`background`](https://docs.astro.build/en/reference/modules/astro-assets/#background), [`kernel`](https://docs.astro.build/en/reference/configuration-reference/#imageserviceconfigkernel), and codec-specific defaults such as [`jpeg`](https://docs.astro.build/en/reference/configuration-reference/#imageserviceconfigjpeg).
+- This package is no longer maintained, so compatibility with newer Astro releases will continue to drift.
+
+### If you do not use custom config
+
+Remove `betterImageService()` from your `integrations` array and configure Astro's built-in image service with the closest equivalent of this package's default settings.
+
+Before:
+
+```javascript
+import betterImageService from "astro-better-image-service";
+import { defineConfig } from "astro/config";
+
+export default defineConfig({
+	integrations: [betterImageService()],
+});
+```
+
+After:
+
+```javascript
+import { defineConfig } from "astro/config";
+
+export default defineConfig({
+	image: {
+		service: {
+			config: {
+				jpeg: {
+					mozjpeg: true,
+				},
+				png: {
+					compressionLevel: 9,
+					effort: 10,
+					palette: true,
+				},
+				webp: {
+					effort: 6,
+				},
+				avif: {
+					chromaSubsampling: "4:2:0",
+					effort: 9,
+				},
+			},
+		},
+	},
+	experimental: {
+		svgo: {
+			js2svg: {
+				indent: 0,
+				pretty: false,
+			},
+			multipass: true,
+			plugins: ["preset-default"],
+		},
+	},
+});
+```
+
+This is the closest built-in Astro configuration to this package's defaults from [`defaultConfig`](./src/config.ts). It does not replicate:
+
+- `sharp.sharp.failOnError: false`
+- `sharp.sharp.pages: -1`
+
+Those two settings are package-specific and are not exposed by Astro's built-in image-service config.
+
+### If you use custom config
+
+Replace this package's integration config with Astro's built-in image service config.
+
+Before:
+
+```javascript
+import betterImageService from "astro-better-image-service";
+import { defineConfig } from "astro/config";
+
+export default defineConfig({
+	integrations: [
+		betterImageService({
+			limitInputPixels: false,
+			sharp: {
+				jpeg: {
+					mozjpeg: false,
+				},
+				png: {
+					compressionLevel: 5,
+					effort: 7,
+					palette: true,
+				},
+				webp: {
+					effort: 4,
+					alphaQuality: 80,
+				},
+				avif: {
+					effort: 7,
+					chromaSubsampling: "4:4:4",
+				},
+			},
+			svgo: {
+				multipass: true,
+				plugins: ["preset-default"],
+			},
+		}),
+	],
+});
+```
+
+After:
+
+```javascript
+import { defineConfig } from "astro/config";
+
+export default defineConfig({
+	image: {
+		service: {
+			config: {
+				limitInputPixels: false,
+				jpeg: {
+					mozjpeg: false,
+				},
+				png: {
+					compressionLevel: 5,
+					effort: 7,
+					palette: true,
+				},
+				webp: {
+					effort: 4,
+					alphaQuality: 80,
+				},
+				avif: {
+					effort: 7,
+					chromaSubsampling: "4:4:4",
+				},
+			},
+		},
+	},
+	experimental: {
+		svgo: {
+			multipass: true,
+			plugins: ["preset-default"],
+		},
+	},
+});
+```
+
+### Config mapping
+
+- `betterImageService({ sharp: { jpeg/png/webp/avif } })` -> `image.service.config.{jpeg,png,webp,avif}`
+- `betterImageService({ limitInputPixels })` -> `image.service.config.limitInputPixels`
+- `betterImageService({ sharp: { sharp: { limitInputPixels } } })` -> `image.service.config.limitInputPixels`
+- `betterImageService({ svgo })` -> `experimental.svgo` is the closest Astro-core equivalent, but it is not a one-to-one replacement for this package's image-service SVG transform hook
+- `betterImageService({ sharp: { sharp: { failOnError, pages } } })` -> no direct built-in Astro config equivalent
+
+Astro core does support configuring [`experimental.svgo`](https://docs.astro.build/en/reference/experimental-flags/svg-optimization/) with either `true` or an SVGO config object. However, it applies to Astro's imported SVG optimization path rather than this package's image-service transform hook.
+
+### Behavior differences to review after migration
+
+- Output compression settings may differ from this package's defaults.
+- SVG handling is not configured the same way as this package's `svgo` option.
+- Astro's built-in config does not expose this package's `sharp.sharp.failOnError` or `sharp.sharp.pages` constructor settings.
+
+### If you cannot migrate immediately
+
+- Pin the current working versions of Astro and `astro-better-image-service`.
+- Treat this package as unmaintained legacy infrastructure.
+- Plan a migration before adopting newer Astro image-service features.
+
+See the preserved legacy README content below for the original setup and configuration details.
+
 ## 🖼️ Features
 
 - Compress raster images with the maximum compression ratio using [sharp](https://github.com/lovell/sharp).
